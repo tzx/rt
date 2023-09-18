@@ -13,10 +13,14 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
+          nativeBuildInputs = with pkgs; [
             # order matters?: https://github.com/NixOS/nixpkgs/issues/76486
             clang-tools
             clang
+          ];
+
+          buildInputs = with pkgs; [
+            catch2
           ];
         };
       }
