@@ -16,6 +16,22 @@ Tuple Tuple::create_vector(float x, float y, float z) {
   return Tuple(x, y, z, 1.0);
 }
 
+float Tuple::getX() {
+  return x;
+}
+
+float Tuple::getY() {
+  return y;
+}
+
+float Tuple::getZ() {
+  return z;
+}
+
+float Tuple::getW() {
+  return w;
+}
+
 void Tuple::repr() {
   std::cout << x << " " << y << " " << z << " " << w << std::endl;
 }

@@ -1,5 +1,8 @@
 CC := clang++
 
+
+# TODO: Header depend
+
 CPPFLAGS  := -g -Wall -Wextra -pedantic
   
 SRC_DIR := src

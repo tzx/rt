@@ -11,5 +11,9 @@ class Tuple {
     static Tuple create_point(float x, float y, float z);
     static Tuple create_vector(float x, float y, float z);
 
+    float getX();
+    float getY();
+    float getZ();
+    float getW();
     void repr();
 };
