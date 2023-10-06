@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include "tuple.hpp"
 
@@ -44,6 +45,15 @@ void Tuple::repr() const {
   std::cout << x << " " << y << " " << z << " " << w << std::endl;
 }
 
+float Tuple::getMagnitude() const {
+  return std::sqrt(x * x + y * y + z * z + w * w);
+}
+
+Tuple Tuple::getNormalized() const {
+  auto mag = getMagnitude();
+  return Tuple(x / mag, y / mag, z / mag, w / mag);
+}
+
 Tuple Tuple::operator+(const Tuple &other) const {
   return Tuple(x + other.x, y + other.y, z + other.z, w + other.w);
 }
@@ -62,4 +72,11 @@ Tuple Tuple::operator*(const float &scalar) const {
 
 Tuple Tuple::operator/(const float &scalar) const {
   return Tuple(x / scalar, y / scalar, z / scalar, w / scalar);
+}
+
+float dotProduct(const Tuple &a, const Tuple &b) {
+  return a.getX() * b.getX() +
+         a.getY() * b.getY() +
+         a.getZ() * b.getZ() +
+         a.getW() * b.getW();
 }

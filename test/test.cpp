@@ -111,3 +111,40 @@ TEST_CASE ("Dividing a tuple by a scalar", "[tuple]") {
   REQUIRE( res.getZ() == Approx(1.5) );
   REQUIRE( res.getW() == Approx(-2) );
 }
+
+TEST_CASE ("Compute the magnitude of tuples", "[tuple]") {
+  Tuple v1 = Tuple::create_vector(1, 0, 0);
+  REQUIRE( v1.getMagnitude() == Approx(1) );
+
+  Tuple v2 = Tuple::create_vector(0, 0, 1);
+  REQUIRE( v2.getMagnitude() == Approx(1) );
+
+  Tuple v3 = Tuple::create_vector(1, 2, 3);
+  REQUIRE( v3.getMagnitude() == Approx(3.74165738) );
+
+  Tuple v4 = Tuple::create_vector(-1, -2, -3);
+  REQUIRE( v4.getMagnitude() == Approx(3.74165738) );
+}
+
+TEST_CASE ("Normalizing tuples", "[tuple]") {
+  Tuple v1 = Tuple::create_vector(4, 0, 0);
+  Tuple v1n = v1.getNormalized();
+  REQUIRE( v1n.getX() == Approx(1) );
+  REQUIRE( v1n.getY() == Approx(0) );
+  REQUIRE( v1n.getZ() == Approx(0) );
+
+  Tuple v2 = Tuple::create_vector(1, 2, 3);
+  Tuple v2n = v2.getNormalized();
+  REQUIRE( v2n.getX() == Approx(0.26726) );
+  REQUIRE( v2n.getY() == Approx(0.53452) );
+  REQUIRE( v2n.getZ() == Approx(0.80178) );
+
+  REQUIRE ( v2n.getMagnitude() == Approx(1) );
+}
+
+TEST_CASE ("Dot product of two tuples", "[tuple]") {
+  Tuple a = Tuple::create_vector(1, 2, 3);
+  Tuple b = Tuple::create_vector(2, 3, 4);
+  auto dot = dotProduct(a, b);
+  REQUIRE ( dot == Approx(20) );
+}

@@ -17,11 +17,15 @@ class Tuple {
     float getY() const;
     float getZ() const;
     float getW() const;
+    float getMagnitude() const;
+    Tuple getNormalized() const;
     void repr() const;
 
-    Tuple operator+(const Tuple& other) const;
-    Tuple operator-(const Tuple& other) const;
+    Tuple operator+(const Tuple &other) const;
+    Tuple operator-(const Tuple &other) const;
     Tuple operator-() const;
-    Tuple operator*(const float& scalar) const;
-    Tuple operator/(const float& scalar) const;
+    Tuple operator*(const float &scalar) const;
+    Tuple operator/(const float &scalar) const;
 };
+
+float dotProduct(const Tuple &a, const Tuple &b);
