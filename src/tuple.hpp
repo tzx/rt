@@ -29,3 +29,4 @@ class Tuple {
 };
 
 float dotProduct(const Tuple &a, const Tuple &b);
+Tuple crossProduct(const Tuple &a, const Tuple &b);

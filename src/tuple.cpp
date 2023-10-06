@@ -80,3 +80,11 @@ float dotProduct(const Tuple &a, const Tuple &b) {
          a.getZ() * b.getZ() +
          a.getW() * b.getW();
 }
+
+Tuple crossProduct(const Tuple &a, const Tuple &b) {
+  // TODO: you should try to ensure that the Tuples are vectors?
+  return Tuple::create_vector(
+      a.getY() * b.getZ() - a.getZ() * b.getY(),
+      a.getZ() * b.getX() - a.getX() * b.getZ(),
+      a.getX() * b.getY() - a.getY() * b.getX());
+}

@@ -142,9 +142,23 @@ TEST_CASE ("Normalizing tuples", "[tuple]") {
   REQUIRE ( v2n.getMagnitude() == Approx(1) );
 }
 
-TEST_CASE ("Dot product of two tuples", "[tuple]") {
+TEST_CASE ("Dot product of two vectors", "[tuple]") {
   Tuple a = Tuple::create_vector(1, 2, 3);
   Tuple b = Tuple::create_vector(2, 3, 4);
   auto dot = dotProduct(a, b);
   REQUIRE ( dot == Approx(20) );
+}
+
+TEST_CASE ("Cross product of two vectors", "[tuple]") {
+  Tuple a = Tuple::create_vector(1, 2, 3);
+  Tuple b = Tuple::create_vector(2, 3, 4);
+  auto crossab = crossProduct(a, b);
+  REQUIRE( crossab.getX() == Approx(-1) );
+  REQUIRE( crossab.getY() == Approx(2) );
+  REQUIRE( crossab.getZ() == Approx(-1) );
+
+  auto crossba = crossProduct(b, a);
+  REQUIRE( crossba.getX() == Approx(1) );
+  REQUIRE( crossba.getY() == Approx(-2) );
+  REQUIRE( crossba.getZ() == Approx(1) );
 }
