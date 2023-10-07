@@ -4,6 +4,7 @@
 
 class Color: public Tuple {
   public:
+    Color() = default;
     Color(float _r, float _g, float _b);
 
     float r() const;

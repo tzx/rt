@@ -7,6 +7,7 @@ class Tuple {
     float z;
     float w;
   public:
+    Tuple() = default;
     Tuple(float x, float y, float z, float w);
     static Tuple create_point(float x, float y, float z);
     static Tuple create_vector(float x, float y, float z);
