@@ -83,6 +83,7 @@ float dotProduct(const Tuple &a, const Tuple &b) {
 
 Tuple crossProduct(const Tuple &a, const Tuple &b) {
   // TODO: you should try to ensure that the Tuples are vectors?
+  // Apparently this is very hard, so let's just use the homo coords
   return Tuple::create_vector(
       a.getY() * b.getZ() - a.getZ() * b.getY(),
       a.getZ() * b.getX() - a.getX() * b.getZ(),
