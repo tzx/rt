@@ -9,4 +9,9 @@ class Color: public Tuple {
     float r() const;
     float g() const;
     float b() const;
+
+    Color operator+(const Color &oth);
+    Color operator-(const Color &oth);
+    Color operator*(const float &scale);
+    Color operator*(const Color &oth);
 };

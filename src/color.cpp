@@ -14,3 +14,19 @@ float Color::g() const {
 float Color::b() const {
   return getZ();
 }
+
+Color Color::operator+(const Color &oth) {
+  return Color(this->r() + oth.r(), this->g() + oth.g(), this->b() + oth.b());
+}
+
+Color Color::operator-(const Color &oth) {
+  return Color(this->r() - oth.r(), this->g() - oth.g(), this->b() - oth.b());
+}
+
+Color Color::operator*(const float &scal) {
+  return Color(this->r() * scal, this->g() * scal, this->b() * scal);
+}
+
+Color Color::operator*(const Color &oth) {
+  return Color(this->r() * oth.r(), this->g() * oth.g(), this->b() * oth.b());
+}
