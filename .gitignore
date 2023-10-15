@@ -2,4 +2,8 @@ build/
 out/
 .direnv/
 
-rt
+CMakeCache.txt
+CMakeFiles/
+Rt
+tester
+cmake_install.cmake

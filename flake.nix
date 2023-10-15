@@ -14,9 +14,7 @@
       {
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            # order matters?: https://github.com/NixOS/nixpkgs/issues/76486
-            clang-tools
-            clang
+            cmake
           ];
 
           buildInputs = with pkgs; [
