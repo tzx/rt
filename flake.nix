@@ -1,5 +1,5 @@
 {
-  description = "nosering";
+  description = "rt";
 
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs/nixpkgs-unstable"; };
@@ -15,6 +15,7 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             cmake
+            clang-tools
           ];
 
           buildInputs = with pkgs; [
