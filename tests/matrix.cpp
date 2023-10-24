@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "../src/matrix.hpp"
+#include "../src/tuple.hpp"
 
 TEST_CASE ("Constructing and inspecting a 4x4", "[matrices]") {
   std::vector<float> values = {1, 2, 3, 4,
@@ -72,4 +73,55 @@ TEST_CASE ("Multiplying two matrices", "[matrices]") {
   Matrix product = m_a * m_b;
 
   REQUIRE( product == m_atimesb );
+}
+
+TEST_CASE ("Multiple matrix by tuple", "[matrices]") {
+  std::vector<float> values = { 1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1 };
+  Matrix m = Matrix(4, 4, values);
+  Tuple b = Tuple(1, 2, 3, 1);
+
+  Tuple prod = m * b;
+  REQUIRE( prod.getX() == Approx(18) );
+  REQUIRE( prod.getY() == Approx(24) );
+  REQUIRE( prod.getZ() == Approx(33) );
+  REQUIRE( prod.getW() == Approx(1) );
+}
+
+TEST_CASE ("Multiplying matrix by identity matrix", "[matrices]") {
+  std::vector<float> values = { 0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32 };
+  Matrix m = Matrix(4, 4, values);
+  Matrix i = Matrix::identity_matrix(4);
+  Matrix prod = m * i;
+  REQUIRE( prod == m );
+
+  Tuple tup = Tuple(1, 2, 3, 4);
+  Tuple tup_prod = i * tup;
+
+  REQUIRE( tup.getX() == Approx(tup_prod.getX()) );
+  REQUIRE( tup.getY() == Approx(tup_prod.getY()) );
+  REQUIRE( tup.getZ() == Approx(tup_prod.getZ()) );
+  REQUIRE( tup.getW() == Approx(tup_prod.getW()) );
+}
+
+TEST_CASE ("Transposing a matrix", "[matrices]") {
+  std::vector<float> values = { 0, 9, 3, 0,
+                                9, 8, 0, 8,
+                                1, 8, 5, 3,
+                                0, 0, 5, 8};
+  Matrix m = Matrix(4, 4, values);
+
+  std::vector<float> transposed_values = {0, 9, 1, 0,
+                                          9, 8, 8, 0,
+                                          3, 0, 5, 5,
+                                          0, 8, 3, 8};
+  Matrix tp = Matrix(4, 4, transposed_values);
+
+  Matrix t = m.transpose();
+  REQUIRE( t == tp );
+}
+
+TEST_CASE ("Transposing the identity matrix", "[matrices]") {
+  Matrix i = Matrix::identity_matrix(4);
+
+  REQUIRE( i == i.transpose() );
 }
