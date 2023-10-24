@@ -143,6 +143,33 @@ tester/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/build
 .PHONY : tester/fast
 
+src/approx.o: src/approx.cpp.o
+.PHONY : src/approx.o
+
+# target to build an object file
+src/approx.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.o
+.PHONY : src/approx.cpp.o
+
+src/approx.i: src/approx.cpp.i
+.PHONY : src/approx.i
+
+# target to preprocess a source file
+src/approx.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.i
+.PHONY : src/approx.cpp.i
+
+src/approx.s: src/approx.cpp.s
+.PHONY : src/approx.s
+
+# target to generate assembly for a file
+src/approx.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.s
+.PHONY : src/approx.cpp.s
+
 src/canvas.o: src/canvas.cpp.o
 .PHONY : src/canvas.o
 
@@ -196,6 +223,33 @@ src/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/color.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/color.cpp.s
 .PHONY : src/color.cpp.s
+
+src/matrix.o: src/matrix.cpp.o
+.PHONY : src/matrix.o
+
+# target to build an object file
+src/matrix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.o
+.PHONY : src/matrix.cpp.o
+
+src/matrix.i: src/matrix.cpp.i
+.PHONY : src/matrix.i
+
+# target to preprocess a source file
+src/matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.i
+.PHONY : src/matrix.cpp.i
+
+src/matrix.s: src/matrix.cpp.s
+.PHONY : src/matrix.s
+
+# target to generate assembly for a file
+src/matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.s
+.PHONY : src/matrix.cpp.s
 
 src/rt.o: src/rt.cpp.o
 .PHONY : src/rt.o
@@ -296,6 +350,30 @@ tests/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/color.cpp.s
 .PHONY : tests/color.cpp.s
 
+tests/matrix.o: tests/matrix.cpp.o
+.PHONY : tests/matrix.o
+
+# target to build an object file
+tests/matrix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.o
+.PHONY : tests/matrix.cpp.o
+
+tests/matrix.i: tests/matrix.cpp.i
+.PHONY : tests/matrix.i
+
+# target to preprocess a source file
+tests/matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.i
+.PHONY : tests/matrix.cpp.i
+
+tests/matrix.s: tests/matrix.cpp.s
+.PHONY : tests/matrix.s
+
+# target to generate assembly for a file
+tests/matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.s
+.PHONY : tests/matrix.cpp.s
+
 tests/tuple.o: tests/tuple.cpp.o
 .PHONY : tests/tuple.o
 
@@ -330,12 +408,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Rt"
 	@echo "... tester"
+	@echo "... src/approx.o"
+	@echo "... src/approx.i"
+	@echo "... src/approx.s"
 	@echo "... src/canvas.o"
 	@echo "... src/canvas.i"
 	@echo "... src/canvas.s"
 	@echo "... src/color.o"
 	@echo "... src/color.i"
 	@echo "... src/color.s"
+	@echo "... src/matrix.o"
+	@echo "... src/matrix.i"
+	@echo "... src/matrix.s"
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
@@ -348,6 +432,9 @@ help:
 	@echo "... tests/color.o"
 	@echo "... tests/color.i"
 	@echo "... tests/color.s"
+	@echo "... tests/matrix.o"
+	@echo "... tests/matrix.i"
+	@echo "... tests/matrix.s"
 	@echo "... tests/tuple.o"
 	@echo "... tests/tuple.i"
 	@echo "... tests/tuple.s"
