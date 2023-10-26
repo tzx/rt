@@ -19,11 +19,16 @@ class Matrix {
     float determinant() const;
     float& operator()(int row, int col);
     float at(int row, int col) const;
+    float minor(int row, int col) const;
+    float cofactor(int row, int col) const;
+    bool invertible() const;
 
     Matrix submatrix(int row, int col) const;
     Matrix transpose() const;
+    Matrix inverse() const;
 };
 
 Matrix operator*(const Matrix &self, const Matrix &other);
+Matrix operator*(const Matrix &self, const float cst);
 Tuple operator*(const Matrix &self, const Tuple &tup);
 bool operator==(const Matrix &self, const Matrix &other);

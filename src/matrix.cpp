@@ -39,12 +39,18 @@ inline int Matrix::idx(int row, int col) const {
 }
 
 float Matrix::determinant() const {
-  // TODO: Assume that width and height must be the same
+  assert(this->width() == this->height());
 
   if (this->width() == 2 && this->height() == 2) {
     return this->at(0, 0) * this->at(1, 1) - this->at(0, 1) * this->at(1, 0);
   } else {
-    assert(false);
+    auto sum = 0;
+    // Use first row for the cofactors
+    for (auto col = 0; col < this->width(); ++col) {
+      auto val = this->at(0, col);
+      sum += val * cofactor(0, col);
+    }
+    return sum;
   }
 }
 
@@ -81,6 +87,43 @@ Matrix Matrix::submatrix(int row, int col) const {
   return Matrix(this->height() - 1, this->width() - 1, new_values);
 }
 
+Matrix Matrix::inverse() const {
+  auto det = this->determinant();
+  // -> cofactor matrix -> transpose -> times 1/(original det)
+  std::vector<float> cofactor_values;
+
+  for (auto r = 0; r < this->height(); ++r) {
+    for (auto c = 0; c < this->width(); ++c) {
+      cofactor_values.push_back(this->cofactor(r, c));
+    }
+  }
+
+  Matrix cofactor_m = Matrix(this->height(), this->width(), cofactor_values);
+  Matrix res = cofactor_m.transpose() * (1.0f/det);
+  return res;
+}
+
+float Matrix::minor(int row, int col) const {
+  Matrix sub = this->submatrix(row, col);
+  return sub.determinant();
+}
+
+// + - + 
+// - + -
+// + - +
+// r + c = odd -> negate
+float Matrix::cofactor(int row, int col) const {
+  auto minor = this->minor(row, col);
+  if ((row + col) % 2 == 1) {
+    minor = -minor;
+  }
+  return minor;
+}
+
+bool Matrix::invertible() const {
+  return !approx_eq(this->determinant(), 0);
+}
+
 Matrix operator*(const Matrix &self, const Matrix &other) {
   // TODO: we don't check dimensions of self.width() == other.height()
   Matrix res = Matrix(self.height(), other.width(), {});
@@ -91,6 +134,16 @@ Matrix operator*(const Matrix &self, const Matrix &other) {
         val += self.at(r, k) * other.at(k, c);
       }
       res(r, c) = val;
+    }
+  }
+  return res;
+}
+
+Matrix operator*(const Matrix &self, const float cst) {
+  Matrix res = Matrix(self.height(), self.width(), {});
+  for (auto r = 0; r < self.height(); ++r) {
+    for (auto c = 0; c < self.width(); ++c) {
+      res(r, c) = cst * self.at(r, c);
     }
   }
   return res;
