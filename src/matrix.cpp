@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 #include "approx.hpp"
 #include "tuple.hpp"
+#include <cassert>
 
 Matrix::Matrix(int height, int width, std::vector<float> values) {
   w_ = width;
@@ -37,6 +38,16 @@ inline int Matrix::idx(int row, int col) const {
   return row * w_ + col;
 }
 
+float Matrix::determinant() const {
+  // TODO: Assume that width and height must be the same
+
+  if (this->width() == 2 && this->height() == 2) {
+    return this->at(0, 0) * this->at(1, 1) - this->at(0, 1) * this->at(1, 0);
+  } else {
+    assert(false);
+  }
+}
+
 float& Matrix::operator()(int row, int col) {
   int index = idx(row, col);
   return values_[index];
@@ -55,6 +66,19 @@ Matrix Matrix::transpose() const {
     }
   }
   return res;
+}
+
+Matrix Matrix::submatrix(int row, int col) const {
+  std::vector<float> new_values;
+  for (auto r = 0; r < this->height(); ++r) {
+    for (auto c = 0; c < this->width(); ++c) {
+      if (row == r || c == col) {
+        continue;
+      }
+      new_values.push_back(this->at(r, c));
+    }
+  }
+  return Matrix(this->height() - 1, this->width() - 1, new_values);
 }
 
 Matrix operator*(const Matrix &self, const Matrix &other) {

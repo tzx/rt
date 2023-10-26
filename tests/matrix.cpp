@@ -125,3 +125,30 @@ TEST_CASE ("Transposing the identity matrix", "[matrices]") {
 
   REQUIRE( i == i.transpose() );
 }
+
+TEST_CASE ("Calculating the determinant of a 2x2 matrix", "[matrices]") {
+  std::vector<float> values = { 1, 5, -3, 2 };
+  Matrix m = Matrix(2, 2, values);
+
+  REQUIRE( m.determinant() == Approx(17) );
+}
+
+TEST_CASE ("A submatrix of a 3x3 matrix is 2x2 matrix", "[matrices]") {
+  std::vector<float> values = {1, 5, 0, -3, 2, 7, 0, 6, -3};
+  Matrix m = Matrix(3, 3, values);
+
+  std::vector<float> expected_values = {-3, 2, 0, 6};
+  Matrix expected = Matrix(2, 2, expected_values);
+
+  REQUIRE (m.submatrix(0, 2) == expected);
+}
+
+TEST_CASE ("A submatrix of a 4x4 matrix is 3x3 matrix", "[matrices]") {
+  std::vector<float> values = {-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1};
+  Matrix m = Matrix(4, 4, values);
+
+  std::vector<float> expected_values = {-6, 1, 6, -8, 8, 6, -7, -1, 1};
+  Matrix expected = Matrix(3, 3, expected_values);
+
+  REQUIRE (m.submatrix(2, 1) == expected);
+}

@@ -16,9 +16,11 @@ class Matrix {
 
     int width() const;
     int height() const;
+    float determinant() const;
     float& operator()(int row, int col);
     float at(int row, int col) const;
 
+    Matrix submatrix(int row, int col) const;
     Matrix transpose() const;
 };
 
