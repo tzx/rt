@@ -18,6 +18,7 @@ class Matrix {
     static Matrix rotation_x(float radians);
     static Matrix rotation_y(float radians);
     static Matrix rotation_z(float radians);
+    static Matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 
     int width() const;
     int height() const;
