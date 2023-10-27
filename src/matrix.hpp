@@ -13,6 +13,7 @@ class Matrix {
   public:
     Matrix(int width, int height, std::vector<float> values);
     static Matrix identity_matrix(int size);
+    static Matrix translation(float x, float y, float z);
 
     int width() const;
     int height() const;

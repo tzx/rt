@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include "approx.hpp"
 #include "tuple.hpp"
 
 Tuple::Tuple(float a, float b, float c, float d) {
@@ -52,6 +53,13 @@ float Tuple::getMagnitude() const {
 Tuple Tuple::getNormalized() const {
   auto mag = getMagnitude();
   return Tuple(x / mag, y / mag, z / mag, w / mag);
+}
+
+bool Tuple::operator==(const Tuple &other) const {
+  return approx_eq(this->getX(), other.getX()) &&
+         approx_eq(this->getY(), other.getY()) &&
+         approx_eq(this->getZ(), other.getZ()) &&
+         approx_eq(this->getW(), other.getW());
 }
 
 Tuple Tuple::operator+(const Tuple &other) const {

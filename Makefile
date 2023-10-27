@@ -275,6 +275,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/transformations.o: src/transformations.cpp.o
+.PHONY : src/transformations.o
+
+# target to build an object file
+src/transformations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.o
+.PHONY : src/transformations.cpp.o
+
+src/transformations.i: src/transformations.cpp.i
+.PHONY : src/transformations.i
+
+# target to preprocess a source file
+src/transformations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.i
+.PHONY : src/transformations.cpp.i
+
+src/transformations.s: src/transformations.cpp.s
+.PHONY : src/transformations.s
+
+# target to generate assembly for a file
+src/transformations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.s
+.PHONY : src/transformations.cpp.s
+
 src/tuple.o: src/tuple.cpp.o
 .PHONY : src/tuple.o
 
@@ -374,6 +401,30 @@ tests/matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.s
 .PHONY : tests/matrix.cpp.s
 
+tests/transformations.o: tests/transformations.cpp.o
+.PHONY : tests/transformations.o
+
+# target to build an object file
+tests/transformations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/transformations.cpp.o
+.PHONY : tests/transformations.cpp.o
+
+tests/transformations.i: tests/transformations.cpp.i
+.PHONY : tests/transformations.i
+
+# target to preprocess a source file
+tests/transformations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/transformations.cpp.i
+.PHONY : tests/transformations.cpp.i
+
+tests/transformations.s: tests/transformations.cpp.s
+.PHONY : tests/transformations.s
+
+# target to generate assembly for a file
+tests/transformations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/transformations.cpp.s
+.PHONY : tests/transformations.cpp.s
+
 tests/tuple.o: tests/tuple.cpp.o
 .PHONY : tests/tuple.o
 
@@ -423,6 +474,9 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/transformations.o"
+	@echo "... src/transformations.i"
+	@echo "... src/transformations.s"
 	@echo "... src/tuple.o"
 	@echo "... src/tuple.i"
 	@echo "... src/tuple.s"
@@ -435,6 +489,9 @@ help:
 	@echo "... tests/matrix.o"
 	@echo "... tests/matrix.i"
 	@echo "... tests/matrix.s"
+	@echo "... tests/transformations.o"
+	@echo "... tests/transformations.i"
+	@echo "... tests/transformations.s"
 	@echo "... tests/tuple.o"
 	@echo "... tests/tuple.i"
 	@echo "... tests/tuple.s"
