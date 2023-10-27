@@ -14,6 +14,7 @@ class Matrix {
     Matrix(int width, int height, std::vector<float> values);
     static Matrix identity_matrix(int size);
     static Matrix translation(float x, float y, float z);
+    static Matrix scaling(float x, float y, float z);
 
     int width() const;
     int height() const;

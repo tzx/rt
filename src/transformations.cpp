@@ -8,3 +8,11 @@ Matrix Matrix::translation(float x, float y, float z) {
                                0, 0, 0, 1};
   return Matrix(4, 4, values);
 }
+
+Matrix Matrix::scaling(float x, float y, float z) {
+  std::vector<float> values = {x, 0, 0, 0,
+                               0, y, 0, 0,
+                               0, 0, z, 0,
+                               0, 0, 0, 1};
+  return Matrix(4, 4, values);
+}
