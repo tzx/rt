@@ -2,6 +2,8 @@
 #include "approx.hpp"
 #include "tuple.hpp"
 #include <cassert>
+#include <iostream>
+#include <ostream>
 
 Matrix::Matrix(int height, int width, std::vector<float> values) {
   w_ = width;
@@ -34,6 +36,15 @@ int Matrix::width() const {
   return w_;
 }
 
+void Matrix::repr() const {
+  for (auto r = 0; r < this->height(); ++r) {
+    for (auto c = 0; c < this->width(); ++c) {
+      std::cout << this->at(r, c) << ", ";
+    }
+    std::cout << std::endl;
+  }
+}
+
 inline int Matrix::idx(int row, int col) const {
   return row * w_ + col;
 }
@@ -44,10 +55,10 @@ float Matrix::determinant() const {
   if (this->width() == 2 && this->height() == 2) {
     return this->at(0, 0) * this->at(1, 1) - this->at(0, 1) * this->at(1, 0);
   } else {
-    auto sum = 0;
+    float sum = 0.0f;
     // Use first row for the cofactors
     for (auto col = 0; col < this->width(); ++col) {
-      auto val = this->at(0, col);
+      float val = this->at(0, col);
       sum += val * cofactor(0, col);
     }
     return sum;

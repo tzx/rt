@@ -15,9 +15,13 @@ class Matrix {
     static Matrix identity_matrix(int size);
     static Matrix translation(float x, float y, float z);
     static Matrix scaling(float x, float y, float z);
+    static Matrix rotation_x(float radians);
+    static Matrix rotation_y(float radians);
+    static Matrix rotation_z(float radians);
 
     int width() const;
     int height() const;
+    void repr() const;
     float determinant() const;
     float& operator()(int row, int col);
     float at(int row, int col) const;
