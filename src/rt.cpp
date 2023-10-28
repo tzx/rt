@@ -1,7 +1,9 @@
 #include <cmath>
 #include <iostream>
+#include <ostream>
 
 #include "canvas.hpp"
+#include "matrix.hpp"
 #include "tuple.hpp"
 
 struct Projectile {
@@ -21,30 +23,24 @@ Projectile tick(Environment &env, Projectile &proj) {
   return _new;
 }
 
-constexpr int CANVAS_HEIGHT = 550;
-constexpr int CANVAS_WIDTH = 900;
+constexpr int LENGTH = 20;
+constexpr int LINE_INSET = 200;
+constexpr int DIMENSION = 2 * LINE_INSET + 4 * LENGTH;
+constexpr int INSET = DIMENSION/2;
 
 int main () {
-  struct Projectile prjtle;
-  prjtle.position = Tuple::create_point(0, 1, 0);
-  prjtle.velocity = Tuple::create_vector(1, 1.8, 0).getNormalized() * 11.25;
+  Canvas c = Canvas(DIMENSION, DIMENSION);
 
-  struct Environment env;
-  env.gravity = Tuple::create_vector(0, -0.1, 0);
-  env.wind = Tuple::create_vector(-0.01, 0, 0);
+  Matrix rotation = Matrix::rotation_z(M_PI / 6.0f);
+  Tuple point = Tuple::create_point(0, LINE_INSET + LENGTH, 0);
 
-
-  Canvas c = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-  while (prjtle.position.getY() >= 0) {
-    int x = std::lrint(prjtle.position.getX());
-    int y = std::lrint(prjtle.position.getY());
-    // std::cout << "X: " << prjtle.position.getX() << ", Y: " << prjtle.position.getY() << ", Z: " << prjtle.position.getZ() << std::endl;
-    prjtle = tick(env, prjtle);
-
-    c.write_pixel(x, CANVAS_HEIGHT - y, Color(1, 0, 0));
+  // We have 12 points
+  for (auto hour = 0; hour < 12; ++hour) {
+    c.write_pixel(point.getX() + INSET, INSET + point.getY(), Color(1, 1, 1));
+    point = rotation * point;
   }
 
-  std::cout << c.ppm() << std::endl;
+  std::cout << c.ppm();
 
   return 0;
 }
