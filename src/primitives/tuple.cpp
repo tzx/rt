@@ -1,6 +1,6 @@
 #include <cmath>
 #include <iostream>
-#include "approx.hpp"
+#include "../util/approx.hpp"
 #include "tuple.hpp"
 
 Tuple::Tuple(float a, float b, float c, float d) {

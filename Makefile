@@ -143,113 +143,140 @@ tester/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/build
 .PHONY : tester/fast
 
-src/approx.o: src/approx.cpp.o
-.PHONY : src/approx.o
+src/canvas/canvas.o: src/canvas/canvas.cpp.o
+.PHONY : src/canvas/canvas.o
 
 # target to build an object file
-src/approx.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.o
-.PHONY : src/approx.cpp.o
+src/canvas/canvas.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/canvas.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/canvas.cpp.o
+.PHONY : src/canvas/canvas.cpp.o
 
-src/approx.i: src/approx.cpp.i
-.PHONY : src/approx.i
+src/canvas/canvas.i: src/canvas/canvas.cpp.i
+.PHONY : src/canvas/canvas.i
 
 # target to preprocess a source file
-src/approx.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.i
-.PHONY : src/approx.cpp.i
+src/canvas/canvas.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/canvas.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/canvas.cpp.i
+.PHONY : src/canvas/canvas.cpp.i
 
-src/approx.s: src/approx.cpp.s
-.PHONY : src/approx.s
+src/canvas/canvas.s: src/canvas/canvas.cpp.s
+.PHONY : src/canvas/canvas.s
 
 # target to generate assembly for a file
-src/approx.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/approx.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/approx.cpp.s
-.PHONY : src/approx.cpp.s
+src/canvas/canvas.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/canvas.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/canvas.cpp.s
+.PHONY : src/canvas/canvas.cpp.s
 
-src/canvas.o: src/canvas.cpp.o
-.PHONY : src/canvas.o
+src/canvas/color.o: src/canvas/color.cpp.o
+.PHONY : src/canvas/color.o
 
 # target to build an object file
-src/canvas.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas.cpp.o
-.PHONY : src/canvas.cpp.o
+src/canvas/color.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/color.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/color.cpp.o
+.PHONY : src/canvas/color.cpp.o
 
-src/canvas.i: src/canvas.cpp.i
-.PHONY : src/canvas.i
+src/canvas/color.i: src/canvas/color.cpp.i
+.PHONY : src/canvas/color.i
 
 # target to preprocess a source file
-src/canvas.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas.cpp.i
-.PHONY : src/canvas.cpp.i
+src/canvas/color.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/color.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/color.cpp.i
+.PHONY : src/canvas/color.cpp.i
 
-src/canvas.s: src/canvas.cpp.s
-.PHONY : src/canvas.s
+src/canvas/color.s: src/canvas/color.cpp.s
+.PHONY : src/canvas/color.s
 
 # target to generate assembly for a file
-src/canvas.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas.cpp.s
-.PHONY : src/canvas.cpp.s
+src/canvas/color.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/color.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/color.cpp.s
+.PHONY : src/canvas/color.cpp.s
 
-src/color.o: src/color.cpp.o
-.PHONY : src/color.o
+src/primitives/matrix.o: src/primitives/matrix.cpp.o
+.PHONY : src/primitives/matrix.o
 
 # target to build an object file
-src/color.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/color.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/color.cpp.o
-.PHONY : src/color.cpp.o
+src/primitives/matrix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/matrix.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/matrix.cpp.o
+.PHONY : src/primitives/matrix.cpp.o
 
-src/color.i: src/color.cpp.i
-.PHONY : src/color.i
+src/primitives/matrix.i: src/primitives/matrix.cpp.i
+.PHONY : src/primitives/matrix.i
 
 # target to preprocess a source file
-src/color.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/color.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/color.cpp.i
-.PHONY : src/color.cpp.i
+src/primitives/matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/matrix.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/matrix.cpp.i
+.PHONY : src/primitives/matrix.cpp.i
 
-src/color.s: src/color.cpp.s
-.PHONY : src/color.s
+src/primitives/matrix.s: src/primitives/matrix.cpp.s
+.PHONY : src/primitives/matrix.s
 
 # target to generate assembly for a file
-src/color.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/color.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/color.cpp.s
-.PHONY : src/color.cpp.s
+src/primitives/matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/matrix.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/matrix.cpp.s
+.PHONY : src/primitives/matrix.cpp.s
 
-src/matrix.o: src/matrix.cpp.o
-.PHONY : src/matrix.o
+src/primitives/transformations.o: src/primitives/transformations.cpp.o
+.PHONY : src/primitives/transformations.o
 
 # target to build an object file
-src/matrix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.o
-.PHONY : src/matrix.cpp.o
+src/primitives/transformations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/transformations.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/transformations.cpp.o
+.PHONY : src/primitives/transformations.cpp.o
 
-src/matrix.i: src/matrix.cpp.i
-.PHONY : src/matrix.i
+src/primitives/transformations.i: src/primitives/transformations.cpp.i
+.PHONY : src/primitives/transformations.i
 
 # target to preprocess a source file
-src/matrix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.i
-.PHONY : src/matrix.cpp.i
+src/primitives/transformations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/transformations.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/transformations.cpp.i
+.PHONY : src/primitives/transformations.cpp.i
 
-src/matrix.s: src/matrix.cpp.s
-.PHONY : src/matrix.s
+src/primitives/transformations.s: src/primitives/transformations.cpp.s
+.PHONY : src/primitives/transformations.s
 
 # target to generate assembly for a file
-src/matrix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/matrix.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/matrix.cpp.s
-.PHONY : src/matrix.cpp.s
+src/primitives/transformations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/transformations.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/transformations.cpp.s
+.PHONY : src/primitives/transformations.cpp.s
+
+src/primitives/tuple.o: src/primitives/tuple.cpp.o
+.PHONY : src/primitives/tuple.o
+
+# target to build an object file
+src/primitives/tuple.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/tuple.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/tuple.cpp.o
+.PHONY : src/primitives/tuple.cpp.o
+
+src/primitives/tuple.i: src/primitives/tuple.cpp.i
+.PHONY : src/primitives/tuple.i
+
+# target to preprocess a source file
+src/primitives/tuple.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/tuple.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/tuple.cpp.i
+.PHONY : src/primitives/tuple.cpp.i
+
+src/primitives/tuple.s: src/primitives/tuple.cpp.s
+.PHONY : src/primitives/tuple.s
+
+# target to generate assembly for a file
+src/primitives/tuple.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/tuple.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/tuple.cpp.s
+.PHONY : src/primitives/tuple.cpp.s
 
 src/rt.o: src/rt.cpp.o
 .PHONY : src/rt.o
@@ -275,59 +302,32 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
-src/transformations.o: src/transformations.cpp.o
-.PHONY : src/transformations.o
+src/util/approx.o: src/util/approx.cpp.o
+.PHONY : src/util/approx.o
 
 # target to build an object file
-src/transformations.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.o
-.PHONY : src/transformations.cpp.o
+src/util/approx.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/approx.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/approx.cpp.o
+.PHONY : src/util/approx.cpp.o
 
-src/transformations.i: src/transformations.cpp.i
-.PHONY : src/transformations.i
-
-# target to preprocess a source file
-src/transformations.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.i
-.PHONY : src/transformations.cpp.i
-
-src/transformations.s: src/transformations.cpp.s
-.PHONY : src/transformations.s
-
-# target to generate assembly for a file
-src/transformations.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/transformations.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/transformations.cpp.s
-.PHONY : src/transformations.cpp.s
-
-src/tuple.o: src/tuple.cpp.o
-.PHONY : src/tuple.o
-
-# target to build an object file
-src/tuple.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/tuple.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/tuple.cpp.o
-.PHONY : src/tuple.cpp.o
-
-src/tuple.i: src/tuple.cpp.i
-.PHONY : src/tuple.i
+src/util/approx.i: src/util/approx.cpp.i
+.PHONY : src/util/approx.i
 
 # target to preprocess a source file
-src/tuple.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/tuple.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/tuple.cpp.i
-.PHONY : src/tuple.cpp.i
+src/util/approx.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/approx.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/approx.cpp.i
+.PHONY : src/util/approx.cpp.i
 
-src/tuple.s: src/tuple.cpp.s
-.PHONY : src/tuple.s
+src/util/approx.s: src/util/approx.cpp.s
+.PHONY : src/util/approx.s
 
 # target to generate assembly for a file
-src/tuple.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/tuple.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/tuple.cpp.s
-.PHONY : src/tuple.cpp.s
+src/util/approx.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/approx.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/approx.cpp.s
+.PHONY : src/util/approx.cpp.s
 
 tests/canvas.o: tests/canvas.cpp.o
 .PHONY : tests/canvas.o
@@ -459,27 +459,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Rt"
 	@echo "... tester"
-	@echo "... src/approx.o"
-	@echo "... src/approx.i"
-	@echo "... src/approx.s"
-	@echo "... src/canvas.o"
-	@echo "... src/canvas.i"
-	@echo "... src/canvas.s"
-	@echo "... src/color.o"
-	@echo "... src/color.i"
-	@echo "... src/color.s"
-	@echo "... src/matrix.o"
-	@echo "... src/matrix.i"
-	@echo "... src/matrix.s"
+	@echo "... src/canvas/canvas.o"
+	@echo "... src/canvas/canvas.i"
+	@echo "... src/canvas/canvas.s"
+	@echo "... src/canvas/color.o"
+	@echo "... src/canvas/color.i"
+	@echo "... src/canvas/color.s"
+	@echo "... src/primitives/matrix.o"
+	@echo "... src/primitives/matrix.i"
+	@echo "... src/primitives/matrix.s"
+	@echo "... src/primitives/transformations.o"
+	@echo "... src/primitives/transformations.i"
+	@echo "... src/primitives/transformations.s"
+	@echo "... src/primitives/tuple.o"
+	@echo "... src/primitives/tuple.i"
+	@echo "... src/primitives/tuple.s"
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
-	@echo "... src/transformations.o"
-	@echo "... src/transformations.i"
-	@echo "... src/transformations.s"
-	@echo "... src/tuple.o"
-	@echo "... src/tuple.i"
-	@echo "... src/tuple.s"
+	@echo "... src/util/approx.o"
+	@echo "... src/util/approx.i"
+	@echo "... src/util/approx.s"
 	@echo "... tests/canvas.o"
 	@echo "... tests/canvas.i"
 	@echo "... tests/canvas.s"

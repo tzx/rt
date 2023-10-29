@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tuple.hpp"
+#include "../primitives/tuple.hpp"
 
 class Color: public Tuple {
   public:

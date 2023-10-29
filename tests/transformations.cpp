@@ -1,8 +1,8 @@
 #include <catch2/catch.hpp>
 #include <cmath>
 
-#include "../src/matrix.hpp"
-#include "../src/tuple.hpp"
+#include "../src/primitives/matrix.hpp"
+#include "../src/primitives/tuple.hpp"
 
 TEST_CASE ( "Multiplying by a translation matrix", "[matrices]" ) {
   Matrix t = Matrix::translation(5, -3, 2);

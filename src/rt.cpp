@@ -2,9 +2,9 @@
 #include <iostream>
 #include <ostream>
 
-#include "canvas.hpp"
-#include "matrix.hpp"
-#include "tuple.hpp"
+#include "canvas/canvas.hpp"
+#include "primitives/matrix.hpp"
+#include "primitives/tuple.hpp"
 
 struct Projectile {
   Tuple position;

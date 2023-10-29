@@ -1,5 +1,5 @@
 #include "color.hpp"
-#include "tuple.hpp"
+#include "../primitives/tuple.hpp"
 
 Color::Color(float _r, float _g, float _b) : Tuple(_r, _g, _b, 0) {}
 

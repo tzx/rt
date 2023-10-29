@@ -2,8 +2,8 @@
 #include <iostream>
 #include <vector>
 
-#include "../src/matrix.hpp"
-#include "../src/tuple.hpp"
+#include "../src/primitives/matrix.hpp"
+#include "../src/primitives/tuple.hpp"
 
 TEST_CASE ("Constructing and inspecting a 4x4", "[matrices]") {
   std::vector<float> values = {1, 2, 3, 4,

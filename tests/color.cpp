@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "../src/color.hpp"
+#include "../src/canvas/color.hpp"
 
 TEST_CASE ( "Colors are tuples", "[color]" ) {
   Color c = Color(-0.5, 0.4, 1.7);

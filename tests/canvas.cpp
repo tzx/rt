@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "../src/canvas.hpp"
+#include "../src/canvas/canvas.hpp"
 
 TEST_CASE ("Creating a canvas", "[canvas]" ) {
   Canvas c = Canvas(10, 20);

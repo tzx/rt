@@ -1,5 +1,5 @@
 #include "matrix.hpp"
-#include "approx.hpp"
+#include "../util/approx.hpp"
 #include "tuple.hpp"
 #include <cassert>
 #include <iostream>
