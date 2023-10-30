@@ -278,6 +278,33 @@ src/primitives/tuple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/tuple.cpp.s
 .PHONY : src/primitives/tuple.cpp.s
 
+src/ray.o: src/ray.cpp.o
+.PHONY : src/ray.o
+
+# target to build an object file
+src/ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.o
+.PHONY : src/ray.cpp.o
+
+src/ray.i: src/ray.cpp.i
+.PHONY : src/ray.i
+
+# target to preprocess a source file
+src/ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.i
+.PHONY : src/ray.cpp.i
+
+src/ray.s: src/ray.cpp.s
+.PHONY : src/ray.s
+
+# target to generate assembly for a file
+src/ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.s
+.PHONY : src/ray.cpp.s
+
 src/rt.o: src/rt.cpp.o
 .PHONY : src/rt.o
 
@@ -401,6 +428,30 @@ tests/matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.s
 .PHONY : tests/matrix.cpp.s
 
+tests/ray.o: tests/ray.cpp.o
+.PHONY : tests/ray.o
+
+# target to build an object file
+tests/ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/ray.cpp.o
+.PHONY : tests/ray.cpp.o
+
+tests/ray.i: tests/ray.cpp.i
+.PHONY : tests/ray.i
+
+# target to preprocess a source file
+tests/ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/ray.cpp.i
+.PHONY : tests/ray.cpp.i
+
+tests/ray.s: tests/ray.cpp.s
+.PHONY : tests/ray.s
+
+# target to generate assembly for a file
+tests/ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/ray.cpp.s
+.PHONY : tests/ray.cpp.s
+
 tests/transformations.o: tests/transformations.cpp.o
 .PHONY : tests/transformations.o
 
@@ -474,6 +525,9 @@ help:
 	@echo "... src/primitives/tuple.o"
 	@echo "... src/primitives/tuple.i"
 	@echo "... src/primitives/tuple.s"
+	@echo "... src/ray.o"
+	@echo "... src/ray.i"
+	@echo "... src/ray.s"
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
@@ -489,6 +543,9 @@ help:
 	@echo "... tests/matrix.o"
 	@echo "... tests/matrix.i"
 	@echo "... tests/matrix.s"
+	@echo "... tests/ray.o"
+	@echo "... tests/ray.i"
+	@echo "... tests/ray.s"
 	@echo "... tests/transformations.o"
 	@echo "... tests/transformations.i"
 	@echo "... tests/transformations.s"
