@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../src/ray.hpp"
+#include "../src/primitives/matrix.hpp"
 #include "../src/sphere.hpp"
 #include "../src/intersection.hpp"
 
@@ -146,4 +147,53 @@ TEST_CASE ("The hit is always the lowest nonnegative intersection", "[hit]") {
 
   auto i = hit(xs);
   REQUIRE( i.value() == i4 );
+}
+
+TEST_CASE ("Translating a ray", "[transformation]") {
+  Ray r = Ray(Tuple::create_point(1, 2, 3), Tuple::create_vector(0, 1, 0));
+  Matrix m = Matrix::translation(3, 4, 5);
+  
+  Ray r2 = r.transform(m);
+  REQUIRE ( r2.origin() == Tuple::create_point(4, 6, 8) );
+  REQUIRE ( r2.direction() == Tuple::create_vector(0, 1, 0) );
+}
+
+TEST_CASE ("Scaling a ray", "[transformation]") {
+  Ray r = Ray(Tuple::create_point(1, 2, 3), Tuple::create_vector(0, 1, 0));
+  Matrix m = Matrix::scaling(2, 3, 4);
+  
+  Ray r2 = r.transform(m);
+  REQUIRE ( r2.origin() == Tuple::create_point(2, 6, 12) );
+  REQUIRE ( r2.direction() == Tuple::create_vector(0, 3, 0) );
+}
+
+TEST_CASE ("A sphere's default transformation", "[transformation]") {
+  Sphere s = Sphere();
+  REQUIRE ( s.transform() == Matrix::identity_matrix(4) );
+}
+
+TEST_CASE ("Changing a sphere's tranformation", "[transformation]") {
+  Sphere s = Sphere();
+  s.setTransform(Matrix::translation(2, 3, 4));
+  REQUIRE ( s.transform() == Matrix::translation(2, 3, 4) );
+}
+
+TEST_CASE ("Intersecting a scaled sphere with a ray", "[transformation]") {
+  Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  Sphere s = Sphere();
+  s.setTransform(Matrix::scaling(2, 2, 2));
+
+  auto xs = intersect(s, r);
+  REQUIRE ( xs.size() == 2 );
+  REQUIRE ( xs[0].t() == 3 );
+  REQUIRE ( xs[1].t() == 7 );
+}
+
+TEST_CASE ("Intersecting a translated sphere with a ray", "[transformation]") {
+  Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  Sphere s = Sphere();
+  s.setTransform(Matrix::translation(5, 0, 0));
+
+  auto xs = intersect(s, r);
+  REQUIRE ( xs.size() == 0 );
 }

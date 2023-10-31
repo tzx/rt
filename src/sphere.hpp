@@ -1,7 +1,7 @@
 #pragma once
 
+#include "primitives/matrix.hpp"
 #include "ray.hpp"
-#include <vector>
 
 class Sphere {
   public:
@@ -11,7 +11,11 @@ class Sphere {
     int uuid() const;
     bool operator==(const Sphere &other) const;
 
+    void setTransform(Matrix m);
+    Matrix transform() const;
+
 
   private:
     int uuid_;
+    Matrix transform_;
 };

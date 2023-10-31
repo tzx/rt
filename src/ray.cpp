@@ -17,3 +17,9 @@ Tuple Ray::direction() const {
 Tuple Ray::position(float t) const {
   return this->origin() + this->direction() * t;
 }
+
+Ray Ray::transform(Matrix m) const {
+  auto new_orig = m * this->origin();
+  auto new_dir = m * this->direction();
+  return Ray(new_orig, new_dir);
+}

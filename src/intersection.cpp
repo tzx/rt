@@ -21,7 +21,9 @@ bool Intersection::operator==(const Intersection &oth) const {
   return this->t() == oth.t() && this->object() == oth.object();
 }
 
-std::vector<Intersection> intersect(const Sphere s, const Ray ray) {
+std::vector<Intersection> intersect(const Sphere s, const Ray ray_) {
+  Ray ray = ray_.transform(s.transform().inverse());
+
   // Assume sphere is at world origin of 0,0,0
   Tuple sphere_to_ray = ray.origin() - Tuple::create_point(0, 0, 0);
   auto a = dotProduct(ray.direction(), ray.direction());

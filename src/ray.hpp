@@ -1,5 +1,6 @@
 #pragma once
 
+#include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
 
 class Ray {
@@ -9,6 +10,7 @@ class Ray {
     Tuple direction() const;
 
     Tuple position(float t) const;
+    Ray transform(Matrix m) const;
 
   private:
     Tuple orig_;
