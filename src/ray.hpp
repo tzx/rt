@@ -6,6 +6,8 @@ class Ray {
     Tuple origin() const;
     Tuple direction() const;
 
+    Tuple position(float t) const;
+
   private:
     Tuple orig_;
     Tuple dir_;

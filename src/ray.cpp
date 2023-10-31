@@ -13,3 +13,7 @@ Tuple Ray::origin() const {
 Tuple Ray::direction() const {
   return this->dir_;
 }
+
+Tuple Ray::position(float t) const {
+  return this->origin() + this->direction() * t;
+}

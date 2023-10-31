@@ -11,3 +11,12 @@ TEST_CASE ("Creating and querying a ray", "[ray]") {
   REQUIRE(ray.origin() == origin);
   REQUIRE(ray.direction() == direction);
 }
+
+TEST_CASE ("Computing a point from a distance", "[ray]") {
+  Ray ray = Ray(Tuple::create_point(2, 3, 4), Tuple::create_vector(1, 0, 0));
+
+  REQUIRE(ray.position(0) == Tuple::create_point(2, 3, 4));
+  REQUIRE(ray.position(1) == Tuple::create_point(3, 3, 4));
+  REQUIRE(ray.position(-1) == Tuple::create_point(1, 3, 4));
+  REQUIRE(ray.position(2.5) == Tuple::create_point(4.5, 3, 4));
+}
