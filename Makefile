@@ -197,6 +197,33 @@ src/canvas/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/color.cpp.s
 .PHONY : src/canvas/color.cpp.s
 
+src/intersection.o: src/intersection.cpp.o
+.PHONY : src/intersection.o
+
+# target to build an object file
+src/intersection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.o
+.PHONY : src/intersection.cpp.o
+
+src/intersection.i: src/intersection.cpp.i
+.PHONY : src/intersection.i
+
+# target to preprocess a source file
+src/intersection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.i
+.PHONY : src/intersection.cpp.i
+
+src/intersection.s: src/intersection.cpp.s
+.PHONY : src/intersection.s
+
+# target to generate assembly for a file
+src/intersection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.s
+.PHONY : src/intersection.cpp.s
+
 src/primitives/matrix.o: src/primitives/matrix.cpp.o
 .PHONY : src/primitives/matrix.o
 
@@ -570,6 +597,9 @@ help:
 	@echo "... src/canvas/color.o"
 	@echo "... src/canvas/color.i"
 	@echo "... src/canvas/color.s"
+	@echo "... src/intersection.o"
+	@echo "... src/intersection.i"
+	@echo "... src/intersection.s"
 	@echo "... src/primitives/matrix.o"
 	@echo "... src/primitives/matrix.i"
 	@echo "... src/primitives/matrix.s"

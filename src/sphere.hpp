@@ -9,6 +9,10 @@ class Sphere {
     Sphere();
     std::vector<float> intersect(Ray ray) const;
 
+    int uuid() const;
+    bool operator==(const Sphere &other) const;
+
+
   private:
-    int uuid;
+    int uuid_;
 };

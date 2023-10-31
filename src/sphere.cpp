@@ -8,7 +8,7 @@
 Sphere::Sphere() {
   // Assuming pretty decent distribution, we shouldn't be having collisions
   // At least for now....
-  this->uuid = random_id();
+  this->uuid_ = random_id();
 }
 
 std::vector<float> Sphere::intersect(Ray ray) const {
@@ -29,4 +29,12 @@ std::vector<float> Sphere::intersect(Ray ray) const {
   float t1 = (-b - std::sqrt(discriminant)) / (2.0 * a);
   float t2 = (-b + std::sqrt(discriminant)) / (2.0 * a);
   return {t1, t2};
+}
+
+int Sphere::uuid() const {
+  return this->uuid_;
+}
+
+bool Sphere::operator==(const Sphere &other) const {
+  return this->uuid() == other.uuid();
 }
