@@ -113,11 +113,7 @@ TEST_CASE ("The hit, when all intersections have positive t", "[hit]") {
   std::vector<Intersection> xs = {i1, i2};
 
   auto i = hit(xs);
-  REQUIRE( i.first );
-
-  std::cout << i.second->t() << std::endl;
-  std::cout << i.second->object().uuid() << std::endl;
-  REQUIRE( i1 == *i.second );
+  REQUIRE( i1 == i.value() );
 }
 
 TEST_CASE ("The hit, when some intersection have negative t", "[hit]") {
@@ -127,8 +123,7 @@ TEST_CASE ("The hit, when some intersection have negative t", "[hit]") {
   std::vector<Intersection> xs = {i2, i1};
 
   auto i = hit(xs);
-  REQUIRE( i.first );
-  REQUIRE( i2 == *i.second );
+  REQUIRE( i2 == i.value() );
 }
 
 TEST_CASE ("The hit, when all intersections have negative t", "[hit]") {
@@ -138,7 +133,7 @@ TEST_CASE ("The hit, when all intersections have negative t", "[hit]") {
   std::vector<Intersection> xs = {i2, i1};
 
   auto i = hit(xs);
-  REQUIRE_FALSE( i.first );
+  REQUIRE_FALSE( i.has_value() );
 }
 
 TEST_CASE ("The hit is always the lowest nonnegative intersection", "[hit]") {
@@ -150,6 +145,5 @@ TEST_CASE ("The hit is always the lowest nonnegative intersection", "[hit]") {
   std::vector<Intersection> xs = {i1, i2, i3, i4};
 
   auto i = hit(xs);
-  REQUIRE( i.first );
-  REQUIRE( *i.second == i4 );
+  REQUIRE( i.value() == i4 );
 }

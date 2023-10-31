@@ -1,6 +1,7 @@
 #pragma once
 #include "sphere.hpp"
 #include <utility>
+#include <optional>
 
 class Intersection {
   public:
@@ -19,4 +20,4 @@ class Intersection {
 };
 
 std::vector<Intersection> intersect(const Sphere s, const Ray r);
-std::pair<bool, const Intersection*> hit(const std::vector<Intersection>&);
+std::optional<Intersection> hit(const std::vector<Intersection>&);
