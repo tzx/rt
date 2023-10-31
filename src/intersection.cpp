@@ -1,5 +1,7 @@
 #include "intersection.hpp"
 #include <cmath>
+#include <iostream>
+#include <utility>
 
 Intersection::Intersection(float t, Sphere s) {
   this->time = t;
@@ -12,6 +14,10 @@ float Intersection::t() const {
 
 Sphere Intersection::object() const {
   return this->sph;
+}
+
+bool Intersection::operator==(const Intersection &oth) const {
+  return this->t() == oth.t() && this->object() == oth.object();
 }
 
 std::vector<Intersection> intersect(const Sphere s, const Ray ray) {
@@ -36,4 +42,18 @@ std::vector<Intersection> intersect(const Sphere s, const Ray ray) {
   Intersection i2 = Intersection(t2, s);
 
   return {i1, i2};
+}
+
+std::pair<bool, const Intersection*> hit(const std::vector<Intersection> &xs) {
+  const Intersection *result = nullptr;
+  for (auto &i: xs) {
+    if (i.t() < 0) {
+      continue;
+    }
+    if (result == nullptr || i.t() < result->t()) {
+      result = &i;
+      std::cout << "switched" << std::endl;
+    }
+  }
+  return {result != nullptr, result};
 }

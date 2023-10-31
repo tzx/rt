@@ -1,4 +1,5 @@
 #include <catch2/catch.hpp>
+#include <iostream>
 
 #include "../src/ray.hpp"
 #include "../src/sphere.hpp"
@@ -103,4 +104,52 @@ TEST_CASE ("Intersect sets the object on the intersection", "[intersection]") {
   REQUIRE ( xs.size() == 2 );
   REQUIRE ( xs[0].object() == s );
   REQUIRE ( xs[1].object() == s );
+}
+
+TEST_CASE ("The hit, when all intersections have positive t", "[hit]") {
+  Sphere s = Sphere();
+  Intersection i1 = Intersection(1, s);
+  Intersection i2 = Intersection(2, s);
+  std::vector<Intersection> xs = {i1, i2};
+
+  auto i = hit(xs);
+  REQUIRE( i.first );
+
+  std::cout << i.second->t() << std::endl;
+  std::cout << i.second->object().uuid() << std::endl;
+  REQUIRE( i1 == *i.second );
+}
+
+TEST_CASE ("The hit, when some intersection have negative t", "[hit]") {
+  Sphere s = Sphere();
+  Intersection i1 = Intersection(-1, s);
+  Intersection i2 = Intersection(1, s);
+  std::vector<Intersection> xs = {i2, i1};
+
+  auto i = hit(xs);
+  REQUIRE( i.first );
+  REQUIRE( i2 == *i.second );
+}
+
+TEST_CASE ("The hit, when all intersections have negative t", "[hit]") {
+  Sphere s = Sphere();
+  Intersection i1 = Intersection(-2, s);
+  Intersection i2 = Intersection(-1, s);
+  std::vector<Intersection> xs = {i2, i1};
+
+  auto i = hit(xs);
+  REQUIRE_FALSE( i.first );
+}
+
+TEST_CASE ("The hit is always the lowest nonnegative intersection", "[hit]") {
+  Sphere s = Sphere();
+  Intersection i1 = Intersection(5, s);
+  Intersection i2 = Intersection(7, s);
+  Intersection i3 = Intersection(-3, s);
+  Intersection i4 = Intersection(2, s);
+  std::vector<Intersection> xs = {i1, i2, i3, i4};
+
+  auto i = hit(xs);
+  REQUIRE( i.first );
+  REQUIRE( *i.second == i4 );
 }
