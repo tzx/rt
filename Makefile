@@ -329,6 +329,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/sphere.o: src/sphere.cpp.o
+.PHONY : src/sphere.o
+
+# target to build an object file
+src/sphere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.o
+.PHONY : src/sphere.cpp.o
+
+src/sphere.i: src/sphere.cpp.i
+.PHONY : src/sphere.i
+
+# target to preprocess a source file
+src/sphere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.i
+.PHONY : src/sphere.cpp.i
+
+src/sphere.s: src/sphere.cpp.s
+.PHONY : src/sphere.s
+
+# target to generate assembly for a file
+src/sphere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.s
+.PHONY : src/sphere.cpp.s
+
 src/util/approx.o: src/util/approx.cpp.o
 .PHONY : src/util/approx.o
 
@@ -355,6 +382,33 @@ src/util/approx.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/approx.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/approx.cpp.s
 .PHONY : src/util/approx.cpp.s
+
+src/util/rangen.o: src/util/rangen.cpp.o
+.PHONY : src/util/rangen.o
+
+# target to build an object file
+src/util/rangen.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/rangen.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/rangen.cpp.o
+.PHONY : src/util/rangen.cpp.o
+
+src/util/rangen.i: src/util/rangen.cpp.i
+.PHONY : src/util/rangen.i
+
+# target to preprocess a source file
+src/util/rangen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/rangen.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/rangen.cpp.i
+.PHONY : src/util/rangen.cpp.i
+
+src/util/rangen.s: src/util/rangen.cpp.s
+.PHONY : src/util/rangen.s
+
+# target to generate assembly for a file
+src/util/rangen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/util/rangen.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/rangen.cpp.s
+.PHONY : src/util/rangen.cpp.s
 
 tests/canvas.o: tests/canvas.cpp.o
 .PHONY : tests/canvas.o
@@ -531,9 +585,15 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/sphere.o"
+	@echo "... src/sphere.i"
+	@echo "... src/sphere.s"
 	@echo "... src/util/approx.o"
 	@echo "... src/util/approx.i"
 	@echo "... src/util/approx.s"
+	@echo "... src/util/rangen.o"
+	@echo "... src/util/rangen.i"
+	@echo "... src/util/rangen.s"
 	@echo "... tests/canvas.o"
 	@echo "... tests/canvas.i"
 	@echo "... tests/canvas.s"

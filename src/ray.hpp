@@ -1,3 +1,5 @@
+#pragma once
+
 #include "primitives/tuple.hpp"
 
 class Ray {
