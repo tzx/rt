@@ -3,43 +3,43 @@
 #include <ostream>
 
 #include "canvas/canvas.hpp"
+#include "canvas/color.hpp"
+#include "intersection.hpp"
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
+#include "ray.hpp"
+#include "sphere.hpp"
 
-struct Projectile {
-  Tuple position;
-  Tuple velocity;
-};
 
-struct Environment {
-  Tuple gravity;
-  Tuple wind;
-};
-
-Projectile tick(Environment &env, Projectile &proj) {
-  Projectile _new;
-  _new.position = proj.position + proj.velocity;
-  _new.velocity = proj.velocity + env.gravity + env.wind;
-  return _new;
-}
-
-constexpr int LENGTH = 20;
-constexpr int LINE_INSET = 200;
-constexpr int DIMENSION = 2 * LINE_INSET + 4 * LENGTH;
-constexpr int INSET = DIMENSION/2;
+constexpr int CANVAS_DIMENSIONS = 500;
+constexpr int wall_z = 10;
+constexpr int wall_size = 7;
+constexpr float pixel_size = (float)7/CANVAS_DIMENSIONS;
+constexpr float half = 7/2.0f;
 
 int main () {
-  Canvas c = Canvas(DIMENSION, DIMENSION);
+  Tuple ray_origin = Tuple::create_point(0, 0, -5);
+  Color color = Color(1, 0, 1);
 
-  Matrix rotation = Matrix::rotation_z(M_PI / 6.0f);
-  Tuple point = Tuple::create_point(0, LINE_INSET + LENGTH, 0);
+  Canvas c = Canvas(CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+  Sphere shape = Sphere();
+  shape.setTransform(Matrix::shearing(1, 0, 0, 0, 0, 0) * Matrix::scaling(0.5, 1, 1));
 
-  // We have 12 points
-  for (auto hour = 0; hour < 12; ++hour) {
-    c.write_pixel(point.getX() + INSET, INSET + point.getY(), Color(1, 1, 1));
-    point = rotation * point;
+  for (auto y = 0; y < CANVAS_DIMENSIONS; ++y) {
+    float world_y = half - pixel_size * y;
+    for (auto x = 0; x < CANVAS_DIMENSIONS; ++x) {
+      float world_x = -half + pixel_size * x;
+
+      Tuple position = Tuple::create_point(world_x, world_y, wall_z);
+
+      Ray r = Ray(ray_origin, (position - ray_origin).getNormalized());
+      auto xs = intersect(shape, r);
+      auto h = hit(xs);
+      if (h.has_value()) {
+        c.write_pixel(x, y, color);
+      }
+    }
   }
-
   std::cout << c.ppm();
 
   return 0;
