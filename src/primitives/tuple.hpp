@@ -18,9 +18,11 @@ class Tuple {
     float getY() const;
     float getZ() const;
     float getW() const;
+    void turnIntoVector();
     float getMagnitude() const;
     Tuple getNormalized() const;
     void repr() const;
+
 
     bool operator==(const Tuple &other) const;
     Tuple operator+(const Tuple &other) const;
@@ -32,3 +34,5 @@ class Tuple {
 
 float dotProduct(const Tuple &a, const Tuple &b);
 Tuple crossProduct(const Tuple &a, const Tuple &b);
+
+Tuple reflect(const Tuple in, const Tuple normal);

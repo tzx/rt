@@ -34,6 +34,10 @@ float Tuple::getW() const {
   return w;
 }
 
+void Tuple::turnIntoVector() {
+  this->w = 0;
+}
+
 bool Tuple::isPoint() const {
   return w == 1.0;
 }
@@ -96,4 +100,8 @@ Tuple crossProduct(const Tuple &a, const Tuple &b) {
       a.getY() * b.getZ() - a.getZ() * b.getY(),
       a.getZ() * b.getX() - a.getX() * b.getZ(),
       a.getX() * b.getY() - a.getY() * b.getX());
+}
+
+Tuple reflect(const Tuple in, const Tuple normal) {
+  return in - normal * 2 * dotProduct(in, normal);
 }

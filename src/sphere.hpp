@@ -1,6 +1,7 @@
 #pragma once
 
 #include "primitives/matrix.hpp"
+#include "primitives/tuple.hpp"
 #include "ray.hpp"
 
 class Sphere {
@@ -14,6 +15,7 @@ class Sphere {
     void setTransform(Matrix m);
     Matrix transform() const;
 
+    Tuple normal_at(Tuple p) const;
 
   private:
     int uuid_;

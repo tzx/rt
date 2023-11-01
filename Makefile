@@ -485,6 +485,30 @@ tests/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/color.cpp.s
 .PHONY : tests/color.cpp.s
 
+tests/lighting.o: tests/lighting.cpp.o
+.PHONY : tests/lighting.o
+
+# target to build an object file
+tests/lighting.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/lighting.cpp.o
+.PHONY : tests/lighting.cpp.o
+
+tests/lighting.i: tests/lighting.cpp.i
+.PHONY : tests/lighting.i
+
+# target to preprocess a source file
+tests/lighting.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/lighting.cpp.i
+.PHONY : tests/lighting.cpp.i
+
+tests/lighting.s: tests/lighting.cpp.s
+.PHONY : tests/lighting.s
+
+# target to generate assembly for a file
+tests/lighting.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/lighting.cpp.s
+.PHONY : tests/lighting.cpp.s
+
 tests/matrix.o: tests/matrix.cpp.o
 .PHONY : tests/matrix.o
 
@@ -630,6 +654,9 @@ help:
 	@echo "... tests/color.o"
 	@echo "... tests/color.i"
 	@echo "... tests/color.s"
+	@echo "... tests/lighting.o"
+	@echo "... tests/lighting.i"
+	@echo "... tests/lighting.s"
 	@echo "... tests/matrix.o"
 	@echo "... tests/matrix.i"
 	@echo "... tests/matrix.s"
