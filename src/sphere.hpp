@@ -1,5 +1,6 @@
 #pragma once
 
+#include "lights/material.hpp"
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
 #include "ray.hpp"
@@ -14,10 +15,13 @@ class Sphere {
 
     void setTransform(Matrix m);
     Matrix transform() const;
+    Material material() const;
+    void setMaterial(Material m);
 
     Tuple normal_at(Tuple p) const;
 
   private:
     int uuid_;
     Matrix transform_;
+    Material material_;
 };

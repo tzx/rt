@@ -8,6 +8,7 @@ Sphere::Sphere() : transform_(Matrix::identity_matrix(4)) {
   // At least for now....
   // We are also assuming that the sphere is always at the origin
   this->uuid_ = random_id();
+  this->material_ = Material();
 }
 
 int Sphere::uuid() const {
@@ -24,6 +25,14 @@ Matrix Sphere::transform() const {
 
 void Sphere::setTransform(Matrix m) {
   this->transform_ = m;
+}
+
+Material Sphere::material() const {
+  return this->material_;
+}
+
+void Sphere::setMaterial(Material m) {
+  this->material_ = m;
 }
 
 Tuple Sphere::normal_at(Tuple world_p) const {

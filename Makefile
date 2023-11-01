@@ -224,6 +224,60 @@ src/intersection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.s
 .PHONY : src/intersection.cpp.s
 
+src/lights/material.o: src/lights/material.cpp.o
+.PHONY : src/lights/material.o
+
+# target to build an object file
+src/lights/material.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/material.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/material.cpp.o
+.PHONY : src/lights/material.cpp.o
+
+src/lights/material.i: src/lights/material.cpp.i
+.PHONY : src/lights/material.i
+
+# target to preprocess a source file
+src/lights/material.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/material.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/material.cpp.i
+.PHONY : src/lights/material.cpp.i
+
+src/lights/material.s: src/lights/material.cpp.s
+.PHONY : src/lights/material.s
+
+# target to generate assembly for a file
+src/lights/material.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/material.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/material.cpp.s
+.PHONY : src/lights/material.cpp.s
+
+src/lights/point_light.o: src/lights/point_light.cpp.o
+.PHONY : src/lights/point_light.o
+
+# target to build an object file
+src/lights/point_light.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/point_light.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.o
+.PHONY : src/lights/point_light.cpp.o
+
+src/lights/point_light.i: src/lights/point_light.cpp.i
+.PHONY : src/lights/point_light.i
+
+# target to preprocess a source file
+src/lights/point_light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/point_light.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.i
+.PHONY : src/lights/point_light.cpp.i
+
+src/lights/point_light.s: src/lights/point_light.cpp.s
+.PHONY : src/lights/point_light.s
+
+# target to generate assembly for a file
+src/lights/point_light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/lights/point_light.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
+.PHONY : src/lights/point_light.cpp.s
+
 src/primitives/matrix.o: src/primitives/matrix.cpp.o
 .PHONY : src/primitives/matrix.o
 
@@ -624,6 +678,12 @@ help:
 	@echo "... src/intersection.o"
 	@echo "... src/intersection.i"
 	@echo "... src/intersection.s"
+	@echo "... src/lights/material.o"
+	@echo "... src/lights/material.i"
+	@echo "... src/lights/material.s"
+	@echo "... src/lights/point_light.o"
+	@echo "... src/lights/point_light.i"
+	@echo "... src/lights/point_light.s"
 	@echo "... src/primitives/matrix.o"
 	@echo "... src/primitives/matrix.i"
 	@echo "... src/primitives/matrix.s"

@@ -2,6 +2,8 @@
 #include <cmath>
 
 #include "../src/sphere.hpp"
+#include "../src/canvas/color.hpp"
+#include "../src/lights/point_light.hpp"
 
 TEST_CASE ("The normal on a sphere at a point on the x axis", "[normal]") {
   Sphere s = Sphere();
@@ -65,4 +67,105 @@ TEST_CASE ("Reflecting a vector off a slanted surface", "[reflect]") {
   Tuple n = Tuple::create_vector(sq2_2, sq2_2, 0);
   Tuple r = reflect(v, n);
   REQUIRE (r == Tuple::create_vector(1, 0, 0));
+}
+
+TEST_CASE ("A point light has a position and intensity", "[phong]") {
+  Color intensity = Color(1, 1, 1);
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  PointLight light = PointLight(position, intensity);
+
+  REQUIRE (light.position() == position);
+  REQUIRE (light.intensity() == intensity);
+}
+
+TEST_CASE ("The default material", "[phong]") {
+  Material m = Material();
+
+  REQUIRE (m.color() == Color(1, 1, 1));
+  REQUIRE (m.ambient() == 0.1f);
+  REQUIRE (m.diffuse() == 0.9f);
+  REQUIRE (m.specular() == 0.9f);
+  REQUIRE (m.shininess() == 200.0f);
+}
+
+TEST_CASE ("A sphere has a default material", "[phong]") {
+  Sphere s = Sphere();
+  Material m = s.material();
+
+  REQUIRE (m == Material());
+}
+
+TEST_CASE ("A sphere may be assigned a material", "[phong]") {
+  Sphere s = Sphere();
+  Material m = Material();
+  m.setAmbient(1);
+  s.setMaterial(m);
+
+  REQUIRE (s.material() == m);
+}
+
+TEST_CASE ("Lighting with the eye between the light and the surface", "[phong]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  Tuple eyev = Tuple::create_vector(0, 0, -1);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight light = PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
+
+  Color result = m.lighting(light, position, eyev, normalv);
+  REQUIRE (result == Color(1.9, 1.9, 1.9));
+}
+
+TEST_CASE ("Lighting with the eye between the light and the surface, eye offset 45deg", "[phong]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  float sq2_2 = std::sqrt(2)/2.0f;
+
+  Tuple eyev = Tuple::create_vector(0, sq2_2, -sq2_2);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight light = PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
+
+  Color result = m.lighting(light, position, eyev, normalv);
+  REQUIRE (result == Color(1.0, 1.0, 1.0));
+}
+
+TEST_CASE ("Lighting with eye opposite surface, light offset 45deg", "[phong]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  Tuple eyev = Tuple::create_vector(0, 0, -1);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight light = PointLight(Tuple::create_point(0, 10, -10), Color(1, 1, 1));
+
+  Color result = m.lighting(light, position, eyev, normalv);
+  REQUIRE (result == Color(0.7364, 0.7364, 0.7364));
+}
+
+TEST_CASE ("Lighting with eye in the path of the reflection vector", "[phong]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  float sq2_2 = std::sqrt(2)/2.0f;
+
+  Tuple eyev = Tuple::create_vector(0, -sq2_2, -sq2_2);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight light = PointLight(Tuple::create_point(0, 10, -10), Color(1, 1, 1));
+
+  Color result = m.lighting(light, position, eyev, normalv);
+
+  REQUIRE (result == Color(1.63639, 1.63639, 1.63639));
+}
+
+TEST_CASE ("Lighting with light behind the surface", "[phong]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  Tuple eyev = Tuple::create_vector(0, 0, -1);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight light = PointLight(Tuple::create_point(0, 0, 10), Color(1, 1, 1));
+
+  Color result = m.lighting(light, position, eyev, normalv);
+  REQUIRE (result == Color(0.1, 0.1, 0.1));
 }
