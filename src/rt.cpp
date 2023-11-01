@@ -19,11 +19,18 @@ constexpr float half = 7/2.0f;
 
 int main () {
   Tuple ray_origin = Tuple::create_point(0, 0, -5);
-  Color color = Color(1, 0, 1);
 
   Canvas c = Canvas(CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+
+  Material mat = Material();
+  mat.setColor(Color(1, 0.2, 1));
   Sphere shape = Sphere();
-  shape.setTransform(Matrix::shearing(1, 0, 0, 0, 0, 0) * Matrix::scaling(0.5, 1, 1));
+  shape.setMaterial(mat);
+  // shape.setTransform(Matrix::shearing(1, 0, 0, 0, 0, 0) * Matrix::scaling(0.5, 1, 1));
+
+  Tuple light_position = Tuple::create_point(-10, 10, -10);
+  Color light_color = Color(1, 1, 1);
+  PointLight light = PointLight(light_position, light_color);
 
   for (auto y = 0; y < CANVAS_DIMENSIONS; ++y) {
     float world_y = half - pixel_size * y;
@@ -36,6 +43,12 @@ int main () {
       auto xs = intersect(shape, r);
       auto h = hit(xs);
       if (h.has_value()) {
+        auto intersection = h.value();
+        auto point = r.position(intersection.t());
+        auto normal = intersection.object().normal_at(point);
+        auto eye = -r.direction();
+        auto color = intersection.object().material().lighting(light, point, eye, normal);
+
         c.write_pixel(x, y, color);
       }
     }
