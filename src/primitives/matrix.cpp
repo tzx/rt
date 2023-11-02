@@ -184,3 +184,17 @@ bool operator==(const Matrix &self, const Matrix &other) {
   }
   return true;
 }
+
+Matrix view_transform(const Tuple from, const Tuple to, const Tuple up) {
+  Tuple forward = (to - from).getNormalized();
+  Tuple left = crossProduct(forward, up.getNormalized());
+  Tuple true_up = crossProduct(left, forward);
+
+  std::vector<float> values = { left.getX(), left.getY(), left.getZ(), 0,
+                                true_up.getX(), true_up.getY(), true_up.getZ(), 0,
+                                -forward.getX(), -forward.getY(), -forward.getZ(), 0,
+                                0, 0, 0, 1};
+  Matrix orientation = Matrix(4, 4, values);
+
+  return orientation * Matrix::translation(-from.getX(), -from.getY(), -from.getZ());
+}

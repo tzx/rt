@@ -143,6 +143,33 @@ tester/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/build
 .PHONY : tester/fast
 
+src/canvas/camera.o: src/canvas/camera.cpp.o
+.PHONY : src/canvas/camera.o
+
+# target to build an object file
+src/canvas/camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/camera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/camera.cpp.o
+.PHONY : src/canvas/camera.cpp.o
+
+src/canvas/camera.i: src/canvas/camera.cpp.i
+.PHONY : src/canvas/camera.i
+
+# target to preprocess a source file
+src/canvas/camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/camera.cpp.i
+.PHONY : src/canvas/camera.cpp.i
+
+src/canvas/camera.s: src/canvas/camera.cpp.s
+.PHONY : src/canvas/camera.s
+
+# target to generate assembly for a file
+src/canvas/camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/camera.cpp.s
+.PHONY : src/canvas/camera.cpp.s
+
 src/canvas/canvas.o: src/canvas/canvas.cpp.o
 .PHONY : src/canvas/canvas.o
 
@@ -720,6 +747,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Rt"
 	@echo "... tester"
+	@echo "... src/canvas/camera.o"
+	@echo "... src/canvas/camera.i"
+	@echo "... src/canvas/camera.s"
 	@echo "... src/canvas/canvas.o"
 	@echo "... src/canvas/canvas.i"
 	@echo "... src/canvas/canvas.s"

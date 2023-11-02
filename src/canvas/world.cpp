@@ -42,6 +42,11 @@ const std::vector<std::shared_ptr<Sphere>> World::objects() const {
   return this->objects_;
 }
 
+void World::addObject(Sphere obj) {
+  auto to_add = std::make_shared<Sphere>(obj);
+  this->objects_.push_back(to_add);
+}
+
 bool World::contains(Sphere &to_check) const {
   for (auto sph: this->objects()) {
     if (to_check == *sph) {

@@ -2,9 +2,12 @@
 #include <iostream>
 #include <ostream>
 
+#include "canvas/camera.hpp"
 #include "canvas/canvas.hpp"
 #include "canvas/color.hpp"
+#include "canvas/world.hpp"
 #include "intersection.hpp"
+#include "lights/point_light.hpp"
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
 #include "ray.hpp"
@@ -18,42 +21,62 @@ constexpr float pixel_size = (float)7/CANVAS_DIMENSIONS;
 constexpr float half = 7/2.0f;
 
 int main () {
-  Tuple ray_origin = Tuple::create_point(0, 0, -5);
+  Sphere floor = Sphere();
+  floor.setTransform(Matrix::scaling(10, 0.01, 10));
+  Material m = Material();
+  m.setColor(Color(1, 0.9, 0.9));
+  m.setSpecular(0);
+  floor.setMaterial(m);
 
-  Canvas c = Canvas(CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+  Sphere left_wall = Sphere();
+  left_wall.setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(-M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
+  left_wall.setMaterial(floor.material());
 
-  Material mat = Material();
-  mat.setColor(Color(1, 0.2, 1));
-  Sphere shape = Sphere();
-  shape.setMaterial(mat);
-  // shape.setTransform(Matrix::shearing(1, 0, 0, 0, 0, 0) * Matrix::scaling(0.5, 1, 1));
+  Sphere right_wall = Sphere();
+  right_wall.setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
+  right_wall.setMaterial(floor.material());
 
-  Tuple light_position = Tuple::create_point(-10, 10, -10);
-  Color light_color = Color(1, 1, 1);
-  PointLight light = PointLight(light_position, light_color);
+  Sphere middle = Sphere();
+  middle.setTransform(Matrix::translation(-0.5, 1, 0.5));
+  Material middle_m = Material();
+  middle_m.setColor(Color(0.1, 1, 0.5));
+  middle_m.setDiffuse(0.7);
+  middle_m.setSpecular(0.3);
+  middle.setMaterial(middle_m);
 
-  for (auto y = 0; y < CANVAS_DIMENSIONS; ++y) {
-    float world_y = half - pixel_size * y;
-    for (auto x = 0; x < CANVAS_DIMENSIONS; ++x) {
-      float world_x = -half + pixel_size * x;
+  Sphere right = Sphere();
+  right.setTransform(Matrix::translation(1.5, 0.5, -0.5) * Matrix::scaling(0.5, 0.5, 0.5));
+  Material right_m = Material();
+  right_m.setColor(Color(0.5, 1, 0.1));
+  right_m.setDiffuse(0.7);
+  right_m.setSpecular(0.3);
+  right.setMaterial(right_m);
 
-      Tuple position = Tuple::create_point(world_x, world_y, wall_z);
+  Sphere left = Sphere();
+  left.setTransform(Matrix::translation(-1.5, 0.33, -0.75) * Matrix::scaling(0.33, 0.33, 0.33));
+  Material left_m = Material();
+  left_m.setColor(Color(1, 0.8, 0.1));
+  left_m.setDiffuse(0.7);
+  left_m.setSpecular(0.3);
+  left.setMaterial(left_m);
 
-      Ray r = Ray(ray_origin, (position - ray_origin).getNormalized());
-      auto xs = intersect(shape, r);
-      auto h = hit(xs);
-      if (h.has_value()) {
-        auto intersection = h.value();
-        auto point = r.position(intersection.t());
-        auto normal = intersection.object().normal_at(point);
-        auto eye = -r.direction();
-        auto color = intersection.object().material().lighting(light, point, eye, normal);
+  World w = World();
+  w.setLight(PointLight(Tuple::create_point(-10, 10, -10), Color(1, 1, 1)));
+  w.addObject(floor);
+  w.addObject(left_wall);
+  w.addObject(right_wall);
+  w.addObject(middle);
+  w.addObject(right);
+  w.addObject(left);
 
-        c.write_pixel(x, y, color);
-      }
-    }
-  }
-  std::cout << c.ppm();
+  Camera c = Camera(1000, 500, M_PIf/3.0f);
+  c.setTransform(view_transform(Tuple::create_point(0, 1.5, -5), 
+                                Tuple::create_point(0, 1, 0),
+                                Tuple::create_vector(0, 1, 0)));
+  
+  Canvas canvas = c.render(w);
+
+  std::cout << canvas.ppm();
 
   return 0;
 }

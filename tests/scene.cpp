@@ -1,7 +1,10 @@
 #include <catch2/catch.hpp>
+#include <cmath>
+#include <vector>
 
 #include "../src/canvas/color.hpp"
 #include "../src/canvas/world.hpp"
+#include "../src/canvas/camera.hpp"
 #include "../src/lights/point_light.hpp"
 #include "../src/primitives/tuple.hpp"
 #include "../src/sphere.hpp"
@@ -147,5 +150,119 @@ TEST_CASE ("The color with an intersection behind the ray", "[color]") {
   Ray r = Ray(Tuple::create_point(0, 0, 0.75), Tuple::create_vector(0, 0, -1));
   Color c = w.color_at(r);
 
-  REQUIRE( c == inner->material().color() );
+  REQUIRE ( c == inner->material().color() );
+}
+
+TEST_CASE ("The transformation matrix for the default orientation", "[transformation]") {
+  Tuple from = Tuple::create_point(0, 0, 0);
+  Tuple to = Tuple::create_point(0, 0, -1);
+  Tuple up = Tuple::create_vector(0, 1, 0);
+
+  Matrix t = view_transform(from, to, up);
+
+  REQUIRE (t == Matrix::identity_matrix(4));
+}
+
+TEST_CASE ("A view transformation matrix looking in the positive z direction", "[transformation]") {
+  Tuple from = Tuple::create_point(0, 0, 0);
+  Tuple to = Tuple::create_point(0, 0, 1);
+  Tuple up = Tuple::create_vector(0, 1, 0);
+
+  Matrix t = view_transform(from, to, up);
+
+  REQUIRE (t == Matrix::scaling(-1, 1, -1));
+}
+
+TEST_CASE ("The view transformation moves the world", "[transformation]") {
+  Tuple from = Tuple::create_point(0, 0, 8);
+  Tuple to = Tuple::create_point(0, 0, 0);
+  Tuple up = Tuple::create_vector(0, 1, 0);
+
+  Matrix t = view_transform(from, to, up);
+
+  REQUIRE (t == Matrix::translation(0, 0, -8));
+}
+
+TEST_CASE ("An arbitary view transformation", "[transformation]") {
+  Tuple from = Tuple::create_point(1, 3, 2);
+  Tuple to = Tuple::create_point(4, -2, 8);
+  Tuple up = Tuple::create_vector(1, 1, 0);
+
+  Matrix t = view_transform(from, to, up);
+
+  std::vector<float> values = { -0.50709, 0.50709, 0.67612, -2.36643,
+                                 0.76772, 0.60609, 0.12122, -2.82843,
+                                 -0.35857, 0.59761, -0.71714, 0.0000,
+                                 0.0000, 0.0, 0.0, 1.0 };
+
+
+
+  Matrix m = Matrix(4, 4, values);
+  REQUIRE (t == m);
+}
+
+TEST_CASE ("Constructing a camera", "[camera]") {
+  int hsize = 160;
+  int vsize = 120;
+  float fov = M_PI_2f;
+
+  Camera c = Camera(hsize, vsize, fov);
+
+  REQUIRE (c.hsize() == hsize);
+  REQUIRE (c.vsize() == vsize);
+  REQUIRE (c.fov() == fov);
+  REQUIRE (c.transform() == Matrix::identity_matrix(4));
+}
+
+TEST_CASE ("The pixel size for a horizontal canvas", "[camera]") {
+  Camera c = Camera(200, 125, M_PI_2f);
+
+  REQUIRE (c.pixel_size() == 0.01f);
+}
+
+TEST_CASE ("The pixel size for a vertical canvas", "[camera]") {
+  Camera c = Camera(125, 200, M_PI_2f);
+
+  REQUIRE (c.pixel_size() == 0.01f);
+}
+
+TEST_CASE ("Constructing a ray through the center of the canvas", "[camera]") {
+  Camera c = Camera(201, 101, M_PI_2f);
+  Ray r = c.ray_for_pixel(100, 50);
+
+  REQUIRE (r.origin() == Tuple::create_point(0, 0, 0));
+  REQUIRE (r.direction() == Tuple::create_vector(0, 0, -1));
+}
+
+TEST_CASE ("Constructing a ray through a corner of the canvas", "[camera]") {
+  Camera c = Camera(201, 101, M_PI_2f);
+  Ray r = c.ray_for_pixel(0, 0);
+
+  REQUIRE (r.origin() == Tuple::create_point(0, 0, 0));
+  REQUIRE (r.direction() == Tuple::create_vector(0.66519, 0.33259, -0.66851));
+}
+
+TEST_CASE ("Constructing a ray when the camera is transformed", "[camera]") {
+  Camera c = Camera(201, 101, M_PI_2f);
+  c.setTransform(Matrix::rotation_y(M_PI_4f) * Matrix::translation(0, -2, 5));
+
+  Ray r = c.ray_for_pixel(100, 50);
+
+  float sq2_2 = std::sqrt(2)/2.0f;
+
+  REQUIRE ( r.origin() == Tuple::create_point(0, 2, -5) );
+  REQUIRE ( r.direction() == Tuple::create_vector(sq2_2, 0, -sq2_2) );
+}
+
+TEST_CASE ("Rendering a world with a camera", "[camera]") {
+  World w = World::default_world();
+  Camera c = Camera(11, 11, M_PI_2f);
+  Tuple from = Tuple::create_point(0, 0, -5);
+  Tuple to = Tuple::create_point(0, 0, 0);
+  Tuple up = Tuple::create_vector(0, 1, 0);
+  c.setTransform(view_transform(from, to, up));
+
+  Canvas image = c.render(w);
+
+  REQUIRE (image.pixel_at(5, 5) == Color(0.38066, 0.47583, 0.2855));
 }

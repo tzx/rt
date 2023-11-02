@@ -15,6 +15,7 @@ class World {
     const std::optional<std::shared_ptr<PointLight>> light() const;
     void setLight(PointLight);
     const std::vector<std::shared_ptr<Sphere>> objects() const;
+    void addObject(Sphere obj);
 
     bool contains(Sphere &sph) const;
     std::vector<Intersection> intersect_world(const Ray r) const;

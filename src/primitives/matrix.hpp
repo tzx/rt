@@ -39,3 +39,5 @@ Matrix operator*(const Matrix &self, const Matrix &other);
 Matrix operator*(const Matrix &self, const float cst);
 Tuple operator*(const Matrix &self, const Tuple &tup);
 bool operator==(const Matrix &self, const Matrix &other);
+
+Matrix view_transform(const Tuple from, const Tuple to, const Tuple up);
