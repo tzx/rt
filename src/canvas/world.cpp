@@ -68,3 +68,15 @@ std::vector<Intersection> World::intersect_world(const Ray r) const {
 Color World::shade_hit(const Computations comps) const {
   return comps.object().material().lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv());
 }
+
+Color World::color_at(const Ray r) const {
+  auto xs = this->intersect_world(r);
+  std::optional<Intersection> h = hit(xs);
+  if (h == std::nullopt) {
+    return Color(0, 0, 0);
+  }
+
+  auto comps = Computations(h.value(), r);
+
+  return this->shade_hit(comps);
+}

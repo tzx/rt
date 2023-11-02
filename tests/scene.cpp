@@ -114,3 +114,38 @@ TEST_CASE ("Shading an intersection from the inside", "[shading]") {
 
   REQUIRE (c == Color(0.90498, 0.90498, 0.90498));
 }
+
+TEST_CASE ("The color when a ray misses", "[color]") {
+  World w = World::default_world();
+  Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 1, 0));
+  Color c = w.color_at(r);
+
+  REQUIRE( c == Color(0, 0, 0) );
+}
+
+TEST_CASE ("The color when a ray hits", "[color]") {
+  World w = World::default_world();
+  Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  Color c = w.color_at(r);
+
+  REQUIRE( c == Color(0.38066, 0.47583, 0.2855) );
+}
+
+TEST_CASE ("The color with an intersection behind the ray", "[color]") {
+  World w = World::default_world();
+  // TODO: You, maybe make a shared pointer for material because i am copying right now
+  auto outer = w.objects().front();
+  auto outer_mat = outer->material();
+  outer_mat.setAmbient(1);
+  outer->setMaterial(outer_mat);
+
+  auto inner = w.objects().at(1);
+  auto inner_mat = inner->material();
+  inner_mat.setAmbient(1);
+  inner->setMaterial(inner_mat);
+
+  Ray r = Ray(Tuple::create_point(0, 0, 0.75), Tuple::create_vector(0, 0, -1));
+  Color c = w.color_at(r);
+
+  REQUIRE( c == inner->material().color() );
+}

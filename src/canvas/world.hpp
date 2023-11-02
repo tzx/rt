@@ -19,6 +19,7 @@ class World {
     bool contains(Sphere &sph) const;
     std::vector<Intersection> intersect_world(const Ray r) const;
     Color shade_hit(const Computations comps) const;
+    Color color_at(const Ray r) const;
 
   private:
     std::optional<std::shared_ptr<PointLight>> light_;
