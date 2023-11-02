@@ -21,3 +21,22 @@ class Intersection {
 
 std::vector<Intersection> intersect(const Sphere s, const Ray r);
 std::optional<Intersection> hit(const std::vector<Intersection>&);
+
+class Computations {
+  public:
+    Computations(const Intersection &i, const Ray &r);
+    float t() const;
+    Sphere object() const;
+    Tuple point() const;
+    Tuple eyev() const;
+    Tuple normalv() const;
+    bool inside() const;
+
+  private:
+    float t_;
+    Sphere sph;
+    Tuple point_;
+    Tuple eyev_;
+    Tuple normalv_;
+    bool inside_;
+};

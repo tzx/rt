@@ -1,4 +1,5 @@
 #include "intersection.hpp"
+#include "primitives/tuple.hpp"
 #include <cmath>
 #include <iostream>
 #include <optional>
@@ -58,4 +59,44 @@ std::optional<Intersection> hit(const std::vector<Intersection> &xs) {
     }
   }
   return result;
+}
+
+float Computations::t() const {
+  return this->t_;
+}
+
+Sphere Computations::object() const {
+  return this->sph;
+}
+
+Tuple Computations::point() const {
+  return this->point_;
+}
+
+Tuple Computations::eyev() const {
+  return this->eyev_;
+}
+
+Tuple Computations::normalv() const {
+  return this->normalv_;
+}
+
+bool Computations::inside() const {
+  return this->inside_;
+}
+
+Computations::Computations(const Intersection &i, const Ray &r) {
+  this->t_ = i.t();
+  this->sph = i.object();
+
+  this->point_ = r.position(this->t());
+  this->eyev_ = -r.direction();
+  this->normalv_ = this->object().normal_at(this->point());
+
+  if (dotProduct(this->normalv(), this->eyev()) < 0) {
+    this->inside_ = true;
+    this->normalv_ = - this->normalv_;
+  } else {
+    this->inside_ = false;
+  }
 }

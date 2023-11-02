@@ -1,4 +1,5 @@
 #include "world.hpp"
+#include <algorithm>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -33,15 +34,37 @@ const std::optional<std::shared_ptr<PointLight>> World::light() const {
   return this->light_;
 }
 
+void World::setLight(PointLight light) {
+  this->light_ = std::make_shared<PointLight>(light);
+}
+
 const std::vector<std::shared_ptr<Sphere>> World::objects() const {
   return this->objects_;
 }
 
 bool World::contains(Sphere &to_check) const {
-  for (auto sph: this->objects_) {
+  for (auto sph: this->objects()) {
     if (to_check == *sph) {
       return true;
     }
   }
   return false;
+}
+
+std::vector<Intersection> World::intersect_world(const Ray r) const {
+  std::vector<Intersection> res;
+  for (auto sph: this->objects()) {
+    std::vector<Intersection> xs = intersect(*sph, r);
+    res.insert(res.end(), xs.begin(), xs.end());
+  }
+
+  std::sort(res.begin(), res.end(), [](const Intersection &a, const Intersection &b) {
+    return a.t() < b.t();
+  });
+
+  return res;
+}
+
+Color World::shade_hit(const Computations comps) const {
+  return comps.object().material().lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv());
 }
