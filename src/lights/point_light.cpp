@@ -12,3 +12,8 @@ Tuple PointLight::position() const {
 Color PointLight::intensity() const {
   return this->intensity_;
 }
+
+bool PointLight::operator==(const PointLight &oth) const {
+  return this->position() == oth.position() &&
+         this->intensity() == oth.intensity();
+}

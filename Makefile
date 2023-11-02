@@ -197,6 +197,33 @@ src/canvas/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/color.cpp.s
 .PHONY : src/canvas/color.cpp.s
 
+src/canvas/world.o: src/canvas/world.cpp.o
+.PHONY : src/canvas/world.o
+
+# target to build an object file
+src/canvas/world.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/world.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/world.cpp.o
+.PHONY : src/canvas/world.cpp.o
+
+src/canvas/world.i: src/canvas/world.cpp.i
+.PHONY : src/canvas/world.i
+
+# target to preprocess a source file
+src/canvas/world.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/world.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/world.cpp.i
+.PHONY : src/canvas/world.cpp.i
+
+src/canvas/world.s: src/canvas/world.cpp.s
+.PHONY : src/canvas/world.s
+
+# target to generate assembly for a file
+src/canvas/world.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/canvas/world.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/world.cpp.s
+.PHONY : src/canvas/world.cpp.s
+
 src/intersection.o: src/intersection.cpp.o
 .PHONY : src/intersection.o
 
@@ -611,6 +638,30 @@ tests/ray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/ray.cpp.s
 .PHONY : tests/ray.cpp.s
 
+tests/scene.o: tests/scene.cpp.o
+.PHONY : tests/scene.o
+
+# target to build an object file
+tests/scene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/scene.cpp.o
+.PHONY : tests/scene.cpp.o
+
+tests/scene.i: tests/scene.cpp.i
+.PHONY : tests/scene.i
+
+# target to preprocess a source file
+tests/scene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/scene.cpp.i
+.PHONY : tests/scene.cpp.i
+
+tests/scene.s: tests/scene.cpp.s
+.PHONY : tests/scene.s
+
+# target to generate assembly for a file
+tests/scene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/scene.cpp.s
+.PHONY : tests/scene.cpp.s
+
 tests/transformations.o: tests/transformations.cpp.o
 .PHONY : tests/transformations.o
 
@@ -675,6 +726,9 @@ help:
 	@echo "... src/canvas/color.o"
 	@echo "... src/canvas/color.i"
 	@echo "... src/canvas/color.s"
+	@echo "... src/canvas/world.o"
+	@echo "... src/canvas/world.i"
+	@echo "... src/canvas/world.s"
 	@echo "... src/intersection.o"
 	@echo "... src/intersection.i"
 	@echo "... src/intersection.s"
@@ -723,6 +777,9 @@ help:
 	@echo "... tests/ray.o"
 	@echo "... tests/ray.i"
 	@echo "... tests/ray.s"
+	@echo "... tests/scene.o"
+	@echo "... tests/scene.i"
+	@echo "... tests/scene.s"
 	@echo "... tests/transformations.o"
 	@echo "... tests/transformations.i"
 	@echo "... tests/transformations.s"

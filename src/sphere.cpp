@@ -16,7 +16,9 @@ int Sphere::uuid() const {
 }
 
 bool Sphere::operator==(const Sphere &other) const {
-  return this->uuid() == other.uuid();
+  return this->uuid() == other.uuid() &&
+         this->transform() == other.transform() &&
+         this->material() == other.material();
 }
 
 Matrix Sphere::transform() const {

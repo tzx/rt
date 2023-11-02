@@ -10,6 +10,8 @@ class PointLight {
     Tuple position() const;
     Color intensity() const;
 
+    bool operator==(const PointLight &oth) const;
+
   private:
     Tuple pos_;
     Color intensity_;
