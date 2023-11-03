@@ -464,6 +464,60 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/shapes/shape.o: src/shapes/shape.cpp.o
+.PHONY : src/shapes/shape.o
+
+# target to build an object file
+src/shapes/shape.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/shape.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/shape.cpp.o
+.PHONY : src/shapes/shape.cpp.o
+
+src/shapes/shape.i: src/shapes/shape.cpp.i
+.PHONY : src/shapes/shape.i
+
+# target to preprocess a source file
+src/shapes/shape.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/shape.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/shape.cpp.i
+.PHONY : src/shapes/shape.cpp.i
+
+src/shapes/shape.s: src/shapes/shape.cpp.s
+.PHONY : src/shapes/shape.s
+
+# target to generate assembly for a file
+src/shapes/shape.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/shape.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/shape.cpp.s
+.PHONY : src/shapes/shape.cpp.s
+
+src/shapes/test_shape.o: src/shapes/test_shape.cpp.o
+.PHONY : src/shapes/test_shape.o
+
+# target to build an object file
+src/shapes/test_shape.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/test_shape.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/test_shape.cpp.o
+.PHONY : src/shapes/test_shape.cpp.o
+
+src/shapes/test_shape.i: src/shapes/test_shape.cpp.i
+.PHONY : src/shapes/test_shape.i
+
+# target to preprocess a source file
+src/shapes/test_shape.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/test_shape.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/test_shape.cpp.i
+.PHONY : src/shapes/test_shape.cpp.i
+
+src/shapes/test_shape.s: src/shapes/test_shape.cpp.s
+.PHONY : src/shapes/test_shape.s
+
+# target to generate assembly for a file
+src/shapes/test_shape.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/test_shape.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/test_shape.cpp.s
+.PHONY : src/shapes/test_shape.cpp.s
+
 src/sphere.o: src/sphere.cpp.o
 .PHONY : src/sphere.o
 
@@ -689,6 +743,30 @@ tests/scene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/scene.cpp.s
 .PHONY : tests/scene.cpp.s
 
+tests/shape.o: tests/shape.cpp.o
+.PHONY : tests/shape.o
+
+# target to build an object file
+tests/shape.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/shape.cpp.o
+.PHONY : tests/shape.cpp.o
+
+tests/shape.i: tests/shape.cpp.i
+.PHONY : tests/shape.i
+
+# target to preprocess a source file
+tests/shape.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/shape.cpp.i
+.PHONY : tests/shape.cpp.i
+
+tests/shape.s: tests/shape.cpp.s
+.PHONY : tests/shape.s
+
+# target to generate assembly for a file
+tests/shape.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/shape.cpp.s
+.PHONY : tests/shape.cpp.s
+
 tests/transformations.o: tests/transformations.cpp.o
 .PHONY : tests/transformations.o
 
@@ -783,6 +861,12 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/shapes/shape.o"
+	@echo "... src/shapes/shape.i"
+	@echo "... src/shapes/shape.s"
+	@echo "... src/shapes/test_shape.o"
+	@echo "... src/shapes/test_shape.i"
+	@echo "... src/shapes/test_shape.s"
 	@echo "... src/sphere.o"
 	@echo "... src/sphere.i"
 	@echo "... src/sphere.s"
@@ -810,6 +894,9 @@ help:
 	@echo "... tests/scene.o"
 	@echo "... tests/scene.i"
 	@echo "... tests/scene.s"
+	@echo "... tests/shape.o"
+	@echo "... tests/shape.i"
+	@echo "... tests/shape.s"
 	@echo "... tests/transformations.o"
 	@echo "... tests/transformations.i"
 	@echo "... tests/transformations.s"

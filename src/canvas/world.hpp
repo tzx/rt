@@ -7,6 +7,8 @@
 #include <optional>
 #include <vector>
 
+constexpr float SHADOW_OFFSET = 0.001f;
+
 class World {
   public:
     World();
@@ -21,6 +23,7 @@ class World {
     std::vector<Intersection> intersect_world(const Ray r) const;
     Color shade_hit(const Computations comps) const;
     Color color_at(const Ray r) const;
+    bool is_shadowed(Tuple point) const;
 
   private:
     std::optional<std::shared_ptr<PointLight>> light_;

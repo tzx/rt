@@ -19,7 +19,7 @@ class Material {
     void setSpecular(float s);
     void setShininess(float s);
 
-    Color lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv) const;
+    Color lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow = false) const;
 
     bool operator==(const Material &oth) const;
 

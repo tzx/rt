@@ -32,6 +32,8 @@ class Computations {
     Tuple normalv() const;
     bool inside() const;
 
+    Tuple over_point() const;
+
   private:
     float t_;
     Sphere sph;

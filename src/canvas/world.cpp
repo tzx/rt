@@ -71,7 +71,8 @@ std::vector<Intersection> World::intersect_world(const Ray r) const {
 }
 
 Color World::shade_hit(const Computations comps) const {
-  return comps.object().material().lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv());
+  bool in_shadow = this->is_shadowed(comps.over_point());
+  return comps.object().material().lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv(), in_shadow);
 }
 
 Color World::color_at(const Ray r) const {
@@ -84,4 +85,16 @@ Color World::color_at(const Ray r) const {
   auto comps = Computations(h.value(), r);
 
   return this->shade_hit(comps);
+}
+
+bool World::is_shadowed(Tuple point) const {
+  Tuple v = this->light().value()->position() - point;
+  float distance = v.getMagnitude();
+  Tuple direction = v.getNormalized();
+
+  Ray r = Ray(point, direction);
+  auto xs = this->intersect_world(r);
+  auto h = hit(xs);
+
+  return h.has_value() && h.value().t() < distance;
 }

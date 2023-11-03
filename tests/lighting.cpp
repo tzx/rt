@@ -169,3 +169,17 @@ TEST_CASE ("Lighting with light behind the surface", "[phong]") {
   Color result = m.lighting(light, position, eyev, normalv);
   REQUIRE (result == Color(0.1, 0.1, 0.1));
 }
+
+TEST_CASE ("Lighting with the surface in the shadow", "[shadow]") {
+  Material m = Material();
+  Tuple position = Tuple::create_point(0, 0, 0);
+
+  Tuple eyev = Tuple::create_vector(0, 0, -1);
+  Tuple normalv = Tuple::create_vector(0, 0, -1);
+  PointLight point_light(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
+
+  bool in_shadow = true;
+  Color result = m.lighting(point_light, position, eyev, normalv, in_shadow);
+
+  REQUIRE (result == Color(0.1, 0.1, 0.1) );
+}

@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <cmath>
+#include <memory>
 #include <vector>
 
 #include "../src/canvas/color.hpp"
@@ -7,6 +8,7 @@
 #include "../src/canvas/camera.hpp"
 #include "../src/lights/point_light.hpp"
 #include "../src/primitives/tuple.hpp"
+#include "../src/util/approx.hpp"
 #include "../src/sphere.hpp"
 #include "../src/intersection.hpp"
 
@@ -265,4 +267,63 @@ TEST_CASE ("Rendering a world with a camera", "[camera]") {
   Canvas image = c.render(w);
 
   REQUIRE (image.pixel_at(5, 5) == Color(0.38066, 0.47583, 0.2855));
+}
+
+TEST_CASE ("There is no shadow when nothing is collinear with point and light", "[shadow]") {
+  World w = World::default_world();
+  Tuple p = Tuple::create_point(0, 10, 0);
+
+  REQUIRE_FALSE ( w.is_shadowed(p) );
+}
+
+TEST_CASE ("The shadow when an object is between the point and the light", "[shadow]") {
+  World w = World::default_world();
+  Tuple p = Tuple::create_point(10, -10, 10);
+
+  REQUIRE ( w.is_shadowed(p) );
+}
+
+TEST_CASE ("There is no shadow when an object is behind the light", "[shadow]") {
+  World w = World::default_world();
+  Tuple p = Tuple::create_point(-20, 20, -20);
+
+  REQUIRE_FALSE ( w.is_shadowed(p) );
+}
+
+TEST_CASE ("There is no shadow when an object is behind the point", "[shadow]") {
+  World w = World::default_world();
+  Tuple p = Tuple::create_point(-2, 2, -2);
+
+  REQUIRE_FALSE ( w.is_shadowed(p) );
+}
+
+TEST_CASE ("shade_hit() if given an intersection in shadow", "[shadow]") {
+  World w = World();
+  w.setLight(PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1)));
+
+  Sphere s1;
+  w.addObject(s1);
+
+  Sphere s2;
+  s2.setTransform(Matrix::translation(0, 0, 10));
+  w.addObject(s2);
+
+  Ray r = Ray(Tuple::create_point(0, 0, 5), Tuple::create_vector(0, 0, 1));
+  Intersection i = Intersection(4, s2);
+
+  auto comps = Computations(i, r);
+  auto c = w.shade_hit(comps);
+
+  REQUIRE (c == Color(0.1, 0.1, 0.1));
+}
+
+TEST_CASE ("The hit should offset the point", "[shadow]") {
+  Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  Sphere shape;
+  shape.setTransform(Matrix::translation(0, 0, 1));
+
+  Intersection i = Intersection(5, shape);
+  Computations comps = Computations(i, r);
+  REQUIRE( comps.over_point().getZ() < -SHADOW_OFFSET/2.0f );
+  REQUIRE( comps.point().getZ() > comps.over_point().getZ() );
 }

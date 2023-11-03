@@ -49,7 +49,7 @@ void Material::setShininess(float s) {
   this->shininess_ = s;
 }
 
-Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv) const {
+Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow) const {
   Color black = Color(0, 0, 0);
 
   Color effective_color = this->color() * light.intensity();
@@ -57,6 +57,10 @@ Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normal
   Tuple lightv = (light.position() - point).getNormalized();
 
   Color ambient = effective_color * this->ambient();
+
+  if (in_shadow) {
+    return ambient;
+  }
 
   float light_dot_normal = dotProduct(lightv, normalv);
 

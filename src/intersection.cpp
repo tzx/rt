@@ -1,5 +1,7 @@
 #include "intersection.hpp"
+#include "canvas/world.hpp"
 #include "primitives/tuple.hpp"
+#include "shapes/shape.hpp"
 #include <cmath>
 #include <iostream>
 #include <optional>
@@ -20,6 +22,11 @@ Sphere Intersection::object() const {
 
 bool Intersection::operator==(const Intersection &oth) const {
   return this->t() == oth.t() && this->object() == oth.object();
+}
+
+std::vector<Intersection> intersect (Shape &s, const Ray &ray) {
+  Ray local_ray = ray.transform(s.transform().inverse());
+  return s.local_intersect(local_ray);
 }
 
 std::vector<Intersection> intersect(const Sphere s, const Ray ray_) {
@@ -99,4 +106,8 @@ Computations::Computations(const Intersection &i, const Ray &r) {
   } else {
     this->inside_ = false;
   }
+}
+
+Tuple Computations::over_point() const {
+    return this->point() + this->normalv() * SHADOW_OFFSET;
 }
