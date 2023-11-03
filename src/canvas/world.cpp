@@ -73,7 +73,7 @@ Color World::shade_hit(const Computations comps) const {
   bool in_shadow = this->is_shadowed(comps.over_point());
   return comps.object()->material()->lighting(comps.object().get(),
                                               *this->light().value(),
-                                              comps.point(),
+                                              comps.over_point(),
                                               comps.eyev(),
                                               comps.normalv(),
                                               in_shadow);

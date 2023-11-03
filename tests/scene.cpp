@@ -100,7 +100,7 @@ TEST_CASE ("Shading an intersection", "[shading]") {
 
   Color c = w.shade_hit(comps);
 
-  REQUIRE (c == Color(0.38066, 0.47583, 0.2855));
+  REQUIRE (c == Color(0.380637, 0.475797, 0.285478));
 }
 
 TEST_CASE ("Shading an intersection from the inside", "[shading]") {
@@ -116,7 +116,7 @@ TEST_CASE ("Shading an intersection from the inside", "[shading]") {
 
   Color c = w.shade_hit(comps);
 
-  REQUIRE (c == Color(0.90498, 0.90498, 0.90498));
+  REQUIRE (c == Color(0.904662, 0.904662, 0.904662));
 }
 
 TEST_CASE ("The color when a ray misses", "[color]") {
@@ -132,7 +132,7 @@ TEST_CASE ("The color when a ray hits", "[color]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
   Color c = w.color_at(r);
 
-  REQUIRE( c == Color(0.38066, 0.47583, 0.2855) );
+  REQUIRE (c == Color(0.380637, 0.475797, 0.285478));
 }
 
 TEST_CASE ("The color with an intersection behind the ray", "[color]") {
@@ -263,7 +263,7 @@ TEST_CASE ("Rendering a world with a camera", "[camera]") {
 
   Canvas image = c.render(w);
 
-  REQUIRE (image.pixel_at(5, 5) == Color(0.38066, 0.47583, 0.2855));
+  REQUIRE (image.pixel_at(5, 5) == Color(0.380637, 0.475797, 0.285478));
 }
 
 TEST_CASE ("There is no shadow when nothing is collinear with point and light", "[shadow]") {

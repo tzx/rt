@@ -10,7 +10,7 @@ Color Ring::b() const {
 }
 
 Color Ring::pattern_at(Tuple point) const {
-  int floored = std::floor(std::sqrt(point.getX() * point.getX() + point.getZ() + point.getZ()));
+  int floored = std::floor(std::sqrt(point.getX() * point.getX() + point.getZ() * point.getZ()));
   if (floored % 2 == 0) {
     return a();
   }
