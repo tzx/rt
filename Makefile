@@ -332,6 +332,33 @@ src/lights/point_light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
 .PHONY : src/lights/point_light.cpp.s
 
+src/patterns/stripe_pattern.o: src/patterns/stripe_pattern.cpp.o
+.PHONY : src/patterns/stripe_pattern.o
+
+# target to build an object file
+src/patterns/stripe_pattern.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/stripe_pattern.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/stripe_pattern.cpp.o
+.PHONY : src/patterns/stripe_pattern.cpp.o
+
+src/patterns/stripe_pattern.i: src/patterns/stripe_pattern.cpp.i
+.PHONY : src/patterns/stripe_pattern.i
+
+# target to preprocess a source file
+src/patterns/stripe_pattern.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/stripe_pattern.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/stripe_pattern.cpp.i
+.PHONY : src/patterns/stripe_pattern.cpp.i
+
+src/patterns/stripe_pattern.s: src/patterns/stripe_pattern.cpp.s
+.PHONY : src/patterns/stripe_pattern.s
+
+# target to generate assembly for a file
+src/patterns/stripe_pattern.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/stripe_pattern.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/stripe_pattern.cpp.s
+.PHONY : src/patterns/stripe_pattern.cpp.s
+
 src/primitives/matrix.o: src/primitives/matrix.cpp.o
 .PHONY : src/primitives/matrix.o
 
@@ -722,6 +749,30 @@ tests/matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.s
 .PHONY : tests/matrix.cpp.s
 
+tests/patterns.o: tests/patterns.cpp.o
+.PHONY : tests/patterns.o
+
+# target to build an object file
+tests/patterns.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/patterns.cpp.o
+.PHONY : tests/patterns.cpp.o
+
+tests/patterns.i: tests/patterns.cpp.i
+.PHONY : tests/patterns.i
+
+# target to preprocess a source file
+tests/patterns.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/patterns.cpp.i
+.PHONY : tests/patterns.cpp.i
+
+tests/patterns.s: tests/patterns.cpp.s
+.PHONY : tests/patterns.s
+
+# target to generate assembly for a file
+tests/patterns.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/patterns.cpp.s
+.PHONY : tests/patterns.cpp.s
+
 tests/ray.o: tests/ray.cpp.o
 .PHONY : tests/ray.o
 
@@ -873,6 +924,9 @@ help:
 	@echo "... src/lights/point_light.o"
 	@echo "... src/lights/point_light.i"
 	@echo "... src/lights/point_light.s"
+	@echo "... src/patterns/stripe_pattern.o"
+	@echo "... src/patterns/stripe_pattern.i"
+	@echo "... src/patterns/stripe_pattern.s"
 	@echo "... src/primitives/matrix.o"
 	@echo "... src/primitives/matrix.i"
 	@echo "... src/primitives/matrix.s"
@@ -918,6 +972,9 @@ help:
 	@echo "... tests/matrix.o"
 	@echo "... tests/matrix.i"
 	@echo "... tests/matrix.s"
+	@echo "... tests/patterns.o"
+	@echo "... tests/patterns.i"
+	@echo "... tests/patterns.s"
 	@echo "... tests/ray.o"
 	@echo "... tests/ray.i"
 	@echo "... tests/ray.s"

@@ -49,10 +49,23 @@ void Material::setShininess(float s) {
   this->shininess_ = s;
 }
 
+std::optional<StripePattern> Material::pattern() const {
+  return this->pattern_;
+}
+
+void Material::setPattern(StripePattern pattern) {
+  this->pattern_ = std::optional<StripePattern>(pattern);
+}
+
 Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow) const {
   Color black = Color(0, 0, 0);
 
-  Color effective_color = this->color() * light.intensity();
+  Color col_to_use = this->color();
+  if (this->pattern().has_value()) {
+    col_to_use = this->pattern().value().stripe_at(point);
+  };
+
+  Color effective_color = col_to_use * light.intensity();
 
   Tuple lightv = (light.position() - point).getNormalized();
 
