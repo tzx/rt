@@ -4,6 +4,8 @@
 #include "../src/patterns/gradient.hpp"
 #include "../src/patterns/stripe_pattern.hpp"
 #include "../src/patterns/test_pattern.hpp"
+#include "../src/patterns/ring.hpp"
+#include "../src/patterns/checker.hpp"
 #include "../src/lights/material.hpp"
 #include "../src/shapes/sphere.hpp"
 
@@ -159,4 +161,46 @@ TEST_CASE ("A gradient linearly interpolates between colors", "[gradient]") {
   REQUIRE(pattern.pattern_at(Tuple::create_point(0.25, 0, 0)) == Color(0.75, 0.75, 0.75));
   REQUIRE(pattern.pattern_at(Tuple::create_point(0.5, 0, 0)) == Color(0.5, 0.5, 0.5));
   REQUIRE(pattern.pattern_at(Tuple::create_point(0.75, 0, 0)) == Color(0.25, 0.25, 0.25));
+}
+
+TEST_CASE ("A ring should extend in both x and z", "[ring]") {
+  auto white = Color(1, 1, 1);
+  auto black = Color(0, 0, 0);
+
+  auto pattern = Ring(white, black);
+
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(1, 0, 0)) == black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 1)) == black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.708, 0, 0.708)) == black);
+}
+
+TEST_CASE ("Checkers should repeat in x", "[checkers]") {
+  auto white = Color(1, 1, 1);
+  auto black = Color(0, 0, 0);
+
+  auto pattern = Checker(white, black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.99, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(1.01, 0, 0)) == black);
+}
+
+TEST_CASE ("Checkers should repeat in y", "[checkers]") {
+  auto white = Color(1, 1, 1);
+  auto black = Color(0, 0, 0);
+
+  auto pattern = Checker(white, black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0.99, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 1.01, 0)) == black);
+}
+
+TEST_CASE ("Checkers should repeat in z", "[checkers]") {
+  auto white = Color(1, 1, 1);
+  auto black = Color(0, 0, 0);
+
+  auto pattern = Checker(white, black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0.99)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 1.01)) == black);
 }

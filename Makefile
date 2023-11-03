@@ -332,6 +332,33 @@ src/lights/point_light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
 .PHONY : src/lights/point_light.cpp.s
 
+src/patterns/checker.o: src/patterns/checker.cpp.o
+.PHONY : src/patterns/checker.o
+
+# target to build an object file
+src/patterns/checker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/checker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/checker.cpp.o
+.PHONY : src/patterns/checker.cpp.o
+
+src/patterns/checker.i: src/patterns/checker.cpp.i
+.PHONY : src/patterns/checker.i
+
+# target to preprocess a source file
+src/patterns/checker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/checker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/checker.cpp.i
+.PHONY : src/patterns/checker.cpp.i
+
+src/patterns/checker.s: src/patterns/checker.cpp.s
+.PHONY : src/patterns/checker.s
+
+# target to generate assembly for a file
+src/patterns/checker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/checker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/checker.cpp.s
+.PHONY : src/patterns/checker.cpp.s
+
 src/patterns/gradient.o: src/patterns/gradient.cpp.o
 .PHONY : src/patterns/gradient.o
 
@@ -385,6 +412,33 @@ src/patterns/pattern.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/pattern.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/pattern.cpp.s
 .PHONY : src/patterns/pattern.cpp.s
+
+src/patterns/ring.o: src/patterns/ring.cpp.o
+.PHONY : src/patterns/ring.o
+
+# target to build an object file
+src/patterns/ring.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/ring.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/ring.cpp.o
+.PHONY : src/patterns/ring.cpp.o
+
+src/patterns/ring.i: src/patterns/ring.cpp.i
+.PHONY : src/patterns/ring.i
+
+# target to preprocess a source file
+src/patterns/ring.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/ring.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/ring.cpp.i
+.PHONY : src/patterns/ring.cpp.i
+
+src/patterns/ring.s: src/patterns/ring.cpp.s
+.PHONY : src/patterns/ring.s
+
+# target to generate assembly for a file
+src/patterns/ring.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/patterns/ring.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/patterns/ring.cpp.s
+.PHONY : src/patterns/ring.cpp.s
 
 src/patterns/stripe_pattern.o: src/patterns/stripe_pattern.cpp.o
 .PHONY : src/patterns/stripe_pattern.o
@@ -1005,12 +1059,18 @@ help:
 	@echo "... src/lights/point_light.o"
 	@echo "... src/lights/point_light.i"
 	@echo "... src/lights/point_light.s"
+	@echo "... src/patterns/checker.o"
+	@echo "... src/patterns/checker.i"
+	@echo "... src/patterns/checker.s"
 	@echo "... src/patterns/gradient.o"
 	@echo "... src/patterns/gradient.i"
 	@echo "... src/patterns/gradient.s"
 	@echo "... src/patterns/pattern.o"
 	@echo "... src/patterns/pattern.i"
 	@echo "... src/patterns/pattern.s"
+	@echo "... src/patterns/ring.o"
+	@echo "... src/patterns/ring.i"
+	@echo "... src/patterns/ring.s"
 	@echo "... src/patterns/stripe_pattern.o"
 	@echo "... src/patterns/stripe_pattern.i"
 	@echo "... src/patterns/stripe_pattern.s"
