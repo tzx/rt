@@ -29,12 +29,12 @@ float Material::shininess() const { return this->shininess_; }
 
 void Material::setShininess(float s) { this->shininess_ = s; }
 
-std::optional<StripePattern> Material::pattern() const {
+std::optional<std::shared_ptr<Pattern>> Material::pattern() const {
   return this->pattern_;
 }
 
-void Material::setPattern(StripePattern pattern) {
-  this->pattern_ = std::optional<StripePattern>(pattern);
+void Material::setPattern(std::shared_ptr<Pattern> pattern) {
+  this->pattern_ = std::optional<std::shared_ptr<Pattern>>(pattern);
 }
 
 Color Material::lighting(Shape *obj, PointLight light, Tuple point, Tuple eyev,
@@ -43,7 +43,7 @@ Color Material::lighting(Shape *obj, PointLight light, Tuple point, Tuple eyev,
 
   Color col_to_use = this->color();
   if (this->pattern().has_value()) {
-    col_to_use = this->pattern().value().stripe_at_object(obj, point);
+    col_to_use = this->pattern().value()->stripe_at_object(obj, point);
   };
 
   Color effective_color = col_to_use * light.intensity();

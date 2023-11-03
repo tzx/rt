@@ -53,7 +53,7 @@ TEST_CASE("A stripe pattern alternates in x", "[pattern]") {
 
 TEST_CASE("Lighting with a pattern applied", "[material]") {
   Material m = Material();
-  m.setPattern(StripePattern(Color(1, 1, 1), Color(0, 0, 0)));
+  m.setPattern(std::make_shared<StripePattern>(StripePattern(Color(1, 1, 1), Color(0, 0, 0))));
   m.setAmbient(1);
   m.setDiffuse(0);
   m.setSpecular(0);

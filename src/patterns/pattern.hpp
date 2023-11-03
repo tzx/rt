@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../canvas/color.hpp"
 #include "../primitives/matrix.hpp"
 
 class Pattern {
@@ -8,6 +9,9 @@ class Pattern {
 
     Matrix transform() const;
     void set_transform(Matrix t);
+
+    virtual Color stripe_at(Tuple point) const = 0;
+    Color stripe_at_object(const class Shape *obj, Tuple world_point) const;
 
   private:
     Matrix transform_;

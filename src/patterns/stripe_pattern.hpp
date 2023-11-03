@@ -10,8 +10,7 @@ class StripePattern: public Pattern {
 
     Color a() const;
     Color b() const;
-    Color stripe_at(Tuple point) const;
-    Color stripe_at_object(const class Shape *obj, Tuple world_point) const;
+    Color stripe_at(Tuple point) const override;
 
   private:
     Color a_;

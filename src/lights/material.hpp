@@ -3,6 +3,7 @@
 #include "../canvas/color.hpp"
 #include "point_light.hpp"
 #include "../patterns/stripe_pattern.hpp"
+#include <memory>
 #include <optional>
 
 class Material {
@@ -14,14 +15,14 @@ class Material {
     float diffuse() const;
     float specular() const;
     float shininess() const;
-    std::optional<StripePattern> pattern() const;
+    std::optional<std::shared_ptr<Pattern>> pattern() const;
 
     void setColor(Color c);
     void setAmbient(float a);
     void setDiffuse(float d);
     void setSpecular(float s);
     void setShininess(float s);
-    void setPattern(StripePattern pattern);
+    void setPattern(std::shared_ptr<Pattern> pattern);
 
     Color lighting(Shape *obj,
                    PointLight light,
@@ -38,5 +39,5 @@ class Material {
     float diffuse_;
     float specular_;
     float shininess_;
-    std::optional<StripePattern> pattern_;
+    std::optional<std::shared_ptr<Pattern>> pattern_;
 };
