@@ -12,6 +12,7 @@
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
 #include "ray.hpp"
+#include "shapes/plane.hpp"
 #include "shapes/sphere.hpp"
 
 
@@ -22,19 +23,7 @@ constexpr float pixel_size = (float)7/CANVAS_DIMENSIONS;
 constexpr float half = 7/2.0f;
 
 int main () {
-  auto floor = std::make_shared<Sphere>();
-  floor->setTransform(Matrix::scaling(10, 0.01, 10));
-  auto m = floor->material();
-  m->setColor(Color(1, 0.9, 0.9));
-  m->setSpecular(0);
-
-  auto left_wall = std::make_shared<Sphere>();
-  left_wall->setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(-M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
-  left_wall->set_material(floor->material());
-
-  auto right_wall = std::make_shared<Sphere>();
-  right_wall->setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
-  right_wall->set_material(floor->material());
+  auto plane = std::make_shared<Plane>();
 
   auto middle = std::make_shared<Sphere>();
   middle->setTransform(Matrix::translation(-0.5, 1, 0.5));
@@ -59,9 +48,7 @@ int main () {
 
   World w = World();
   w.setLight(PointLight(Tuple::create_point(-10, 10, -10), Color(1, 1, 1)));
-  w.addObject(floor);
-  w.addObject(left_wall);
-  w.addObject(right_wall);
+  w.addObject(plane);
   w.addObject(middle);
   w.addObject(right);
   w.addObject(left);
