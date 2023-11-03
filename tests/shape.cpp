@@ -1,4 +1,5 @@
 #include <catch2/catch.hpp>
+#include <cmath>
 
 #include "../src/primitives/matrix.hpp"
 #include "../src/shapes/test_shape.hpp"
@@ -49,4 +50,23 @@ TEST_CASE("Intersecting a translated shape with a ray", "[shape]") {
 
   REQUIRE(s.saved_ray.value().origin() == Tuple::create_point(-5, 0, -5));
   REQUIRE(s.saved_ray.value().direction() == Tuple::create_vector(0, 0, 1));
+}
+
+TEST_CASE ("Computing the normal on a translated test shape", "[shape]") {
+  auto s = TestShape();
+  s.setTransform(Matrix::translation(0, 1, 0));
+  auto n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711));
+
+  n.repr();
+
+  REQUIRE (n == Tuple::create_vector(0, 0.70711, -0.70711));
+}
+
+TEST_CASE ("Computing the normal on a transformed test shape", "[shape]") {
+  auto s = TestShape();
+  s.setTransform(Matrix::scaling(1, 0.5, 1) * Matrix::rotation_z(M_PIf/5));
+  float sq2_2 = std::sqrt(2.0f)/2;
+  auto n = s.normal_at(Tuple::create_point(0, sq2_2, -sq2_2));
+
+  REQUIRE (n == Tuple::create_vector(0, 0.97014, -0.24254));
 }

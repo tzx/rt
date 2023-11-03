@@ -17,8 +17,11 @@ class Shape {
     void setTransform(Matrix m);
     std::shared_ptr<Material> material();
 
+    Tuple normal_at(const Tuple &p) const;
+
     // TODO: This can't be const because of my test shape
     virtual std::vector<Intersection> local_intersect(const Ray &local_r) = 0;
+    virtual Tuple local_normal_at(const Tuple &local_p) const = 0;
 
   private:
     int uuid_;
