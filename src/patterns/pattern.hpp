@@ -10,8 +10,8 @@ class Pattern {
     Matrix transform() const;
     void set_transform(Matrix t);
 
-    virtual Color stripe_at(Tuple point) const = 0;
-    Color stripe_at_object(const class Shape *obj, Tuple world_point) const;
+    virtual Color pattern_at(Tuple point) const = 0;
+    Color pattern_at_shape(const class Shape *obj, Tuple world_point) const;
 
   private:
     Matrix transform_;

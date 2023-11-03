@@ -15,7 +15,7 @@ Color StripePattern::b() const {
   return this->b_;
 }
 
-Color StripePattern::stripe_at(Tuple point) const {
+Color StripePattern::pattern_at(Tuple point) const {
   int floored = std::floor(point.getX());
   if (floored % 2 == 0) {
     return a();

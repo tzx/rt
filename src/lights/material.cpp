@@ -43,7 +43,7 @@ Color Material::lighting(Shape *obj, PointLight light, Tuple point, Tuple eyev,
 
   Color col_to_use = this->color();
   if (this->pattern().has_value()) {
-    col_to_use = this->pattern().value()->stripe_at_object(obj, point);
+    col_to_use = this->pattern().value()->pattern_at_shape(obj, point);
   };
 
   Color effective_color = col_to_use * light.intensity();

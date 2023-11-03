@@ -1,7 +1,9 @@
 #include <catch2/catch.hpp>
 
 #include "../src/canvas/color.hpp"
+#include "../src/patterns/gradient.hpp"
 #include "../src/patterns/stripe_pattern.hpp"
+#include "../src/patterns/test_pattern.hpp"
 #include "../src/lights/material.hpp"
 #include "../src/shapes/sphere.hpp"
 
@@ -21,9 +23,9 @@ TEST_CASE("A stripe pattern is constant in y", "[pattern]") {
 
   StripePattern pattern = StripePattern(white, black);
   
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 0, 0)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 1, 0)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 2, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 1, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 2, 0)) == white);
 }
 
 TEST_CASE("A stripe pattern is constant in z", "[pattern]") {
@@ -32,9 +34,9 @@ TEST_CASE("A stripe pattern is constant in z", "[pattern]") {
 
   StripePattern pattern = StripePattern(white, black);
   
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 0, 0)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 0, 1)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 0, 2)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 1)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 2)) == white);
 }
 
 TEST_CASE("A stripe pattern alternates in x", "[pattern]") {
@@ -43,12 +45,12 @@ TEST_CASE("A stripe pattern alternates in x", "[pattern]") {
 
   StripePattern pattern = StripePattern(white, black);
   
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0, 0, 0)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(0.9, 0, 0)) == white);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(1, 0, 0)) == black);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(-0.1, 0, 0)) == black);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(-1, 0, 0)) == black);
-  REQUIRE(pattern.stripe_at(Tuple::create_point(-1.1, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.9, 0, 0)) == white);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(1, 0, 0)) == black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(-0.1, 0, 0)) == black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(-1, 0, 0)) == black);
+  REQUIRE(pattern.pattern_at(Tuple::create_point(-1.1, 0, 0)) == white);
 }
 
 TEST_CASE("Lighting with a pattern applied", "[material]") {
@@ -77,7 +79,7 @@ TEST_CASE("Stripes with an object transformation", "[transformation]") {
   Sphere object = Sphere();
   object.setTransform(Matrix::scaling(2, 2, 2));
   StripePattern pattern = StripePattern(white, black);
-  Color c = pattern.stripe_at_object(&object, Tuple::create_point(1.5, 0, 0));
+  Color c = pattern.pattern_at_shape(&object, Tuple::create_point(1.5, 0, 0));
 
   REQUIRE (c == white);
 }
@@ -90,7 +92,7 @@ TEST_CASE("Stripes with a pattern transformation", "[transformation]") {
 
   pattern.set_transform(Matrix::scaling(2, 2, 2));
 
-  Color c = pattern.stripe_at_object(&object, Tuple::create_point(1.5, 0, 0));
+  Color c = pattern.pattern_at_shape(&object, Tuple::create_point(1.5, 0, 0));
 
   REQUIRE (c == white);
 }
@@ -103,7 +105,58 @@ TEST_CASE("Stripes with both an object and a pattern transformation", "[transfor
   object.setTransform(Matrix::scaling(2, 2, 2));
 
   pattern.set_transform(Matrix::translation(0.5, 0, 0));
-  Color c = pattern.stripe_at_object(&object, Tuple::create_point(2.5, 0, 0));
+  Color c = pattern.pattern_at_shape(&object, Tuple::create_point(2.5, 0, 0));
 
   REQUIRE (c == white);
+}
+
+TEST_CASE ("The default pattern transformation", "[test_pattern]") {
+  TestPattern pattern = TestPattern();
+  REQUIRE (pattern.transform() == Matrix::identity_matrix(4));
+}
+
+TEST_CASE ("Assigning a transformation test pattern", "[test_pattern]") {
+  TestPattern pattern = TestPattern();
+  pattern.set_transform(Matrix::translation(1, 2, 3));
+  REQUIRE (pattern.transform() == Matrix::translation(1, 2, 3));
+}
+
+TEST_CASE ("A pattern with an object transformation", "[test_pattern]") {
+  Sphere shape = Sphere();
+  shape.setTransform(Matrix::scaling(2, 2, 2));
+
+  TestPattern pattern = TestPattern();
+
+  Color c = pattern.pattern_at_shape(&shape, Tuple::create_point(2, 3, 4));
+  REQUIRE (c == Color(1, 1.5, 2));
+}
+
+TEST_CASE ("A pattern with an pattern transformation", "[test_pattern]") {
+  Sphere shape = Sphere();
+
+  TestPattern pattern = TestPattern();
+  pattern.set_transform(Matrix::scaling(2, 2, 2));
+
+  Color c = pattern.pattern_at_shape(&shape, Tuple::create_point(2, 3, 4));
+  REQUIRE (c == Color(1, 1.5, 2));
+}
+
+TEST_CASE ("A pattern with both an object and pattern transformation", "[test_pattern]") {
+  Sphere shape = Sphere();
+  shape.setTransform(Matrix::scaling(2, 2, 2));
+
+  TestPattern pattern = TestPattern();
+  pattern.set_transform(Matrix::translation(0.5, 1, 1.5));
+
+  Color c = pattern.pattern_at_shape(&shape, Tuple::create_point(2.5, 3, 3.5));
+  REQUIRE (c == Color(0.75, 0.5, 0.25));
+}
+
+TEST_CASE ("A gradient linearly interpolates between colors", "[gradient]") {
+  Gradient pattern = Gradient(Color(1, 1, 1), Color(0, 0, 0));
+
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0, 0, 0)) == Color(1, 1, 1));
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.25, 0, 0)) == Color(0.75, 0.75, 0.75));
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.5, 0, 0)) == Color(0.5, 0.5, 0.5));
+  REQUIRE(pattern.pattern_at(Tuple::create_point(0.75, 0, 0)) == Color(0.25, 0.25, 0.25));
 }
