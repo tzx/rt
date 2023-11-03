@@ -464,6 +464,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/shapes/plane.o: src/shapes/plane.cpp.o
+.PHONY : src/shapes/plane.o
+
+# target to build an object file
+src/shapes/plane.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/plane.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/plane.cpp.o
+.PHONY : src/shapes/plane.cpp.o
+
+src/shapes/plane.i: src/shapes/plane.cpp.i
+.PHONY : src/shapes/plane.i
+
+# target to preprocess a source file
+src/shapes/plane.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/plane.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/plane.cpp.i
+.PHONY : src/shapes/plane.cpp.i
+
+src/shapes/plane.s: src/shapes/plane.cpp.s
+.PHONY : src/shapes/plane.s
+
+# target to generate assembly for a file
+src/shapes/plane.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/plane.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/plane.cpp.s
+.PHONY : src/shapes/plane.cpp.s
+
 src/shapes/shape.o: src/shapes/shape.cpp.o
 .PHONY : src/shapes/shape.o
 
@@ -861,6 +888,9 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/shapes/plane.o"
+	@echo "... src/shapes/plane.i"
+	@echo "... src/shapes/plane.s"
 	@echo "... src/shapes/shape.o"
 	@echo "... src/shapes/shape.i"
 	@echo "... src/shapes/shape.s"

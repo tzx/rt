@@ -2,6 +2,7 @@
 #include <cmath>
 
 #include "../src/primitives/matrix.hpp"
+#include "../src/shapes/plane.hpp"
 #include "../src/shapes/test_shape.hpp"
 
 TEST_CASE("The default transformation", "[shape]") {
@@ -52,19 +53,69 @@ TEST_CASE("Intersecting a translated shape with a ray", "[shape]") {
   REQUIRE(s->saved_ray.value().direction() == Tuple::create_vector(0, 0, 1));
 }
 
-TEST_CASE ("Computing the normal on a translated test shape", "[shape]") {
+TEST_CASE("Computing the normal on a translated test shape", "[shape]") {
   auto s = TestShape();
   s.setTransform(Matrix::translation(0, 1, 0));
   auto n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711));
 
-  REQUIRE (n == Tuple::create_vector(0, 0.70711, -0.70711));
+  REQUIRE(n == Tuple::create_vector(0, 0.70711, -0.70711));
 }
 
-TEST_CASE ("Computing the normal on a transformed test shape", "[shape]") {
+TEST_CASE("Computing the normal on a transformed test shape", "[shape]") {
   auto s = TestShape();
-  s.setTransform(Matrix::scaling(1, 0.5, 1) * Matrix::rotation_z(M_PIf/5));
-  float sq2_2 = std::sqrt(2.0f)/2;
+  s.setTransform(Matrix::scaling(1, 0.5, 1) * Matrix::rotation_z(M_PIf / 5));
+  float sq2_2 = std::sqrt(2.0f) / 2;
   auto n = s.normal_at(Tuple::create_point(0, sq2_2, -sq2_2));
 
-  REQUIRE (n == Tuple::create_vector(0, 0.97014, -0.24254));
+  REQUIRE(n == Tuple::create_vector(0, 0.97014, -0.24254));
+}
+
+TEST_CASE("The normal of a plane is constant everywhere", "[shape]") {
+  auto p = Plane();
+  Tuple n1 = p.local_normal_at(Tuple::create_point(0, 0, 0));
+  Tuple n2 = p.local_normal_at(Tuple::create_point(10, 0, -10));
+  Tuple n3 = p.local_normal_at(Tuple::create_point(-5, 0, 150));
+
+  REQUIRE(n1 == Tuple::create_vector(0, 1, 0));
+  REQUIRE(n2 == Tuple::create_vector(0, 1, 0));
+  REQUIRE(n3 == Tuple::create_vector(0, 1, 0));
+}
+
+TEST_CASE("Intersect with a ray parallel to the plane", "[shape]") {
+  auto p = Plane();
+  auto r = Ray(Tuple::create_point(0, 10, 0), Tuple::create_vector(0, 0, 1));
+
+  auto xs = p.local_intersect(r);
+
+  REQUIRE(xs.empty());
+}
+
+TEST_CASE("Intersect with a coplanar ray", "[shape]") {
+  auto p = Plane();
+  auto r = Ray(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 0, 1));
+
+  auto xs = p.local_intersect(r);
+
+  REQUIRE(xs.empty());
+}
+
+TEST_CASE("A ray intersecting a plane from above", "[shape]") {
+  auto p = std::make_shared<Plane>();
+  auto r = Ray(Tuple::create_point(0, 1, 0), Tuple::create_vector(0, -1, 0));
+
+  auto xs = p->local_intersect(r);
+
+  REQUIRE(xs.size() == 1);
+  REQUIRE(xs[0].t() == 1);
+  REQUIRE(xs[0].object() == p);
+}
+
+TEST_CASE("A ray intersecting a plane from below", "[shape]") {
+  auto p = std::make_shared<Plane>();
+  auto r = Ray(Tuple::create_point(0, -1, 0), Tuple::create_vector(0, 1, 0));
+  auto xs = p->local_intersect(r);
+
+  REQUIRE(xs.size() == 1);
+  REQUIRE(xs.at(0).t() == 1);
+  REQUIRE(xs[0].object() == p);
 }
