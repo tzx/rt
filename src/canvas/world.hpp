@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../lights/point_light.hpp"
-#include "../sphere.hpp"
+#include "../shapes/shape.hpp"
 #include "../intersection.hpp"
 #include <memory>
 #include <optional>
@@ -16,10 +16,10 @@ class World {
 
     const std::optional<std::shared_ptr<PointLight>> light() const;
     void setLight(PointLight);
-    const std::vector<std::shared_ptr<Sphere>> objects() const;
-    void addObject(Sphere obj);
+    const std::vector<std::shared_ptr<Shape>> objects() const;
+    void addObject(std::shared_ptr<Shape> to_add);
 
-    bool contains(Sphere &sph) const;
+    bool contains(Shape &sph) const;
     std::vector<Intersection> intersect_world(const Ray r) const;
     Color shade_hit(const Computations comps) const;
     Color color_at(const Ray r) const;
@@ -27,5 +27,5 @@ class World {
 
   private:
     std::optional<std::shared_ptr<PointLight>> light_;
-    std::vector<std::shared_ptr<Sphere>> objects_;
+    std::vector<std::shared_ptr<Shape>> objects_;
 };

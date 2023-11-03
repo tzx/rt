@@ -491,6 +491,33 @@ src/shapes/shape.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/shape.cpp.s
 .PHONY : src/shapes/shape.cpp.s
 
+src/shapes/sphere.o: src/shapes/sphere.cpp.o
+.PHONY : src/shapes/sphere.o
+
+# target to build an object file
+src/shapes/sphere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/sphere.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/sphere.cpp.o
+.PHONY : src/shapes/sphere.cpp.o
+
+src/shapes/sphere.i: src/shapes/sphere.cpp.i
+.PHONY : src/shapes/sphere.i
+
+# target to preprocess a source file
+src/shapes/sphere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/sphere.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/sphere.cpp.i
+.PHONY : src/shapes/sphere.cpp.i
+
+src/shapes/sphere.s: src/shapes/sphere.cpp.s
+.PHONY : src/shapes/sphere.s
+
+# target to generate assembly for a file
+src/shapes/sphere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/sphere.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/sphere.cpp.s
+.PHONY : src/shapes/sphere.cpp.s
+
 src/shapes/test_shape.o: src/shapes/test_shape.cpp.o
 .PHONY : src/shapes/test_shape.o
 
@@ -517,33 +544,6 @@ src/shapes/test_shape.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/test_shape.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/test_shape.cpp.s
 .PHONY : src/shapes/test_shape.cpp.s
-
-src/sphere.o: src/sphere.cpp.o
-.PHONY : src/sphere.o
-
-# target to build an object file
-src/sphere.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.o
-.PHONY : src/sphere.cpp.o
-
-src/sphere.i: src/sphere.cpp.i
-.PHONY : src/sphere.i
-
-# target to preprocess a source file
-src/sphere.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.i
-.PHONY : src/sphere.cpp.i
-
-src/sphere.s: src/sphere.cpp.s
-.PHONY : src/sphere.s
-
-# target to generate assembly for a file
-src/sphere.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/sphere.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/sphere.cpp.s
-.PHONY : src/sphere.cpp.s
 
 src/util/approx.o: src/util/approx.cpp.o
 .PHONY : src/util/approx.o
@@ -864,12 +864,12 @@ help:
 	@echo "... src/shapes/shape.o"
 	@echo "... src/shapes/shape.i"
 	@echo "... src/shapes/shape.s"
+	@echo "... src/shapes/sphere.o"
+	@echo "... src/shapes/sphere.i"
+	@echo "... src/shapes/sphere.s"
 	@echo "... src/shapes/test_shape.o"
 	@echo "... src/shapes/test_shape.i"
 	@echo "... src/shapes/test_shape.s"
-	@echo "... src/sphere.o"
-	@echo "... src/sphere.i"
-	@echo "... src/sphere.s"
 	@echo "... src/util/approx.o"
 	@echo "... src/util/approx.i"
 	@echo "... src/util/approx.s"

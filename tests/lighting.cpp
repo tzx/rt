@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <cmath>
 
-#include "../src/sphere.hpp"
+#include "../src/shapes/sphere.hpp"
 #include "../src/canvas/color.hpp"
 #include "../src/lights/point_light.hpp"
 
@@ -91,18 +91,18 @@ TEST_CASE ("The default material", "[phong]") {
 
 TEST_CASE ("A sphere has a default material", "[phong]") {
   Sphere s = Sphere();
-  Material m = s.material();
+  Material m = *s.material();
 
   REQUIRE (m == Material());
 }
 
 TEST_CASE ("A sphere may be assigned a material", "[phong]") {
   Sphere s = Sphere();
+  s.material()->setAmbient(1);
   Material m = Material();
   m.setAmbient(1);
-  s.setMaterial(m);
 
-  REQUIRE (s.material() == m);
+  REQUIRE (*s.material() == m);
 }
 
 TEST_CASE ("Lighting with the eye between the light and the surface", "[phong]") {

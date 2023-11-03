@@ -4,55 +4,27 @@
 #include "shapes/shape.hpp"
 #include <cmath>
 #include <iostream>
+#include <memory>
 #include <optional>
 #include <utility>
 
-Intersection::Intersection(float t, Sphere s) {
-  this->time = t;
-  this->sph = s;
-}
+Intersection::Intersection(float t, const std::shared_ptr<Shape> &s) : time{t}, shape_{s} {};
 
 float Intersection::t() const {
   return this->time;
 }
 
-Sphere Intersection::object() const {
-  return this->sph;
+const std::shared_ptr<Shape> Intersection::object() const {
+  return this->shape_;
 }
 
 bool Intersection::operator==(const Intersection &oth) const {
   return this->t() == oth.t() && this->object() == oth.object();
 }
 
-std::vector<Intersection> intersect (Shape &s, const Ray &ray) {
-  Ray local_ray = ray.transform(s.transform().inverse());
-  return s.local_intersect(local_ray);
-}
-
-std::vector<Intersection> intersect(const Sphere s, const Ray ray_) {
-  Ray ray = ray_.transform(s.transform().inverse());
-
-  // Assume sphere is at world origin of 0,0,0
-  Tuple sphere_to_ray = ray.origin() - Tuple::create_point(0, 0, 0);
-  auto a = dotProduct(ray.direction(), ray.direction());
-  auto b = 2 * dotProduct(ray.direction(), sphere_to_ray);
-  auto c = dotProduct(sphere_to_ray, sphere_to_ray) - 1;
-
-  auto discriminant = b * b - 4 * a * c;
-
-  if (discriminant < 0) {
-    return {};
-  }
-
-  // Use quadratic formula
-  // (-b +- sqrt(dis))/ 2a
-  float t1 = (-b - std::sqrt(discriminant)) / (2.0 * a);
-  float t2 = (-b + std::sqrt(discriminant)) / (2.0 * a);
-
-  Intersection i1 = Intersection(t1, s);
-  Intersection i2 = Intersection(t2, s);
-
-  return {i1, i2};
+std::vector<Intersection> intersect (std::shared_ptr<Shape> s, const Ray &ray) {
+  Ray local_ray = ray.transform(s->transform().inverse());
+  return s->local_intersect(local_ray);
 }
 
 std::optional<Intersection> hit(const std::vector<Intersection> &xs) {
@@ -72,8 +44,8 @@ float Computations::t() const {
   return this->t_;
 }
 
-Sphere Computations::object() const {
-  return this->sph;
+std::shared_ptr<Shape> Computations::object() const {
+  return this->shape_;
 }
 
 Tuple Computations::point() const {
@@ -94,11 +66,11 @@ bool Computations::inside() const {
 
 Computations::Computations(const Intersection &i, const Ray &r) {
   this->t_ = i.t();
-  this->sph = i.object();
+  this->shape_ = i.object();
 
   this->point_ = r.position(this->t());
   this->eyev_ = -r.direction();
-  this->normalv_ = this->object().normal_at(this->point());
+  this->normalv_ = this->object()->normal_at(this->point());
 
   if (dotProduct(this->normalv(), this->eyev()) < 0) {
     this->inside_ = true;

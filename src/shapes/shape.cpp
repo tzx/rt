@@ -7,6 +7,12 @@ Shape::Shape() : transform_(Matrix::identity_matrix(4)) {
   this->material_ = std::make_shared<Material>();
 }
 
+bool Shape::operator==(const Shape &other) const {
+  return this->uuid() == other.uuid() &&
+         this->transform() == other.transform() &&
+         *(this->const_material()) == *other.const_material();
+}
+
 int Shape::uuid() const {
   return this->uuid_;
 }
@@ -20,6 +26,14 @@ void Shape::setTransform(Matrix m) {
 }
 
 std::shared_ptr<Material> Shape::material() {
+  return this->material_;
+}
+
+void Shape::set_material(std::shared_ptr<Material> m) {
+  this->material_ = m;
+}
+
+std::shared_ptr<const Material> Shape::const_material() const {
   return this->material_;
 }
 

@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <memory>
 #include <ostream>
 
 #include "canvas/camera.hpp"
@@ -11,7 +12,7 @@
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
 #include "ray.hpp"
-#include "sphere.hpp"
+#include "shapes/sphere.hpp"
 
 
 constexpr int CANVAS_DIMENSIONS = 500;
@@ -21,44 +22,40 @@ constexpr float pixel_size = (float)7/CANVAS_DIMENSIONS;
 constexpr float half = 7/2.0f;
 
 int main () {
-  Sphere floor = Sphere();
-  floor.setTransform(Matrix::scaling(10, 0.01, 10));
-  Material m = Material();
-  m.setColor(Color(1, 0.9, 0.9));
-  m.setSpecular(0);
-  floor.setMaterial(m);
+  auto floor = std::make_shared<Sphere>();
+  floor->setTransform(Matrix::scaling(10, 0.01, 10));
+  auto m = floor->material();
+  m->setColor(Color(1, 0.9, 0.9));
+  m->setSpecular(0);
 
-  Sphere left_wall = Sphere();
-  left_wall.setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(-M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
-  left_wall.setMaterial(floor.material());
+  auto left_wall = std::make_shared<Sphere>();
+  left_wall->setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(-M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
+  left_wall->set_material(floor->material());
 
-  Sphere right_wall = Sphere();
-  right_wall.setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
-  right_wall.setMaterial(floor.material());
+  auto right_wall = std::make_shared<Sphere>();
+  right_wall->setTransform(Matrix::translation(0, 0, 5) * Matrix::rotation_y(M_PI_4f) * Matrix::rotation_x(M_PI_2f) * Matrix::scaling(10, 0.01, 10));
+  right_wall->set_material(floor->material());
 
-  Sphere middle = Sphere();
-  middle.setTransform(Matrix::translation(-0.5, 1, 0.5));
-  Material middle_m = Material();
-  middle_m.setColor(Color(0.1, 1, 0.5));
-  middle_m.setDiffuse(0.7);
-  middle_m.setSpecular(0.3);
-  middle.setMaterial(middle_m);
+  auto middle = std::make_shared<Sphere>();
+  middle->setTransform(Matrix::translation(-0.5, 1, 0.5));
+  auto middle_m = middle->material();
+  middle_m->setColor(Color(0.1, 1, 0.5));
+  middle_m->setDiffuse(0.7);
+  middle_m->setSpecular(0.3);
 
-  Sphere right = Sphere();
-  right.setTransform(Matrix::translation(1.5, 0.5, -0.5) * Matrix::scaling(0.5, 0.5, 0.5));
-  Material right_m = Material();
-  right_m.setColor(Color(0.5, 1, 0.1));
-  right_m.setDiffuse(0.7);
-  right_m.setSpecular(0.3);
-  right.setMaterial(right_m);
+  auto right = std::make_shared<Sphere>();
+  right->setTransform(Matrix::translation(1.5, 0.5, -0.5) * Matrix::scaling(0.5, 0.5, 0.5));
+  auto right_m = right->material();
+  right_m->setColor(Color(0.5, 1, 0.1));
+  right_m->setDiffuse(0.7);
+  right_m->setSpecular(0.3);
 
-  Sphere left = Sphere();
-  left.setTransform(Matrix::translation(-1.5, 0.33, -0.75) * Matrix::scaling(0.33, 0.33, 0.33));
-  Material left_m = Material();
-  left_m.setColor(Color(1, 0.8, 0.1));
-  left_m.setDiffuse(0.7);
-  left_m.setSpecular(0.3);
-  left.setMaterial(left_m);
+  auto left = std::make_shared<Sphere>();
+  left->setTransform(Matrix::translation(-1.5, 0.33, -0.75) * Matrix::scaling(0.33, 0.33, 0.33));
+  auto left_m = left->material();
+  left_m->setColor(Color(1, 0.8, 0.1));
+  left_m->setDiffuse(0.7);
+  left_m->setSpecular(0.3);
 
   World w = World();
   w.setLight(PointLight(Tuple::create_point(-10, 10, -10), Color(1, 1, 1)));

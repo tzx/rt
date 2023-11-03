@@ -2,22 +2,26 @@
 
 #include "../lights/material.hpp"
 #include "../primitives/matrix.hpp"
-#include "../ray.hpp"
 #include "../intersection.hpp"
+#include "../ray.hpp"
 #include <memory>
 
 // https://en.cppreference.com/w/cpp/language/abstract_class
-class Shape {
+// TODO: Right now intersections own a reference to shape but we create it in local_intersect so :sob:
+class Shape : public std::enable_shared_from_this<Shape> {
   public:
     Shape();
-    virtual ~Shape() = default;
 
     int uuid() const;
     Matrix transform() const;
     void setTransform(Matrix m);
     std::shared_ptr<Material> material();
+    void set_material(std::shared_ptr<Material> m);
+    std::shared_ptr<const Material> const_material() const;
 
     Tuple normal_at(const Tuple &p) const;
+
+    bool operator==(const Shape &other) const;
 
     // TODO: This can't be const because of my test shape
     virtual std::vector<Intersection> local_intersect(const Ray &local_r) = 0;
@@ -30,4 +34,4 @@ class Shape {
 };
 
 // TODO: can't be const
-std::vector<Intersection> intersect (Shape &s, const Ray &ray);
+std::vector<Intersection> intersect(std::shared_ptr<Shape> s, const Ray &ray);

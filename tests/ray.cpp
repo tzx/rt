@@ -1,9 +1,10 @@
 #include <catch2/catch.hpp>
 #include <iostream>
+#include <memory>
 
 #include "../src/ray.hpp"
 #include "../src/primitives/matrix.hpp"
-#include "../src/sphere.hpp"
+#include "../src/shapes/sphere.hpp"
 #include "../src/intersection.hpp"
 
 TEST_CASE ("Creating and querying a ray", "[ray]") {
@@ -27,7 +28,7 @@ TEST_CASE ("Computing a point from a distance", "[ray]") {
 
 TEST_CASE ("A ray intersects a sphere at two points", "[intersection]") {
   Ray ray = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, ray);
   REQUIRE( xs.size() == 2 );
@@ -38,7 +39,7 @@ TEST_CASE ("A ray intersects a sphere at two points", "[intersection]") {
 
 TEST_CASE ("A ray intersects a sphere at a tangent", "[intersection]") {
   Ray ray = Ray(Tuple::create_point(0, 1, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, ray);
   REQUIRE( xs.size() == 2 );
@@ -48,7 +49,7 @@ TEST_CASE ("A ray intersects a sphere at a tangent", "[intersection]") {
 
 TEST_CASE ("A ray misses a sphere", "[intersection]") {
   Ray ray = Ray(Tuple::create_point(0, 2, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, ray);
   REQUIRE( xs.size() == 0 );
@@ -56,7 +57,7 @@ TEST_CASE ("A ray misses a sphere", "[intersection]") {
 
 TEST_CASE ("A ray originates inside a sphere", "[intersection]") {
   Ray ray = Ray(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, ray);
   REQUIRE( xs.size() == 2 );
@@ -66,7 +67,7 @@ TEST_CASE ("A ray originates inside a sphere", "[intersection]") {
 
 TEST_CASE ("A sphere is behind a ray", "[intersection]") {
   Ray ray = Ray(Tuple::create_point(0, 0, 5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, ray);
   REQUIRE( xs.size() == 2 );
@@ -75,7 +76,7 @@ TEST_CASE ("A sphere is behind a ray", "[intersection]") {
 }
 
 TEST_CASE ("A intersection encapsulates t and object", "[intersection]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   Intersection i = Intersection(3.5, s);
 
@@ -84,7 +85,7 @@ TEST_CASE ("A intersection encapsulates t and object", "[intersection]") {
 }
 
 TEST_CASE ("Aggregating intersections", "[intersection]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   Intersection i1 = Intersection(1, s);
   Intersection i2 = Intersection(2, s);
@@ -98,7 +99,7 @@ TEST_CASE ("Aggregating intersections", "[intersection]") {
 
 TEST_CASE ("Intersect sets the object on the intersection", "[intersection]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
 
   std::vector<Intersection> xs = intersect(s, r);
 
@@ -108,7 +109,7 @@ TEST_CASE ("Intersect sets the object on the intersection", "[intersection]") {
 }
 
 TEST_CASE ("The hit, when all intersections have positive t", "[hit]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
   Intersection i1 = Intersection(1, s);
   Intersection i2 = Intersection(2, s);
   std::vector<Intersection> xs = {i1, i2};
@@ -118,7 +119,7 @@ TEST_CASE ("The hit, when all intersections have positive t", "[hit]") {
 }
 
 TEST_CASE ("The hit, when some intersection have negative t", "[hit]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
   Intersection i1 = Intersection(-1, s);
   Intersection i2 = Intersection(1, s);
   std::vector<Intersection> xs = {i2, i1};
@@ -128,7 +129,7 @@ TEST_CASE ("The hit, when some intersection have negative t", "[hit]") {
 }
 
 TEST_CASE ("The hit, when all intersections have negative t", "[hit]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
   Intersection i1 = Intersection(-2, s);
   Intersection i2 = Intersection(-1, s);
   std::vector<Intersection> xs = {i2, i1};
@@ -138,7 +139,7 @@ TEST_CASE ("The hit, when all intersections have negative t", "[hit]") {
 }
 
 TEST_CASE ("The hit is always the lowest nonnegative intersection", "[hit]") {
-  Sphere s = Sphere();
+  auto s = std::make_shared<Sphere>();
   Intersection i1 = Intersection(5, s);
   Intersection i2 = Intersection(7, s);
   Intersection i3 = Intersection(-3, s);
@@ -180,8 +181,8 @@ TEST_CASE ("Changing a sphere's tranformation", "[transformation]") {
 
 TEST_CASE ("Intersecting a scaled sphere with a ray", "[transformation]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
-  s.setTransform(Matrix::scaling(2, 2, 2));
+  auto s = std::make_shared<Sphere>();
+  s->setTransform(Matrix::scaling(2, 2, 2));
 
   auto xs = intersect(s, r);
   REQUIRE ( xs.size() == 2 );
@@ -191,8 +192,8 @@ TEST_CASE ("Intersecting a scaled sphere with a ray", "[transformation]") {
 
 TEST_CASE ("Intersecting a translated sphere with a ray", "[transformation]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere s = Sphere();
-  s.setTransform(Matrix::translation(5, 0, 0));
+  auto s = std::make_shared<Sphere>();
+  s->setTransform(Matrix::translation(5, 0, 0));
 
   auto xs = intersect(s, r);
   REQUIRE ( xs.size() == 0 );

@@ -34,30 +34,28 @@ TEST_CASE("Assigning a material shape", "[shape]") {
 
 TEST_CASE("Intersecting a scaled shape with a ray", "[shape]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  TestShape s = TestShape();
-  s.setTransform(Matrix::scaling(2, 2, 2));
+  auto s = std::make_shared<TestShape>();
+  s->setTransform(Matrix::scaling(2, 2, 2));
   auto xs = intersect(s, r);
 
-  REQUIRE(s.saved_ray.value().origin() == Tuple::create_point(0, 0, -2.5));
-  REQUIRE(s.saved_ray.value().direction() == Tuple::create_vector(0, 0, 0.5));
+  REQUIRE(s->saved_ray.value().origin() == Tuple::create_point(0, 0, -2.5));
+  REQUIRE(s->saved_ray.value().direction() == Tuple::create_vector(0, 0, 0.5));
 }
 
 TEST_CASE("Intersecting a translated shape with a ray", "[shape]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  TestShape s = TestShape();
-  s.setTransform(Matrix::translation(5, 0, 0));
+  auto s = std::make_shared<TestShape>();
+  s->setTransform(Matrix::translation(5, 0, 0));
   auto xs = intersect(s, r);
 
-  REQUIRE(s.saved_ray.value().origin() == Tuple::create_point(-5, 0, -5));
-  REQUIRE(s.saved_ray.value().direction() == Tuple::create_vector(0, 0, 1));
+  REQUIRE(s->saved_ray.value().origin() == Tuple::create_point(-5, 0, -5));
+  REQUIRE(s->saved_ray.value().direction() == Tuple::create_vector(0, 0, 1));
 }
 
 TEST_CASE ("Computing the normal on a translated test shape", "[shape]") {
   auto s = TestShape();
   s.setTransform(Matrix::translation(0, 1, 0));
   auto n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711));
-
-  n.repr();
 
   REQUIRE (n == Tuple::create_vector(0, 0.70711, -0.70711));
 }

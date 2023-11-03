@@ -1,5 +1,6 @@
 #pragma once
 #include "shape.hpp"
+#include <optional>
 #include <vector>
 
 class TestShape : public Shape {

@@ -4,19 +4,19 @@
 #include <optional>
 #include <vector>
 
+#include "../shapes/sphere.hpp"
+
 World::World() {
   this->light_ = std::nullopt;
-  this->objects_ = std::vector<std::shared_ptr<Sphere>>();
+  this->objects_ = std::vector<std::shared_ptr<Shape>>();
 }
 
 World World::default_world() {
   auto light = PointLight(Tuple::create_point(-10, 10, -10), Color(1, 1, 1));
   auto s1 = std::make_shared<Sphere>();
-  auto m1 = Material();
-  m1.setColor(Color(0.8, 1.0, 0.6));
-  m1.setDiffuse(0.7);
-  m1.setSpecular(0.2);
-  s1->setMaterial(m1);
+  s1->material()->setColor(Color(0.8, 1.0, 0.6));
+  s1->material()->setDiffuse(0.7);
+  s1->material()->setSpecular(0.2);
 
   auto s2 = std::make_shared<Sphere>();
   auto m2 = Matrix::scaling(0.5, 0.5, 0.5);
@@ -38,16 +38,15 @@ void World::setLight(PointLight light) {
   this->light_ = std::make_shared<PointLight>(light);
 }
 
-const std::vector<std::shared_ptr<Sphere>> World::objects() const {
+const std::vector<std::shared_ptr<Shape>> World::objects() const {
   return this->objects_;
 }
 
-void World::addObject(Sphere obj) {
-  auto to_add = std::make_shared<Sphere>(obj);
+void World::addObject(std::shared_ptr<Shape> to_add) {
   this->objects_.push_back(to_add);
 }
 
-bool World::contains(Sphere &to_check) const {
+bool World::contains(Shape &to_check) const {
   for (auto sph: this->objects()) {
     if (to_check == *sph) {
       return true;
@@ -59,7 +58,7 @@ bool World::contains(Sphere &to_check) const {
 std::vector<Intersection> World::intersect_world(const Ray r) const {
   std::vector<Intersection> res;
   for (auto sph: this->objects()) {
-    std::vector<Intersection> xs = intersect(*sph, r);
+    std::vector<Intersection> xs = intersect(sph, r);
     res.insert(res.end(), xs.begin(), xs.end());
   }
 
@@ -72,7 +71,7 @@ std::vector<Intersection> World::intersect_world(const Ray r) const {
 
 Color World::shade_hit(const Computations comps) const {
   bool in_shadow = this->is_shadowed(comps.over_point());
-  return comps.object().material().lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv(), in_shadow);
+  return comps.object()->material()->lighting(*this->light().value(), comps.point(), comps.eyev(), comps.normalv(), in_shadow);
 }
 
 Color World::color_at(const Ray r) const {

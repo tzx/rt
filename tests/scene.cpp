@@ -9,7 +9,7 @@
 #include "../src/lights/point_light.hpp"
 #include "../src/primitives/tuple.hpp"
 #include "../src/util/approx.hpp"
-#include "../src/sphere.hpp"
+#include "../src/shapes/sphere.hpp"
 #include "../src/intersection.hpp"
 
 TEST_CASE ("Creating a world", "[world]") {
@@ -23,11 +23,10 @@ TEST_CASE ("The default world", "[world]") {
   PointLight light = PointLight(Tuple::create_point(-10, 10, -10), Color(1, 1, 1));
 
   Sphere s1 = Sphere();
-  Material m1 = Material();
-  m1.setColor(Color(0.8, 1.0, 0.6));
-  m1.setDiffuse(0.7);
-  m1.setSpecular(0.2);
-  s1.setMaterial(m1);
+  auto m1 = s1.material();
+  m1->setColor(Color(0.8, 1.0, 0.6));
+  m1->setDiffuse(0.7);
+  m1->setSpecular(0.2);
 
   Sphere s2 = Sphere();
   Matrix t2 = Matrix::scaling(0.5, 0.5, 0.5);
@@ -55,7 +54,7 @@ TEST_CASE ("Intersect a world with a ray", "[world]") {
 
 TEST_CASE ("Precomputing the state of an intersection", "[computations]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere shape = Sphere();
+  auto shape = std::make_shared<Sphere>();
   Intersection i = Intersection(4, shape);
 
   Computations comps = Computations(i, r);
@@ -69,7 +68,7 @@ TEST_CASE ("Precomputing the state of an intersection", "[computations]") {
 
 TEST_CASE ("The hit, when an intersection occurs on the outside", "[computations]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere shape = Sphere();
+  auto shape = std::make_shared<Sphere>();
   Intersection i = Intersection(4, shape);
 
   Computations comps = Computations(i, r);
@@ -79,7 +78,7 @@ TEST_CASE ("The hit, when an intersection occurs on the outside", "[computations
 
 TEST_CASE ("The hit, when an intersection occurs on the inside", "[computations]") {
   Ray r = Ray(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 0, 1));
-  Sphere shape = Sphere();
+  auto shape = std::make_shared<Sphere>();
   Intersection i = Intersection(1, shape);
 
   Computations comps = Computations(i, r);
@@ -94,7 +93,7 @@ TEST_CASE ("Shading an intersection", "[shading]") {
   World w = World::default_world();
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
 
-  Sphere shape = *w.objects()[0];
+  auto shape = w.objects()[0];
   Intersection i = Intersection(4, shape);
 
   Computations comps = Computations(i, r);
@@ -109,7 +108,7 @@ TEST_CASE ("Shading an intersection from the inside", "[shading]") {
   w.setLight(PointLight(Tuple::create_point(0, 0.25, 0), Color(1, 1, 1)));
 
   Ray r = Ray(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 0, 1));
-  Sphere shape = *w.objects()[1];
+  auto shape = w.objects()[1];
 
   Intersection i = Intersection(0.5, shape);
 
@@ -141,18 +140,16 @@ TEST_CASE ("The color with an intersection behind the ray", "[color]") {
   // TODO: You, maybe make a shared pointer for material because i am copying right now
   auto outer = w.objects().front();
   auto outer_mat = outer->material();
-  outer_mat.setAmbient(1);
-  outer->setMaterial(outer_mat);
+  outer_mat->setAmbient(1);
 
   auto inner = w.objects().at(1);
   auto inner_mat = inner->material();
-  inner_mat.setAmbient(1);
-  inner->setMaterial(inner_mat);
+  inner_mat->setAmbient(1);
 
   Ray r = Ray(Tuple::create_point(0, 0, 0.75), Tuple::create_vector(0, 0, -1));
   Color c = w.color_at(r);
 
-  REQUIRE ( c == inner->material().color() );
+  REQUIRE ( c == inner->material()->color() );
 }
 
 TEST_CASE ("The transformation matrix for the default orientation", "[transformation]") {
@@ -301,11 +298,11 @@ TEST_CASE ("shade_hit() if given an intersection in shadow", "[shadow]") {
   World w = World();
   w.setLight(PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1)));
 
-  Sphere s1;
+  auto s1 = std::make_shared<Sphere>();
   w.addObject(s1);
 
-  Sphere s2;
-  s2.setTransform(Matrix::translation(0, 0, 10));
+  auto s2 = std::make_shared<Sphere>();
+  s2->setTransform(Matrix::translation(0, 0, 10));
   w.addObject(s2);
 
   Ray r = Ray(Tuple::create_point(0, 0, 5), Tuple::create_vector(0, 0, 1));
@@ -319,8 +316,8 @@ TEST_CASE ("shade_hit() if given an intersection in shadow", "[shadow]") {
 
 TEST_CASE ("The hit should offset the point", "[shadow]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
-  Sphere shape;
-  shape.setTransform(Matrix::translation(0, 0, 1));
+  auto shape = std::make_shared<Sphere>();
+  shape->setTransform(Matrix::translation(0, 0, 1));
 
   Intersection i = Intersection(5, shape);
   Computations comps = Computations(i, r);
