@@ -9,45 +9,25 @@ Material::Material() {
   this->shininess_ = 200.0;
 }
 
-Color Material::color() const {
-  return this->color_;
-}
+Color Material::color() const { return this->color_; }
 
-void Material::setColor(Color c) {
-  this->color_ = c;
-}
+void Material::setColor(Color c) { this->color_ = c; }
 
-float Material::ambient() const {
-  return this->ambient_;
-}
+float Material::ambient() const { return this->ambient_; }
 
-void Material::setAmbient(float a) {
-  this->ambient_ = a;
-}
+void Material::setAmbient(float a) { this->ambient_ = a; }
 
-float Material::diffuse() const {
-  return this->diffuse_;
-}
+float Material::diffuse() const { return this->diffuse_; }
 
-void Material::setDiffuse(float d) {
-  this->diffuse_ = d;
-}
+void Material::setDiffuse(float d) { this->diffuse_ = d; }
 
-float Material::specular() const {
-  return this->specular_;
-}
+float Material::specular() const { return this->specular_; }
 
-void Material::setSpecular(float s) {
-  this->specular_ = s;
-}
+void Material::setSpecular(float s) { this->specular_ = s; }
 
-float Material::shininess() const {
-  return this->shininess_;
-}
+float Material::shininess() const { return this->shininess_; }
 
-void Material::setShininess(float s) {
-  this->shininess_ = s;
-}
+void Material::setShininess(float s) { this->shininess_ = s; }
 
 std::optional<StripePattern> Material::pattern() const {
   return this->pattern_;
@@ -57,12 +37,13 @@ void Material::setPattern(StripePattern pattern) {
   this->pattern_ = std::optional<StripePattern>(pattern);
 }
 
-Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow) const {
+Color Material::lighting(Shape *obj, PointLight light, Tuple point, Tuple eyev,
+                         Tuple normalv, bool in_shadow) const {
   Color black = Color(0, 0, 0);
 
   Color col_to_use = this->color();
   if (this->pattern().has_value()) {
-    col_to_use = this->pattern().value().stripe_at(point);
+    col_to_use = this->pattern().value().stripe_at_object(obj, point);
   };
 
   Color effective_color = col_to_use * light.intensity();
@@ -87,7 +68,7 @@ Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normal
 
     Tuple reflectv = reflect(-lightv, normalv);
     float reflect_dot_eye = dotProduct(reflectv, eyev);
-    
+
     if (reflect_dot_eye <= 0) {
       specular = black;
     } else {
@@ -100,8 +81,7 @@ Color Material::lighting(PointLight light, Tuple point, Tuple eyev, Tuple normal
 }
 
 bool Material::operator==(const Material &oth) const {
-  return this->color() == oth.color() &&
-         this->ambient() == oth.ambient() &&
+  return this->color() == oth.color() && this->ambient() == oth.ambient() &&
          this->diffuse() == oth.diffuse() &&
          this->specular() == oth.specular() &&
          this->shininess() == oth.shininess();

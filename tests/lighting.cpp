@@ -113,7 +113,8 @@ TEST_CASE ("Lighting with the eye between the light and the surface", "[phong]")
   Tuple normalv = Tuple::create_vector(0, 0, -1);
   PointLight light = PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
 
-  Color result = m.lighting(light, position, eyev, normalv);
+  Sphere obj;
+  Color result = m.lighting(&obj, light, position, eyev, normalv);
   REQUIRE (result == Color(1.9, 1.9, 1.9));
 }
 
@@ -127,7 +128,8 @@ TEST_CASE ("Lighting with the eye between the light and the surface, eye offset 
   Tuple normalv = Tuple::create_vector(0, 0, -1);
   PointLight light = PointLight(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
 
-  Color result = m.lighting(light, position, eyev, normalv);
+  Sphere obj;
+  Color result = m.lighting(&obj, light, position, eyev, normalv);
   REQUIRE (result == Color(1.0, 1.0, 1.0));
 }
 
@@ -139,7 +141,8 @@ TEST_CASE ("Lighting with eye opposite surface, light offset 45deg", "[phong]") 
   Tuple normalv = Tuple::create_vector(0, 0, -1);
   PointLight light = PointLight(Tuple::create_point(0, 10, -10), Color(1, 1, 1));
 
-  Color result = m.lighting(light, position, eyev, normalv);
+  Sphere obj;
+  Color result = m.lighting(&obj, light, position, eyev, normalv);
   REQUIRE (result == Color(0.7364, 0.7364, 0.7364));
 }
 
@@ -153,7 +156,8 @@ TEST_CASE ("Lighting with eye in the path of the reflection vector", "[phong]") 
   Tuple normalv = Tuple::create_vector(0, 0, -1);
   PointLight light = PointLight(Tuple::create_point(0, 10, -10), Color(1, 1, 1));
 
-  Color result = m.lighting(light, position, eyev, normalv);
+  Sphere obj;
+  Color result = m.lighting(&obj, light, position, eyev, normalv);
 
   REQUIRE (result == Color(1.63639, 1.63639, 1.63639));
 }
@@ -166,7 +170,8 @@ TEST_CASE ("Lighting with light behind the surface", "[phong]") {
   Tuple normalv = Tuple::create_vector(0, 0, -1);
   PointLight light = PointLight(Tuple::create_point(0, 0, 10), Color(1, 1, 1));
 
-  Color result = m.lighting(light, position, eyev, normalv);
+  Sphere obj;
+  Color result = m.lighting(&obj, light, position, eyev, normalv);
   REQUIRE (result == Color(0.1, 0.1, 0.1));
 }
 
@@ -179,7 +184,8 @@ TEST_CASE ("Lighting with the surface in the shadow", "[shadow]") {
   PointLight point_light(Tuple::create_point(0, 0, -10), Color(1, 1, 1));
 
   bool in_shadow = true;
-  Color result = m.lighting(point_light, position, eyev, normalv, in_shadow);
+  Sphere obj;
+  Color result = m.lighting(&obj,point_light, position, eyev, normalv, in_shadow);
 
   REQUIRE (result == Color(0.1, 0.1, 0.1) );
 }

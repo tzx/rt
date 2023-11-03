@@ -23,7 +23,12 @@ class Material {
     void setShininess(float s);
     void setPattern(StripePattern pattern);
 
-    Color lighting(PointLight light, Tuple point, Tuple eyev, Tuple normalv, bool in_shadow = false) const;
+    Color lighting(Shape *obj,
+                   PointLight light,
+                   Tuple point,
+                   Tuple eyev,
+                   Tuple normalv,
+                   bool in_shadow = false) const;
 
     bool operator==(const Material &oth) const;
 
