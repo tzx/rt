@@ -55,7 +55,7 @@ bool World::contains(Shape &to_check) const {
   return false;
 }
 
-std::vector<Intersection> World::intersect_world(const Ray r) const {
+std::vector<Intersection> World::intersect_world(const Ray &r) const {
   std::vector<Intersection> res;
   for (auto sph: this->objects()) {
     std::vector<Intersection> xs = intersect(sph, r);
@@ -69,17 +69,19 @@ std::vector<Intersection> World::intersect_world(const Ray r) const {
   return res;
 }
 
-Color World::shade_hit(const Computations comps) const {
+Color World::shade_hit(const Computations &comps, size_t remaining) const {
   bool in_shadow = this->is_shadowed(comps.over_point());
-  return comps.object()->material()->lighting(comps.object().get(),
+  Color surface = comps.object()->material()->lighting(comps.object().get(),
                                               *this->light().value(),
                                               comps.over_point(),
                                               comps.eyev(),
                                               comps.normalv(),
                                               in_shadow);
+  Color reflected = this->reflected_color(comps, remaining);
+  return surface + reflected;
 }
 
-Color World::color_at(const Ray r) const {
+Color World::color_at(const Ray r, size_t remaining) const {
   auto xs = this->intersect_world(r);
   std::optional<Intersection> h = hit(xs);
   if (h == std::nullopt) {
@@ -88,7 +90,21 @@ Color World::color_at(const Ray r) const {
 
   auto comps = Computations(h.value(), r);
 
-  return this->shade_hit(comps);
+  return this->shade_hit(comps, remaining);
+}
+
+Color World::reflected_color(const Computations &comps, size_t remaining) const {
+  if (remaining <= 0) {
+    return Color(0, 0, 0);
+  }
+  if (comps.object()->material()->reflective() == 0) {
+    return Color(0, 0, 0);
+  }
+
+  auto reflect_ray = Ray(comps.over_point(), comps.reflectv());
+  Color color = this->color_at(reflect_ray, remaining - 1);
+
+  return color * comps.object()->material()->reflective();
 }
 
 bool World::is_shadowed(Tuple point) const {

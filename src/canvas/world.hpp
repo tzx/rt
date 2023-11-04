@@ -20,9 +20,10 @@ class World {
     void addObject(std::shared_ptr<Shape> to_add);
 
     bool contains(Shape &sph) const;
-    std::vector<Intersection> intersect_world(const Ray r) const;
-    Color shade_hit(const Computations comps) const;
-    Color color_at(const Ray r) const;
+    std::vector<Intersection> intersect_world(const Ray &r) const;
+    Color shade_hit(const Computations &comps, size_t remaining = 4) const;
+    Color color_at(const Ray r, size_t remaining = 4) const;
+    Color reflected_color(const Computations &comps, size_t remaining = 4) const;
     bool is_shadowed(Tuple point) const;
 
   private:
