@@ -41,6 +41,8 @@ class Computations {
     Tuple over_point() const;
     Tuple under_point() const;
 
+    float schlick() const;
+
   private:
     float t_;
     std::shared_ptr<Shape> shape_;

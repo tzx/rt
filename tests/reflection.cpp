@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <cmath>
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -274,4 +275,102 @@ TEST_CASE("The refracted color with a refracted ray", "[refraction]") {
 
   auto c = w.refracted_color(comps, 5);
   REQUIRE(c == Color(0, 0.997872, 0.047472));
+}
+
+TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
+  auto w = World::default_world();
+
+  auto floor = std::make_shared<Plane>();
+  floor->setTransform(Matrix::translation(0, -1, 0));
+  floor->material()->setTransparency(0.5);
+  floor->material()->setRefractiveIndex(1.5);
+  w.addObject(floor);
+
+  auto ball = std::make_shared<Sphere>();
+  ball->material()->setColor(Color(1, 0, 0));
+  ball->material()->setAmbient(0.5);
+  ball->setTransform(Matrix::translation(0, -3.5, -0.5));
+  w.addObject(ball);
+
+  float sq2 = std::sqrt(2);
+  float sq2_2 = std::sqrt(2) / 2.0f;
+
+  Ray r(Tuple::create_point(0, 0, -3), Tuple::create_vector(0, -sq2_2, sq2_2));
+  std::vector<Intersection> xs = {{sq2, floor}};
+
+  auto comps = Computations(xs.front(), r, xs);
+  Color c = w.shade_hit(comps, 5);
+
+  REQUIRE( c == Color(0.936395, 0.686395, 0.686395) );
+}
+
+TEST_CASE("The Schlick approximation under total internal reflection", "[fresnel]") {
+  auto s = std::make_shared<Sphere>(Sphere::glass_sphere());
+  float sq2_2 = std::sqrt(2)/2.0f;
+  Ray r(Tuple::create_point(0, 0, sq2_2), Tuple::create_vector(0, 1, 0));
+
+  std::vector<Intersection> xs = {
+    {-sq2_2, s}, {sq2_2, s}
+  };
+
+  auto comps = Computations(xs.at(1), r, xs);
+
+  auto reflectance = comps.schlick();
+
+  REQUIRE (reflectance == 1.0f);
+}
+
+TEST_CASE ("The Schlick approximation with a perpendicular viewing angle", "[fresnel]") {
+  auto s = std::make_shared<Sphere>(Sphere::glass_sphere());
+  Ray r(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 1, 0));
+
+  std::vector<Intersection> xs = {
+    {-1, s}, {1, s}
+  };
+
+  auto comps = Computations(xs.at(1), r, xs);
+  auto reflectance = comps.schlick();
+
+  REQUIRE (reflectance == Approx(0.04));
+}
+
+TEST_CASE ("The Schlick approximation with small angle and n2 > n1", "[fresnel]") {
+  auto s = std::make_shared<Sphere>(Sphere::glass_sphere());
+  Ray r(Tuple::create_point(0, 0.99, -2), Tuple::create_vector(0, 0, 1));
+
+  std::vector<Intersection> xs = {
+    {1.8589, s}
+  };
+
+  auto comps = Computations(xs.front(), r, xs);
+  auto reflectance = comps.schlick();
+
+  REQUIRE (reflectance == Approx(0.48873));
+}
+
+TEST_CASE ("shade_hit() with a reflective, transparent material", "[fresnel]") {
+  auto w = World::default_world();
+  float sq2_2 = std::sqrt(2)/2.0f;
+  Ray r(Tuple::create_point(0, 0, -3), Tuple::create_vector(0, -sq2_2, sq2_2));
+
+  auto floor = std::make_shared<Plane>();
+  floor->setTransform(Matrix::translation(0, -1, 0));
+  floor->material()->setReflective(0.5);
+  floor->material()->setTransparency(0.5);
+  floor->material()->setRefractiveIndex(1.5);
+  w.addObject(floor);
+
+  auto ball = std::make_shared<Sphere>();
+  ball->material()->setColor(Color(1, 0, 0));
+  ball->material()->setAmbient(0.5);
+  ball->setTransform(Matrix::translation(0, -3.5, -0.5));
+  w.addObject(ball);
+
+  std::vector<Intersection> xs = {{(float)std::sqrt(2), floor}};
+
+  auto comps = Computations(xs.front(), r, xs);
+
+  Color c = w.shade_hit(comps, 5);
+
+  REQUIRE (c == Color(0.933891, 0.696412, 0.692405));
 }

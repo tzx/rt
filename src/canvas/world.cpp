@@ -79,7 +79,14 @@ Color World::shade_hit(const Computations &comps, size_t remaining) const {
                                               comps.normalv(),
                                               in_shadow);
   Color reflected = this->reflected_color(comps, remaining);
-  return surface + reflected;
+  Color refracted = this->refracted_color(comps, remaining);
+
+  auto material = comps.object()->material();
+  if (material->reflective() > 0 && material->transparency() > 0) {
+    auto reflectance = comps.schlick();
+    return surface + reflected * reflectance + refracted * (1 - reflectance);
+  }
+  return surface + reflected + refracted;
 }
 
 Color World::color_at(const Ray r, size_t remaining) const {
