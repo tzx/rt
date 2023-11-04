@@ -932,6 +932,30 @@ tests/ray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/ray.cpp.s
 .PHONY : tests/ray.cpp.s
 
+tests/reflection.o: tests/reflection.cpp.o
+.PHONY : tests/reflection.o
+
+# target to build an object file
+tests/reflection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/reflection.cpp.o
+.PHONY : tests/reflection.cpp.o
+
+tests/reflection.i: tests/reflection.cpp.i
+.PHONY : tests/reflection.i
+
+# target to preprocess a source file
+tests/reflection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/reflection.cpp.i
+.PHONY : tests/reflection.cpp.i
+
+tests/reflection.s: tests/reflection.cpp.s
+.PHONY : tests/reflection.s
+
+# target to generate assembly for a file
+tests/reflection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/reflection.cpp.s
+.PHONY : tests/reflection.cpp.s
+
 tests/scene.o: tests/scene.cpp.o
 .PHONY : tests/scene.o
 
@@ -1128,6 +1152,9 @@ help:
 	@echo "... tests/ray.o"
 	@echo "... tests/ray.i"
 	@echo "... tests/ray.s"
+	@echo "... tests/reflection.o"
+	@echo "... tests/reflection.i"
+	@echo "... tests/reflection.s"
 	@echo "... tests/scene.o"
 	@echo "... tests/scene.i"
 	@echo "... tests/scene.s"

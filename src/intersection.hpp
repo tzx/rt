@@ -32,6 +32,7 @@ class Computations {
     Tuple point() const;
     Tuple eyev() const;
     Tuple normalv() const;
+    Tuple reflectv() const;
     bool inside() const;
 
     Tuple over_point() const;
@@ -42,5 +43,6 @@ class Computations {
     Tuple point_;
     Tuple eyev_;
     Tuple normalv_;
+    Tuple reflectv_;
     bool inside_;
 };

@@ -60,6 +60,10 @@ Tuple Computations::normalv() const {
   return this->normalv_;
 }
 
+Tuple Computations::reflectv() const {
+  return this->reflectv_;
+}
+
 bool Computations::inside() const {
   return this->inside_;
 }
@@ -71,6 +75,9 @@ Computations::Computations(const Intersection &i, const Ray &r) {
   this->point_ = r.position(this->t());
   this->eyev_ = -r.direction();
   this->normalv_ = this->object()->normal_at(this->point());
+
+
+  this->reflectv_ = reflect(r.direction(), this->normalv_);
 
   if (dotProduct(this->normalv(), this->eyev()) < 0) {
     this->inside_ = true;

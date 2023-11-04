@@ -7,6 +7,7 @@ Material::Material() {
   this->diffuse_ = 0.9;
   this->specular_ = 0.9;
   this->shininess_ = 200.0;
+  this->reflective_ = 0.0;
 }
 
 Color Material::color() const { return this->color_; }
@@ -28,6 +29,10 @@ void Material::setSpecular(float s) { this->specular_ = s; }
 float Material::shininess() const { return this->shininess_; }
 
 void Material::setShininess(float s) { this->shininess_ = s; }
+
+float Material::reflective() const { return this->reflective_; };
+
+void Material::setReflective(float r) { this->reflective_ = r; }
 
 std::optional<std::shared_ptr<Pattern>> Material::pattern() const {
   return this->pattern_;
