@@ -1,5 +1,6 @@
 #include "world.hpp"
 #include <algorithm>
+#include <cmath>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -123,7 +124,13 @@ Color World::refracted_color(const Computations &comps, size_t remaining) const 
     return Color(0, 0, 0);
   }
 
-  return Color(1, 1, 1);
+  auto cos_t = std::sqrt(1.0 - sin2_t);
+  auto direction = comps.normalv() * (n_ratio * cos_i - cos_t) - comps.eyev() * n_ratio;
+  auto refract_ray = Ray(comps.under_point(), direction);
+
+  Color c = this->color_at(refract_ray, remaining - 1) * comps.object()->material()->transparency();
+
+  return c;
 }
 
 bool World::is_shadowed(Tuple point) const {
