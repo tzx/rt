@@ -107,6 +107,25 @@ Color World::reflected_color(const Computations &comps, size_t remaining) const 
   return color * comps.object()->material()->reflective();
 }
 
+Color World::refracted_color(const Computations &comps, size_t remaining) const {
+  if (remaining <= 0) {
+    return Color(0, 0, 0);
+  }
+  if (comps.object()->material()->transparency() == 0) {
+    return Color(0, 0, 0);
+  }
+
+  const auto n_ratio = comps.n1() / comps.n2();
+  const auto cos_i = dotProduct(comps.eyev(), comps.normalv());
+  const auto sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
+
+  if (sin2_t > 1) {
+    return Color(0, 0, 0);
+  }
+
+  return Color(1, 1, 1);
+}
+
 bool World::is_shadowed(Tuple point) const {
   Tuple v = this->light().value()->position() - point;
   float distance = v.getMagnitude();

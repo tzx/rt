@@ -24,6 +24,7 @@ class World {
     Color shade_hit(const Computations &comps, size_t remaining = 4) const;
     Color color_at(const Ray r, size_t remaining = 4) const;
     Color reflected_color(const Computations &comps, size_t remaining = 4) const;
+    Color refracted_color(const Computations &comps, size_t remaining) const;
     bool is_shadowed(Tuple point) const;
 
   private:

@@ -39,6 +39,7 @@ class Computations {
     float n2() const;
 
     Tuple over_point() const;
+    Tuple under_point() const;
 
   private:
     float t_;
@@ -51,4 +52,7 @@ class Computations {
 
     float n1_;
     float n2_;
+
+    Tuple over_point_;
+    Tuple under_point_;
 };

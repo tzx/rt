@@ -95,6 +95,9 @@ Computations::Computations(const Intersection &hit, const Ray &r, const std::vec
     this->inside_ = false;
   }
 
+  this->over_point_ = this->point() + this->normalv() * SHADOW_OFFSET;
+  this->under_point_ = this->point() - this->normalv() * SHADOW_OFFSET;
+
   auto xs = xs_;
   if (xs.empty()) {
     xs = {hit};
@@ -129,5 +132,9 @@ Computations::Computations(const Intersection &hit, const Ray &r, const std::vec
 }
 
 Tuple Computations::over_point() const {
-    return this->point() + this->normalv() * SHADOW_OFFSET;
+  return this->over_point_;
+}
+
+Tuple Computations::under_point() const {
+  return this->under_point_;
 }

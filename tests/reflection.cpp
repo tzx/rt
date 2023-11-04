@@ -7,6 +7,7 @@
 #include "../src/shapes/sphere.hpp"
 #include "../src/canvas/world.hpp"
 #include "../src/intersection.hpp"
+#include "../src/util/approx.hpp"
 
 TEST_CASE("Reflectivity for the default material", "[reflection]") {
   Material m = Material();
@@ -184,4 +185,61 @@ TEST_CASE("Finding n1 and n2 at various intersections", "[refraction]") {
   comps = Computations(xs[5], r, xs);
   REQUIRE(comps.n1() == 1.5f);
   REQUIRE(comps.n2() == 1.0f);
+}
+
+TEST_CASE("The under point is offset below the surface", "[refraction]") {
+  Ray r(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  auto shape = std::make_shared<Sphere>(Sphere::glass_sphere());
+  shape->setTransform(Matrix::translation(0, 0, 1));
+
+  auto i = Intersection(5, shape);
+  auto xs = intersect(shape, r);
+
+  auto comps = Computations(i, r, xs);
+  REQUIRE(comps.under_point().getZ() > SHADOW_OFFSET/2.0f);
+  REQUIRE(comps.point().getZ() < SHADOW_OFFSET/2.0f);
+}
+
+TEST_CASE("The refracted color with an opaque surface", "[refraction]") {
+  auto w = World::default_world();
+  auto shape = w.objects().front();
+
+  Ray r(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  std::vector<Intersection> xs = {{4,shape}, {6, shape}};
+
+  auto comps = Computations(xs.at(0), r, xs);
+
+  Color c = w.refracted_color(comps, 5);
+  REQUIRE (c == Color(0, 0, 0));
+}
+
+TEST_CASE ("The refracted color at the maximum recursion depth", "[refraction]") {
+  auto w = World::default_world();
+  auto shape = w.objects().front();
+  shape->material()->setTransparency(1.0);
+  shape->material()->setRefractiveIndex(1.5);
+
+  Ray r(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
+  std::vector<Intersection> xs = {{4, shape}, {6, shape}};
+
+  auto comps = Computations(xs.front(), r, xs);
+
+  Color c = w.refracted_color(comps, 0);
+  REQUIRE (c == Color(0, 0, 0));
+}
+
+TEST_CASE ("The refracted color under total internal reflection", "[refraction]") {
+  auto w = World::default_world();
+  auto shape = w.objects().at(0);
+  shape->material()->setTransparency(1.0);
+  shape->material()->setRefractiveIndex(1.5);
+
+  float sq2_2 = std::sqrt(2)/2.0f;
+
+  Ray r(Tuple::create_point(0, 0, sq2_2), Tuple::create_vector(0, 1, 0));
+  std::vector<Intersection> xs = {{-sq2_2, shape}, {sq2_2, shape}};
+  auto comps = Computations(xs.at(1), r, xs);
+
+  Color c = w.refracted_color(comps, 5);
+  REQUIRE (c == Color(0, 0, 0));
 }
