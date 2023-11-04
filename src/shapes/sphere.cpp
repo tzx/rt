@@ -10,6 +10,14 @@ Tuple Sphere::local_normal_at(const Tuple &local_p) const {
   return local_p - Tuple::create_point(0, 0, 0);
 }
 
+Sphere Sphere::glass_sphere() {
+  Sphere s;
+  s.material()->setTransparency(1.0);
+  s.material()->setRefractiveIndex(1.5);
+
+  return s;
+}
+
 std::vector<Intersection> Sphere::local_intersect(const Ray &local_r) {
   // Assume sphere is at world origin of 0,0,0
   Tuple sphere_to_local_r = local_r.origin() - Tuple::create_point(0, 0, 0);

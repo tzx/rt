@@ -88,7 +88,7 @@ Color World::color_at(const Ray r, size_t remaining) const {
     return Color(0, 0, 0);
   }
 
-  auto comps = Computations(h.value(), r);
+  auto comps = Computations(h.value(), r, xs);
 
   return this->shade_hit(comps, remaining);
 }

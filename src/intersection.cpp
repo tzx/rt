@@ -2,6 +2,7 @@
 #include "canvas/world.hpp"
 #include "primitives/tuple.hpp"
 #include "shapes/shape.hpp"
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <memory>
@@ -68,9 +69,17 @@ bool Computations::inside() const {
   return this->inside_;
 }
 
-Computations::Computations(const Intersection &i, const Ray &r) {
-  this->t_ = i.t();
-  this->shape_ = i.object();
+float Computations::n1() const {
+  return this->n1_;
+}
+
+float Computations::n2() const {
+  return this->n2_;
+}
+
+Computations::Computations(const Intersection &hit, const Ray &r, const std::vector<Intersection> &xs_) {
+  this->t_ = hit.t();
+  this->shape_ =hit.object();
 
   this->point_ = r.position(this->t());
   this->eyev_ = -r.direction();
@@ -84,6 +93,38 @@ Computations::Computations(const Intersection &i, const Ray &r) {
     this->normalv_ = - this->normalv_;
   } else {
     this->inside_ = false;
+  }
+
+  auto xs = xs_;
+  if (xs.empty()) {
+    xs = {hit};
+  }
+
+  std::vector<std::shared_ptr<Shape>> containers;
+  for (auto &i: xs) {
+    if (i == hit) {
+      if (containers.empty()) {
+        this->n1_ = 1.0;
+      } else {
+        this->n1_ = containers.back()->material()->refractive_index();
+      }
+    }
+
+    auto occurence = std::find(containers.begin(), containers.end(), i.object());
+    if (occurence != containers.end()) {
+      containers.erase(occurence);
+    } else {
+      containers.push_back(i.object());
+    }
+
+    if (i == hit) {
+      if (containers.empty()) {
+        this->n2_ = 1.0;
+      } else {
+        this->n2_ = containers.back()->material()->refractive_index();
+      }
+      return;
+    }
   }
 }
 

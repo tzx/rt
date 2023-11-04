@@ -16,6 +16,8 @@ class Material {
     float specular() const;
     float shininess() const;
     float reflective() const;
+    float transparency() const;
+    float refractive_index() const;
     std::optional<std::shared_ptr<Pattern>> pattern() const;
 
     void setColor(Color c);
@@ -24,6 +26,8 @@ class Material {
     void setSpecular(float s);
     void setShininess(float s);
     void setReflective(float r);
+    void setTransparency(float t);
+    void setRefractiveIndex(float r);
     void setPattern(std::shared_ptr<Pattern> pattern);
 
     Color lighting(Shape *obj,
@@ -42,5 +46,7 @@ class Material {
     float specular_;
     float shininess_;
     float reflective_;
+    float transparency_;
+    float refractive_index_;
     std::optional<std::shared_ptr<Pattern>> pattern_;
 };

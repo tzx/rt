@@ -4,6 +4,7 @@
 
 #include "../src/lights/material.hpp"
 #include "../src/shapes/plane.hpp"
+#include "../src/shapes/sphere.hpp"
 #include "../src/canvas/world.hpp"
 #include "../src/intersection.hpp"
 
@@ -126,4 +127,61 @@ TEST_CASE("The reflected color at the maximum recursive depth", "[reflection]") 
   Color color = w.reflected_color(comps, 0);
 
   REQUIRE(color == Color(0, 0, 0));
+}
+
+TEST_CASE("Transparency and Refractive Index for the default material", "[refraction]") {
+  Material m = Material();
+  REQUIRE (m.transparency() == 0.0f);
+  REQUIRE (m.refractive_index() == 1.0f);
+}
+
+TEST_CASE("A helper for producing a sphere with a glassy material", "[refraction]") {
+  Sphere s = Sphere::glass_sphere();
+
+  REQUIRE (s.transform() == Matrix::identity_matrix(4));
+  REQUIRE (s.material()->transparency() == 1.0f);
+  REQUIRE (s.material()->refractive_index() == 1.5f);
+}
+
+TEST_CASE("Finding n1 and n2 at various intersections", "[refraction]") {
+  auto A = std::make_shared<Sphere>(Sphere::glass_sphere());
+  A->setTransform(Matrix::scaling(2, 2, 2));
+  A->material()->setRefractiveIndex(1.5);
+
+  auto B = std::make_shared<Sphere>(Sphere::glass_sphere());
+  B->setTransform(Matrix::translation(0, 0, -0.25));
+  B->material()->setRefractiveIndex(2.0);
+
+  auto C = std::make_shared<Sphere>(Sphere::glass_sphere());
+  C->setTransform(Matrix::translation(0, 0, 0.25));
+  C->material()->setRefractiveIndex(2.5);
+
+  Ray r(Tuple::create_point(0, 0, -4), Tuple::create_vector(0, 0, 1));
+  std::vector<Intersection> xs = {
+    {2, A}, {2.75, B}, {3.25, C}, {4.75, B}, {5.25, C}, {6, A}
+  };
+
+  auto comps = Computations(xs[0], r, xs);
+  REQUIRE(comps.n1() == 1.0f);
+  REQUIRE(comps.n2() == 1.5f);
+
+  comps = Computations(xs[1], r, xs);
+  REQUIRE(comps.n1() == 1.5f);
+  REQUIRE(comps.n2() == 2.0f);
+
+  comps = Computations(xs[2], r, xs);
+  REQUIRE(comps.n1() == 2.0f);
+  REQUIRE(comps.n2() == 2.5f);
+
+  comps = Computations(xs[3], r, xs);
+  REQUIRE(comps.n1() == 2.5f);
+  REQUIRE(comps.n2() == 2.5f);
+
+  comps = Computations(xs[4], r, xs);
+  REQUIRE(comps.n1() == 2.5f);
+  REQUIRE(comps.n2() == 1.5f);
+
+  comps = Computations(xs[5], r, xs);
+  REQUIRE(comps.n1() == 1.5f);
+  REQUIRE(comps.n2() == 1.0f);
 }

@@ -26,7 +26,7 @@ std::optional<Intersection> hit(const std::vector<Intersection>&);
 
 class Computations {
   public:
-    Computations(const Intersection &i, const Ray &r);
+    Computations(const Intersection &i, const Ray &r, const std::vector<Intersection> &xs = {});
     float t() const;
     std::shared_ptr<Shape> object() const;
     Tuple point() const;
@@ -34,6 +34,9 @@ class Computations {
     Tuple normalv() const;
     Tuple reflectv() const;
     bool inside() const;
+
+    float n1() const;
+    float n2() const;
 
     Tuple over_point() const;
 
@@ -45,4 +48,7 @@ class Computations {
     Tuple normalv_;
     Tuple reflectv_;
     bool inside_;
+
+    float n1_;
+    float n2_;
 };
