@@ -28,10 +28,42 @@ std::vector<Intersection> Cylinder::local_intersect(const Ray &local_r) {
   float t0 = (-b - std::sqrt(disc)) / (2.0 * a);
   float t1 = (-b + std::sqrt(disc)) / (2.0 * a);
 
+  if (t0 > t1) {
+    std::swap(t0, t1);
+  }
+
+  std::vector<Intersection> xs;
   auto self = this->shared_from_this();
-  return { Intersection(t0, self), Intersection(t1, self) };
+
+  auto y0 = local_r.origin().getY() + t0 * local_r.direction().getY();
+  if (this->minimum() < y0 && y0 < this->maximum()) {
+    xs.push_back(Intersection(t0, self));
+  }
+
+  auto y1 = local_r.origin().getY() + t1 * local_r.direction().getY();
+  if (this->minimum() < y1 && y1 < this->maximum()) {
+    xs.push_back(Intersection(t1, self));
+  }
+
+  return xs;
 }
 
 Tuple Cylinder::local_normal_at(const Tuple &local_p) const {
   return Tuple::create_vector(local_p.getX(), 0, local_p.getZ());
+}
+
+float Cylinder::minimum() const {
+  return minimum_;
+}
+
+void Cylinder::set_minimum(float m) {
+  minimum_ = m;
+}
+
+float Cylinder::maximum() const {
+  return maximum_;
+}
+
+void Cylinder::set_maximum(float m) {
+  maximum_ = m;
 }

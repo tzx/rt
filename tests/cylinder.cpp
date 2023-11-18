@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
 #include <iostream>
+#include <limits>
+#include <memory>
 
 #include "../src/shapes/cylinder.hpp"
 #include "../src/primitives/tuple.hpp"
@@ -75,5 +77,44 @@ TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
     auto n = cyl->local_normal_at(point);
 
     REQUIRE (n == normal);
+  }
+}
+
+TEST_CASE("The default minimum and maximum for a cylinder", "[cylinder]") {
+  auto cyl = Cylinder();
+  REQUIRE (cyl.minimum() == std::numeric_limits<float>::lowest());
+  REQUIRE (cyl.maximum() == std::numeric_limits<float>::max());
+}
+
+TEST_CASE ("Intersecting a constrained cylinder", "[cylinder]") {
+  auto cyl = std::make_shared<Cylinder>();
+  cyl->set_minimum(1);
+  cyl->set_maximum(2);
+
+  std::vector<Tuple> points = { Tuple::create_point(0, 1.5, 0),
+                                Tuple::create_point(0, 3, -5),
+                                Tuple::create_point(0, 0, -5),
+                                Tuple::create_point(0, 2, -5),
+                                Tuple::create_point(0, 1, -5),
+                                Tuple::create_point(0, 1.5, -2)};
+  std::vector<Tuple> directions = { Tuple::create_vector(0.1, 1, 0),
+                                 Tuple::create_vector(0, 0, 1),
+                                 Tuple::create_vector(0, 0, 1),
+                                 Tuple::create_vector(0, 0, 1),
+                                 Tuple::create_vector(0, 0, 1),
+                                 Tuple::create_vector(0, 0, 1)};
+  std::vector<size_t> counts = {0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                2};
+
+  auto size = 6;
+  for (auto i = 0; i < size; ++i) {
+    auto direction = directions.at(i).getNormalized();
+    auto r = Ray(points.at(i), direction);
+    auto xs = cyl->local_intersect(r);
+    REQUIRE (xs.size() == counts.at(i));
   }
 }
