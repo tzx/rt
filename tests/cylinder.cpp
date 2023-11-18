@@ -118,3 +118,65 @@ TEST_CASE ("Intersecting a constrained cylinder", "[cylinder]") {
     REQUIRE (xs.size() == counts.at(i));
   }
 }
+
+TEST_CASE ("The default closed value for a cylinder", "[cylinder]") {
+  auto cyl = Cylinder();
+  REQUIRE_FALSE (cyl.closed());
+}
+
+TEST_CASE ("Intersecting the caps of a closed cylinder", "[cylinder]") {
+  auto cyl = std::make_shared<Cylinder>();
+  cyl->set_minimum(1);
+  cyl->set_maximum(2);
+  cyl->set_closed(true);
+
+  std::vector<Tuple> points = { Tuple::create_point(0, 3, 0),
+                                Tuple::create_point(0, 3, -2),
+                                Tuple::create_point(0, 4, -2),
+                                Tuple::create_point(0, 0, -2),
+                                Tuple::create_point(0, -1, -2)};
+  std::vector<Tuple> directions = { Tuple::create_vector(0, -1, 0),
+                                    Tuple::create_vector(0, -1, 2),
+                                    Tuple::create_vector(0, -1, 1),
+                                    Tuple::create_vector(0, 1, 2),
+                                    Tuple::create_vector(0, 1, 1)};
+  std::vector<size_t> counts = {2,
+                                2,
+                                2,
+                                2,
+                                2};
+  // idx 2, 4 are the corner cases
+  auto size = 5;
+  for (auto i = 0; i < size; ++i) {
+    auto direction = directions.at(i).getNormalized();
+    auto r = Ray(points.at(i), direction);
+    auto xs = cyl->local_intersect(r);
+    REQUIRE (xs.size() == counts.at(i));
+  }
+}
+
+TEST_CASE ("The normal vector on a cylinder's end caps", "[cylinder]") {
+  auto cyl = std::make_shared<Cylinder>();
+  cyl->set_minimum(1);
+  cyl->set_maximum(2);
+  cyl->set_closed(true);
+
+  std::vector<Tuple> points = { Tuple::create_point(0, 1, 0),
+                                Tuple::create_point(0.5, 1, 0),
+                                Tuple::create_point(0, 1, 0.5),
+                                Tuple::create_point(0, 2, 0),
+                                Tuple::create_point(0.5, 2, 0),
+                                Tuple::create_point(0, 2, 0.5)};
+  std::vector<Tuple> normals = { Tuple::create_vector(0, -1, 0),
+                                    Tuple::create_vector(0, -1, 0),
+                                    Tuple::create_vector(0, -1, 0),
+                                    Tuple::create_vector(0, 1, 0),
+                                    Tuple::create_vector(0, 1, 0),
+                                    Tuple::create_vector(0, 1, 0)};
+  
+  auto size = 6;
+  for (auto i = 0; i < size; ++i) {
+    auto n = cyl->local_normal_at(points.at(i));
+    REQUIRE (n == normals.at(i));
+  }
+}
