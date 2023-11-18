@@ -626,6 +626,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/shapes/cylinder.o: src/shapes/cylinder.cpp.o
+.PHONY : src/shapes/cylinder.o
+
+# target to build an object file
+src/shapes/cylinder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cylinder.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cylinder.cpp.o
+.PHONY : src/shapes/cylinder.cpp.o
+
+src/shapes/cylinder.i: src/shapes/cylinder.cpp.i
+.PHONY : src/shapes/cylinder.i
+
+# target to preprocess a source file
+src/shapes/cylinder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cylinder.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cylinder.cpp.i
+.PHONY : src/shapes/cylinder.cpp.i
+
+src/shapes/cylinder.s: src/shapes/cylinder.cpp.s
+.PHONY : src/shapes/cylinder.s
+
+# target to generate assembly for a file
+src/shapes/cylinder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cylinder.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cylinder.cpp.s
+.PHONY : src/shapes/cylinder.cpp.s
+
 src/shapes/plane.o: src/shapes/plane.cpp.o
 .PHONY : src/shapes/plane.o
 
@@ -835,6 +862,30 @@ tests/color.s: tests/color.cpp.s
 tests/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/color.cpp.s
 .PHONY : tests/color.cpp.s
+
+tests/cylinder.o: tests/cylinder.cpp.o
+.PHONY : tests/cylinder.o
+
+# target to build an object file
+tests/cylinder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cylinder.cpp.o
+.PHONY : tests/cylinder.cpp.o
+
+tests/cylinder.i: tests/cylinder.cpp.i
+.PHONY : tests/cylinder.i
+
+# target to preprocess a source file
+tests/cylinder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cylinder.cpp.i
+.PHONY : tests/cylinder.cpp.i
+
+tests/cylinder.s: tests/cylinder.cpp.s
+.PHONY : tests/cylinder.s
+
+# target to generate assembly for a file
+tests/cylinder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cylinder.cpp.s
+.PHONY : tests/cylinder.cpp.s
 
 tests/lighting.o: tests/lighting.cpp.o
 .PHONY : tests/lighting.o
@@ -1116,6 +1167,9 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/shapes/cylinder.o"
+	@echo "... src/shapes/cylinder.i"
+	@echo "... src/shapes/cylinder.s"
 	@echo "... src/shapes/plane.o"
 	@echo "... src/shapes/plane.i"
 	@echo "... src/shapes/plane.s"
@@ -1140,6 +1194,9 @@ help:
 	@echo "... tests/color.o"
 	@echo "... tests/color.i"
 	@echo "... tests/color.s"
+	@echo "... tests/cylinder.o"
+	@echo "... tests/cylinder.i"
+	@echo "... tests/cylinder.s"
 	@echo "... tests/lighting.o"
 	@echo "... tests/lighting.i"
 	@echo "... tests/lighting.s"
