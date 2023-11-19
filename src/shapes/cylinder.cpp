@@ -110,7 +110,7 @@ void Cylinder::intersect_caps(const Ray &ray, std::vector<Intersection> &xs) {
   }
 }
 
-bool check_cap(const Ray &ray, float t) {
+bool Cylinder::check_cap(const Ray &ray, float t) const {
   auto x = ray.origin().getX() + t * ray.direction().getX();
   auto z = ray.origin().getZ() + t * ray.direction().getZ();
 

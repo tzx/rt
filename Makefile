@@ -626,6 +626,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/shapes/cone.o: src/shapes/cone.cpp.o
+.PHONY : src/shapes/cone.o
+
+# target to build an object file
+src/shapes/cone.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cone.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cone.cpp.o
+.PHONY : src/shapes/cone.cpp.o
+
+src/shapes/cone.i: src/shapes/cone.cpp.i
+.PHONY : src/shapes/cone.i
+
+# target to preprocess a source file
+src/shapes/cone.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cone.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cone.cpp.i
+.PHONY : src/shapes/cone.cpp.i
+
+src/shapes/cone.s: src/shapes/cone.cpp.s
+.PHONY : src/shapes/cone.s
+
+# target to generate assembly for a file
+src/shapes/cone.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cone.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cone.cpp.s
+.PHONY : src/shapes/cone.cpp.s
+
 src/shapes/cylinder.o: src/shapes/cylinder.cpp.o
 .PHONY : src/shapes/cylinder.o
 
@@ -862,6 +889,30 @@ tests/color.s: tests/color.cpp.s
 tests/color.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/color.cpp.s
 .PHONY : tests/color.cpp.s
+
+tests/cone.o: tests/cone.cpp.o
+.PHONY : tests/cone.o
+
+# target to build an object file
+tests/cone.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cone.cpp.o
+.PHONY : tests/cone.cpp.o
+
+tests/cone.i: tests/cone.cpp.i
+.PHONY : tests/cone.i
+
+# target to preprocess a source file
+tests/cone.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cone.cpp.i
+.PHONY : tests/cone.cpp.i
+
+tests/cone.s: tests/cone.cpp.s
+.PHONY : tests/cone.s
+
+# target to generate assembly for a file
+tests/cone.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cone.cpp.s
+.PHONY : tests/cone.cpp.s
 
 tests/cylinder.o: tests/cylinder.cpp.o
 .PHONY : tests/cylinder.o
@@ -1167,6 +1218,9 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/shapes/cone.o"
+	@echo "... src/shapes/cone.i"
+	@echo "... src/shapes/cone.s"
 	@echo "... src/shapes/cylinder.o"
 	@echo "... src/shapes/cylinder.i"
 	@echo "... src/shapes/cylinder.s"
@@ -1194,6 +1248,9 @@ help:
 	@echo "... tests/color.o"
 	@echo "... tests/color.i"
 	@echo "... tests/color.s"
+	@echo "... tests/cone.o"
+	@echo "... tests/cone.i"
+	@echo "... tests/cone.s"
 	@echo "... tests/cylinder.o"
 	@echo "... tests/cylinder.i"
 	@echo "... tests/cylinder.s"

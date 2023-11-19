@@ -3,9 +3,9 @@
 #include "shape.hpp"
 #include <limits>
 
-class Cylinder: public Shape {
+class Cone: public Shape {
   public:
-    Cylinder() {
+    Cone() {
       this->minimum_ = std::numeric_limits<float>::lowest();
       this->maximum_ = std::numeric_limits<float>::max();
       this->closed_ = false;
@@ -26,8 +26,7 @@ class Cylinder: public Shape {
     float maximum_;
     bool closed_;
 
-    // checks intersection on the closed cylinder and adds them to xs
     void intersect_caps(const Ray &ray, std::vector<Intersection> &xs);
-    // Checks to see if the intersection at 't' is within radius of 1 from the y axis
+    // Radius changes 
     bool check_cap(const Ray &ray, float t) const;
 };
