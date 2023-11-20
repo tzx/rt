@@ -680,6 +680,33 @@ src/shapes/cylinder.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cylinder.cpp.s
 .PHONY : src/shapes/cylinder.cpp.s
 
+src/shapes/group.o: src/shapes/group.cpp.o
+.PHONY : src/shapes/group.o
+
+# target to build an object file
+src/shapes/group.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/group.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/group.cpp.o
+.PHONY : src/shapes/group.cpp.o
+
+src/shapes/group.i: src/shapes/group.cpp.i
+.PHONY : src/shapes/group.i
+
+# target to preprocess a source file
+src/shapes/group.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/group.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/group.cpp.i
+.PHONY : src/shapes/group.cpp.i
+
+src/shapes/group.s: src/shapes/group.cpp.s
+.PHONY : src/shapes/group.s
+
+# target to generate assembly for a file
+src/shapes/group.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/group.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/group.cpp.s
+.PHONY : src/shapes/group.cpp.s
+
 src/shapes/plane.o: src/shapes/plane.cpp.o
 .PHONY : src/shapes/plane.o
 
@@ -937,6 +964,30 @@ tests/cylinder.s: tests/cylinder.cpp.s
 tests/cylinder.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cylinder.cpp.s
 .PHONY : tests/cylinder.cpp.s
+
+tests/group.o: tests/group.cpp.o
+.PHONY : tests/group.o
+
+# target to build an object file
+tests/group.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/group.cpp.o
+.PHONY : tests/group.cpp.o
+
+tests/group.i: tests/group.cpp.i
+.PHONY : tests/group.i
+
+# target to preprocess a source file
+tests/group.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/group.cpp.i
+.PHONY : tests/group.cpp.i
+
+tests/group.s: tests/group.cpp.s
+.PHONY : tests/group.s
+
+# target to generate assembly for a file
+tests/group.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/group.cpp.s
+.PHONY : tests/group.cpp.s
 
 tests/lighting.o: tests/lighting.cpp.o
 .PHONY : tests/lighting.o
@@ -1224,6 +1275,9 @@ help:
 	@echo "... src/shapes/cylinder.o"
 	@echo "... src/shapes/cylinder.i"
 	@echo "... src/shapes/cylinder.s"
+	@echo "... src/shapes/group.o"
+	@echo "... src/shapes/group.i"
+	@echo "... src/shapes/group.s"
 	@echo "... src/shapes/plane.o"
 	@echo "... src/shapes/plane.i"
 	@echo "... src/shapes/plane.s"
@@ -1254,6 +1308,9 @@ help:
 	@echo "... tests/cylinder.o"
 	@echo "... tests/cylinder.i"
 	@echo "... tests/cylinder.s"
+	@echo "... tests/group.o"
+	@echo "... tests/group.i"
+	@echo "... tests/group.s"
 	@echo "... tests/lighting.o"
 	@echo "... tests/lighting.i"
 	@echo "... tests/lighting.s"
