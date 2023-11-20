@@ -73,3 +73,56 @@ TEST_CASE("Intersecting a transformed group", "[group]") {
 
   REQUIRE( xs.size() == 2 );
 }
+
+TEST_CASE("Converting a point from world to object space", "[group]") {
+  auto g1 = std::make_shared<Group>();
+  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+  auto g2 = std::make_shared<Group>();
+  g2->setTransform(Matrix::scaling(2, 2, 2));
+
+  g1->add_child(g2);
+
+  auto s = std::make_shared<Sphere>();
+  s->setTransform(Matrix::translation(5, 0, 0));
+
+  g2->add_child(s);
+
+  auto p = s->world_to_object(Tuple::create_point(-2, 0, -10));
+
+  REQUIRE (p == Tuple::create_point(0, 0, -1));
+}
+
+TEST_CASE ("Converting a normal from object to world space", "[group]") {
+  auto g1 = std::make_shared<Group>();
+  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+
+  auto g2 = std::make_shared<Group>();
+  g2->setTransform(Matrix::scaling(1, 2, 3));
+
+  g1->add_child(g2);
+
+  auto s = std::make_shared<Sphere>();
+
+  s->setTransform(Matrix::translation(5, 0, 0));
+  g2->add_child(s);
+
+  auto sq3_3 = std::sqrt(3.0f)/3.0f;
+  auto n = s->normal_to_world(Tuple::create_vector(sq3_3, sq3_3, sq3_3));
+
+  REQUIRE (n == Tuple::create_vector(0.285714, 0.428571, -0.857143));
+}
+
+TEST_CASE ("Finding the normal on a child object", "[group]") {
+  auto g1 = std::make_shared<Group>();
+  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+  auto g2 = std::make_shared<Group>();
+  g2->setTransform(Matrix::scaling(1, 2, 3));
+  g1->add_child(g2);
+
+  auto s = std::make_shared<Sphere>();
+  s->setTransform(Matrix::translation(5, 0, 0));
+  g2->add_child(s);
+
+  auto n = s->normal_at(Tuple::create_point(1.7321, 1.1547, -5.5774));
+  REQUIRE (n == Tuple::create_vector(0.285704, 0.428543, -0.857161));
+}

@@ -22,7 +22,9 @@ class Shape : public std::enable_shared_from_this<Shape> {
     std::optional<std::shared_ptr<class Group>> parent() const;
     void set_parent(std::shared_ptr<class Group>);
 
+    Tuple world_to_object(const Tuple &p) const;
     Tuple normal_at(const Tuple &p) const;
+    Tuple normal_to_world(const Tuple &normal) const;
 
     bool operator==(const Shape &other) const;
 
