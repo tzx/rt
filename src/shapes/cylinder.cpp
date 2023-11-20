@@ -116,3 +116,10 @@ bool Cylinder::check_cap(const Ray &ray, float t) const {
 
   return (x * x + z * z) <= 1 + EPS;
 }
+
+Bounds Cylinder::bounds() const {
+  auto min_ = Tuple::create_point(-1, minimum(), -1);
+  auto max_ = Tuple::create_point(1, maximum(), 1);
+
+  return Bounds(min_, max_);
+}

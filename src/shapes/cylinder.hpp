@@ -17,6 +17,8 @@ class Cylinder: public Shape {
     float maximum() const;
     bool closed() const;
 
+    Bounds bounds() const override;
+
     void set_minimum(float m);
     void set_maximum(float m);
     void set_closed(bool b);

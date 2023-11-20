@@ -4,6 +4,7 @@
 #include "../primitives/matrix.hpp"
 #include "../intersection.hpp"
 #include "../ray.hpp"
+#include "bounds.hpp"
 #include <memory>
 
 // https://en.cppreference.com/w/cpp/language/abstract_class
@@ -25,6 +26,8 @@ class Shape : public std::enable_shared_from_this<Shape> {
     Tuple world_to_object(const Tuple &p) const;
     Tuple normal_at(const Tuple &p) const;
     Tuple normal_to_world(const Tuple &normal) const;
+
+    virtual Bounds bounds() const = 0;
 
     bool operator==(const Shape &other) const;
 

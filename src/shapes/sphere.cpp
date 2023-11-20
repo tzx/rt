@@ -2,6 +2,7 @@
 #include "../primitives/matrix.hpp"
 #include "../util/randgen.hpp"
 #include "../intersection.hpp"
+#include "bounds.hpp"
 #include "shape.hpp"
 #include <cmath>
 #include <memory>
@@ -40,4 +41,8 @@ std::vector<Intersection> Sphere::local_intersect(const Ray &local_r) {
   Intersection i2 = Intersection(t2, this->shared_from_this());
 
   return {i1, i2};
+}
+
+Bounds Sphere::bounds() const {
+  return Bounds(Tuple::create_point(-1, -1, -1), Tuple::create_point(1, 1, 1));
 }

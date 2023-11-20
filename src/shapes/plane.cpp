@@ -15,3 +15,13 @@ std::vector<Intersection> Plane::local_intersect(const Ray &local_r) {
 Tuple Plane::local_normal_at(const Tuple &local_p) const {
   return Tuple::create_vector(0, 1, 0);
 }
+
+Bounds Plane::bounds() const {
+  auto mi = std::numeric_limits<float>::lowest();
+  auto ma = std::numeric_limits<float>::max();
+
+  auto min_ = Tuple::create_point(mi, -0.1, mi);
+  auto max_ = Tuple::create_point(ma, 0.1, ma);
+
+  return Bounds(min_, max_);
+}

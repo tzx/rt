@@ -32,3 +32,7 @@ std::vector<Intersection> Group::local_intersect(const Ray &local_r) {
 Tuple Group::local_normal_at(const Tuple &local_p) const {
   return Tuple::create_vector(0, 0, 0);
 }
+
+Bounds Group::bounds() const {
+  return bounds_;
+}

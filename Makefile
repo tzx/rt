@@ -626,6 +626,33 @@ src/rt.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/rt.cpp.s
 .PHONY : src/rt.cpp.s
 
+src/shapes/bounds.o: src/shapes/bounds.cpp.o
+.PHONY : src/shapes/bounds.o
+
+# target to build an object file
+src/shapes/bounds.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/bounds.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/bounds.cpp.o
+.PHONY : src/shapes/bounds.cpp.o
+
+src/shapes/bounds.i: src/shapes/bounds.cpp.i
+.PHONY : src/shapes/bounds.i
+
+# target to preprocess a source file
+src/shapes/bounds.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/bounds.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/bounds.cpp.i
+.PHONY : src/shapes/bounds.cpp.i
+
+src/shapes/bounds.s: src/shapes/bounds.cpp.s
+.PHONY : src/shapes/bounds.s
+
+# target to generate assembly for a file
+src/shapes/bounds.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/bounds.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/bounds.cpp.s
+.PHONY : src/shapes/bounds.cpp.s
+
 src/shapes/cone.o: src/shapes/cone.cpp.o
 .PHONY : src/shapes/cone.o
 
@@ -1269,6 +1296,9 @@ help:
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"
+	@echo "... src/shapes/bounds.o"
+	@echo "... src/shapes/bounds.i"
+	@echo "... src/shapes/bounds.s"
 	@echo "... src/shapes/cone.o"
 	@echo "... src/shapes/cone.i"
 	@echo "... src/shapes/cone.s"

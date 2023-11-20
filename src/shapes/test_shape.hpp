@@ -9,4 +9,6 @@ class TestShape : public Shape {
     std::optional<Ray> saved_ray;
     std::vector<Intersection> local_intersect(const Ray &r) override;
     Tuple local_normal_at(const Tuple &local_p) const override;
+
+    Bounds bounds() const override;
 };

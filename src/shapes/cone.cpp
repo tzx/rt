@@ -139,3 +139,13 @@ bool Cone::check_cap(const Ray &ray, float t) const {
 
   return (x * x + z * z) <= radius + EPS;
 }
+
+Bounds Cone::bounds() const {
+  auto mi = minimum();
+  auto ma = maximum();
+
+  auto min_ = Tuple::create_point(mi, mi, mi);
+  auto max_ = Tuple::create_point(ma, ma, ma);
+
+  return Bounds(min_, max_);
+}
