@@ -12,6 +12,7 @@ class Group: public Shape {
     Tuple local_normal_at(const Tuple &local_p) const override;
 
     std::vector<std::shared_ptr<Shape>>& shapes();
+    void add_child(std::shared_ptr<Shape> s);
 
   private:
     std::vector<std::shared_ptr<Shape>> shapes_;

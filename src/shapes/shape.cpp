@@ -1,6 +1,7 @@
 #include "shape.hpp"
 #include "../util/randgen.hpp"
 #include <memory>
+#include <optional>
 
 Shape::Shape() : transform_(Matrix::identity_matrix(4)) {
   this->uuid_ = random_id();
@@ -43,4 +44,12 @@ Tuple Shape::normal_at(const Tuple &p) const {
   Tuple world_normal = this->transform().inverse().transpose() * local_normal;
   world_normal.turnIntoVector();
   return world_normal.getNormalized();
+}
+
+std::optional<std::shared_ptr<Group>> Shape::parent() const {
+  return this->parent_;
+}
+
+void Shape::set_parent(std::shared_ptr<Group> group) {
+  this->parent_ = std::make_optional(group);
 }

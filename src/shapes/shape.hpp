@@ -19,6 +19,9 @@ class Shape : public std::enable_shared_from_this<Shape> {
     void set_material(std::shared_ptr<Material> m);
     std::shared_ptr<const Material> const_material() const;
 
+    std::optional<std::shared_ptr<class Group>> parent() const;
+    void set_parent(std::shared_ptr<class Group>);
+
     Tuple normal_at(const Tuple &p) const;
 
     bool operator==(const Shape &other) const;
@@ -31,6 +34,7 @@ class Shape : public std::enable_shared_from_this<Shape> {
     int uuid_;
     Matrix transform_;
     std::shared_ptr<Material> material_;
+    std::optional<std::shared_ptr<class Group>> parent_;
 };
 
 // TODO: can't be const
