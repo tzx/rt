@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../primitives/matrix.hpp"
 #include "../primitives/tuple.hpp"
 
 class Bounds {
@@ -8,6 +9,10 @@ class Bounds {
 
     Tuple maximum() const;
     Tuple minimum() const;
+
+    void merge(const Bounds &oth);
+    void make_fit(const Tuple &p);
+    Bounds transform(Matrix m);
 
   private:
     Tuple maximum_;

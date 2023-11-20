@@ -13,6 +13,8 @@ void Group::add_child(std::shared_ptr<Shape> s) {
   auto base = this->shared_from_this();
   auto self = std::dynamic_pointer_cast<Group>(base);
   s->set_parent(self);
+
+  auto parent_bounds = s->bounds().transform(s->transform());
 }
 
 std::vector<Intersection> Group::local_intersect(const Ray &local_r) {
