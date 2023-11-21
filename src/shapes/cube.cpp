@@ -14,12 +14,26 @@ std::vector<Intersection> Cube::local_intersect(const Ray &ray) {
   auto tmin = std::max(std::max(xtmin, ytmin), ztmin);
   auto tmax = std::min(std::min(xtmax, ytmax), ztmax);
 
+  if (tmin > tmax) {
+    return {};
+  }
+
   auto self = this->shared_from_this();
   return { Intersection(tmin, self), Intersection(tmax, self) };
 }
 
 Tuple Cube::local_normal_at(const Tuple &local_p) const {
-  return Tuple::create_vector(0, 0, 0);
+  auto maxc = std::max(std::max(fabs(local_p.getX()), fabs(local_p.getY())), fabs(local_p.getZ()));
+
+  if (approx_eq(maxc, fabs(local_p.getX()))) {
+    return Tuple::create_vector(local_p.getX(), 0, 0);
+  }
+
+  if (approx_eq(maxc, fabs(local_p.getY()))) {
+    return Tuple::create_vector(0, local_p.getY(), 0);
+  }
+
+  return Tuple::create_vector(0, 0, local_p.getZ());
 }
 
 Bounds Cube::bounds() const {
