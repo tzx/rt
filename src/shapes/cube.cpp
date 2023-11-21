@@ -40,7 +40,7 @@ Bounds Cube::bounds() const {
   return Bounds(Tuple::create_point(-1, -1, -1), Tuple::create_point(1, 1, 1));
 }
 
-std::pair<float, float> check_axis(const float &origin, const float &direction) {
+std::pair<float, float> Cube::check_axis(const float &origin, const float &direction) {
   auto tmin_numerator = (-1 - origin);
   auto tmax_numerator = (1 - origin);
 

@@ -923,6 +923,30 @@ src/util/rangen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/util/rangen.cpp.s
 .PHONY : src/util/rangen.cpp.s
 
+tests/bounds.o: tests/bounds.cpp.o
+.PHONY : tests/bounds.o
+
+# target to build an object file
+tests/bounds.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/bounds.cpp.o
+.PHONY : tests/bounds.cpp.o
+
+tests/bounds.i: tests/bounds.cpp.i
+.PHONY : tests/bounds.i
+
+# target to preprocess a source file
+tests/bounds.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/bounds.cpp.i
+.PHONY : tests/bounds.cpp.i
+
+tests/bounds.s: tests/bounds.cpp.s
+.PHONY : tests/bounds.s
+
+# target to generate assembly for a file
+tests/bounds.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/bounds.cpp.s
+.PHONY : tests/bounds.cpp.s
+
 tests/canvas.o: tests/canvas.cpp.o
 .PHONY : tests/canvas.o
 
@@ -1380,6 +1404,9 @@ help:
 	@echo "... src/util/rangen.o"
 	@echo "... src/util/rangen.i"
 	@echo "... src/util/rangen.s"
+	@echo "... tests/bounds.o"
+	@echo "... tests/bounds.i"
+	@echo "... tests/bounds.s"
 	@echo "... tests/canvas.o"
 	@echo "... tests/canvas.i"
 	@echo "... tests/canvas.s"

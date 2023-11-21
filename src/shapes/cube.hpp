@@ -11,6 +11,6 @@ class Cube: public Shape {
     std::vector<Intersection> local_intersect(const Ray &local_r) override;
     Tuple local_normal_at(const Tuple &local_p) const override;
   private:
+    std::pair<float, float> check_axis(const float &origin, const float &direction);
 };
 
-std::pair<float, float> check_axis(const float &origin, const float &direction);

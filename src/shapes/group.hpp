@@ -19,4 +19,8 @@ class Group: public Shape {
   private:
     std::vector<std::shared_ptr<Shape>> shapes_;
     Bounds bounds_;
+
+    // TODO: you can refactor check_axis
+    std::pair<float, float> check_axis(float origin, float direction, float min_, float max_);
+    bool intersect_bounding_box(const Ray &ray);
 };

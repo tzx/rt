@@ -14,6 +14,8 @@ class Bounds {
     void make_fit(const Tuple &p);
     Bounds transform(Matrix m);
 
+    bool operator==(const Bounds &oth) const;
+
   private:
     Tuple maximum_;
     Tuple minimum_;
