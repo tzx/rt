@@ -680,6 +680,33 @@ src/shapes/cone.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cone.cpp.s
 .PHONY : src/shapes/cone.cpp.s
 
+src/shapes/cube.o: src/shapes/cube.cpp.o
+.PHONY : src/shapes/cube.o
+
+# target to build an object file
+src/shapes/cube.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cube.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cube.cpp.o
+.PHONY : src/shapes/cube.cpp.o
+
+src/shapes/cube.i: src/shapes/cube.cpp.i
+.PHONY : src/shapes/cube.i
+
+# target to preprocess a source file
+src/shapes/cube.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cube.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cube.cpp.i
+.PHONY : src/shapes/cube.cpp.i
+
+src/shapes/cube.s: src/shapes/cube.cpp.s
+.PHONY : src/shapes/cube.s
+
+# target to generate assembly for a file
+src/shapes/cube.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/cube.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/cube.cpp.s
+.PHONY : src/shapes/cube.cpp.s
+
 src/shapes/cylinder.o: src/shapes/cylinder.cpp.o
 .PHONY : src/shapes/cylinder.o
 
@@ -967,6 +994,30 @@ tests/cone.s: tests/cone.cpp.s
 tests/cone.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cone.cpp.s
 .PHONY : tests/cone.cpp.s
+
+tests/cube.o: tests/cube.cpp.o
+.PHONY : tests/cube.o
+
+# target to build an object file
+tests/cube.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cube.cpp.o
+.PHONY : tests/cube.cpp.o
+
+tests/cube.i: tests/cube.cpp.i
+.PHONY : tests/cube.i
+
+# target to preprocess a source file
+tests/cube.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cube.cpp.i
+.PHONY : tests/cube.cpp.i
+
+tests/cube.s: tests/cube.cpp.s
+.PHONY : tests/cube.s
+
+# target to generate assembly for a file
+tests/cube.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/cube.cpp.s
+.PHONY : tests/cube.cpp.s
 
 tests/cylinder.o: tests/cylinder.cpp.o
 .PHONY : tests/cylinder.o
@@ -1302,6 +1353,9 @@ help:
 	@echo "... src/shapes/cone.o"
 	@echo "... src/shapes/cone.i"
 	@echo "... src/shapes/cone.s"
+	@echo "... src/shapes/cube.o"
+	@echo "... src/shapes/cube.i"
+	@echo "... src/shapes/cube.s"
 	@echo "... src/shapes/cylinder.o"
 	@echo "... src/shapes/cylinder.i"
 	@echo "... src/shapes/cylinder.s"
@@ -1335,6 +1389,9 @@ help:
 	@echo "... tests/cone.o"
 	@echo "... tests/cone.i"
 	@echo "... tests/cone.s"
+	@echo "... tests/cube.o"
+	@echo "... tests/cube.i"
+	@echo "... tests/cube.s"
 	@echo "... tests/cylinder.o"
 	@echo "... tests/cylinder.i"
 	@echo "... tests/cylinder.s"
