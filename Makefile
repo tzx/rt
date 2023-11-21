@@ -869,6 +869,33 @@ src/shapes/test_shape.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/test_shape.cpp.s
 .PHONY : src/shapes/test_shape.cpp.s
 
+src/shapes/triangle.o: src/shapes/triangle.cpp.o
+.PHONY : src/shapes/triangle.o
+
+# target to build an object file
+src/shapes/triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/triangle.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/triangle.cpp.o
+.PHONY : src/shapes/triangle.cpp.o
+
+src/shapes/triangle.i: src/shapes/triangle.cpp.i
+.PHONY : src/shapes/triangle.i
+
+# target to preprocess a source file
+src/shapes/triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/triangle.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/triangle.cpp.i
+.PHONY : src/shapes/triangle.cpp.i
+
+src/shapes/triangle.s: src/shapes/triangle.cpp.s
+.PHONY : src/shapes/triangle.s
+
+# target to generate assembly for a file
+src/shapes/triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/triangle.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/triangle.cpp.s
+.PHONY : src/shapes/triangle.cpp.s
+
 src/util/approx.o: src/util/approx.cpp.o
 .PHONY : src/util/approx.o
 
@@ -1283,6 +1310,30 @@ tests/transformations.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/transformations.cpp.s
 .PHONY : tests/transformations.cpp.s
 
+tests/triangle.o: tests/triangle.cpp.o
+.PHONY : tests/triangle.o
+
+# target to build an object file
+tests/triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/triangle.cpp.o
+.PHONY : tests/triangle.cpp.o
+
+tests/triangle.i: tests/triangle.cpp.i
+.PHONY : tests/triangle.i
+
+# target to preprocess a source file
+tests/triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/triangle.cpp.i
+.PHONY : tests/triangle.cpp.i
+
+tests/triangle.s: tests/triangle.cpp.s
+.PHONY : tests/triangle.s
+
+# target to generate assembly for a file
+tests/triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/triangle.cpp.s
+.PHONY : tests/triangle.cpp.s
+
 tests/tuple.o: tests/tuple.cpp.o
 .PHONY : tests/tuple.o
 
@@ -1398,6 +1449,9 @@ help:
 	@echo "... src/shapes/test_shape.o"
 	@echo "... src/shapes/test_shape.i"
 	@echo "... src/shapes/test_shape.s"
+	@echo "... src/shapes/triangle.o"
+	@echo "... src/shapes/triangle.i"
+	@echo "... src/shapes/triangle.s"
 	@echo "... src/util/approx.o"
 	@echo "... src/util/approx.i"
 	@echo "... src/util/approx.s"
@@ -1449,6 +1503,9 @@ help:
 	@echo "... tests/transformations.o"
 	@echo "... tests/transformations.i"
 	@echo "... tests/transformations.s"
+	@echo "... tests/triangle.o"
+	@echo "... tests/triangle.i"
+	@echo "... tests/triangle.s"
 	@echo "... tests/tuple.o"
 	@echo "... tests/tuple.i"
 	@echo "... tests/tuple.s"
