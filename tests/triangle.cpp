@@ -20,3 +20,69 @@ TEST_CASE("Constructing a triangle", "[triangle]") {
 
   REQUIRE (t.normal() == Tuple::create_vector(0, 0, -1));
 }
+
+TEST_CASE("Finding the normal on a triangle", "[triangle]") {
+  auto t = Triangle(Tuple::create_point(0, 1, 0),
+                    Tuple::create_point(-1, 0, 0), 
+                    Tuple::create_point(1, 0, 0));
+
+  auto n1 = t.local_normal_at(Tuple::create_point(0, 0.5, 0));
+  auto n2 = t.local_normal_at(Tuple::create_point(-0.5, 0.75, 0));
+  auto n3 = t.local_normal_at(Tuple::create_point(0.5, 0.25, 0));
+
+  REQUIRE (n1 == t.normal());
+  REQUIRE (n2 == t.normal());
+  REQUIRE (n3 == t.normal());
+}
+
+TEST_CASE("Intersecting a ray parallel to the triangle", "[triangle]") {
+  auto t = Triangle(Tuple::create_point(0, 1, 0),
+                    Tuple::create_point(-1, 0, 0), 
+                    Tuple::create_point(1, 0, 0));
+  auto r = Ray(Tuple::create_point(0, -1, 2), Tuple::create_vector(0, 1, 0));
+
+  auto xs = t.local_intersect(r);
+
+  REQUIRE (xs.empty());
+}
+
+TEST_CASE("A ray misses the p1-p3 edge", "[triangle]") {
+  auto t = Triangle(Tuple::create_point(0, 1, 0),
+                    Tuple::create_point(-1, 0, 0), 
+                    Tuple::create_point(1, 0, 0));
+  auto r = Ray(Tuple::create_point(1, 1, -2), Tuple::create_vector(0, 0, 1));
+  auto xs = t.local_intersect(r);
+
+  REQUIRE (xs.empty());
+}
+
+TEST_CASE("A ray misses the p1-p2 edge", "[triangle]") {
+  auto t = Triangle(Tuple::create_point(0, 1, 0),
+                    Tuple::create_point(-1, 0, 0), 
+                    Tuple::create_point(1, 0, 0));
+  auto r = Ray(Tuple::create_point(-1, 1, -2), Tuple::create_vector(0, 0, 1));
+  auto xs = t.local_intersect(r);
+
+  REQUIRE (xs.empty());
+}
+
+TEST_CASE("A ray misses the p2-p3 edge", "[triangle]") {
+  auto t = Triangle(Tuple::create_point(0, 1, 0),
+                    Tuple::create_point(-1, 0, 0), 
+                    Tuple::create_point(1, 0, 0));
+  auto r = Ray(Tuple::create_point(0, -1, -2), Tuple::create_vector(0, 0, 1));
+  auto xs = t.local_intersect(r);
+
+  REQUIRE (xs.empty());
+}
+
+TEST_CASE("A ray strikes a triangle", "[triangle]") {
+  auto t = std::make_shared<Triangle>(Tuple::create_point(0, 1, 0),
+                                      Tuple::create_point(-1, 0, 0), 
+                                      Tuple::create_point(1, 0, 0));
+  auto r = Ray(Tuple::create_point(0, 0.5, -2), Tuple::create_vector(0, 0, 1));
+  auto xs = t->local_intersect(r);
+
+  REQUIRE (xs.size() == 1);
+  REQUIRE (xs.at(0).t() == 2);
+}
