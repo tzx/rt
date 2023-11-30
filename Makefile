@@ -332,33 +332,6 @@ src/lights/point_light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
 .PHONY : src/lights/point_light.cpp.s
 
-src/obj/face.o: src/obj/face.cpp.o
-.PHONY : src/obj/face.o
-
-# target to build an object file
-src/obj/face.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.o
-.PHONY : src/obj/face.cpp.o
-
-src/obj/face.i: src/obj/face.cpp.i
-.PHONY : src/obj/face.i
-
-# target to preprocess a source file
-src/obj/face.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.i
-.PHONY : src/obj/face.cpp.i
-
-src/obj/face.s: src/obj/face.cpp.s
-.PHONY : src/obj/face.s
-
-# target to generate assembly for a file
-src/obj/face.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.s
-.PHONY : src/obj/face.cpp.s
-
 src/obj/obj_parser.o: src/obj/obj_parser.cpp.o
 .PHONY : src/obj/obj_parser.o
 
@@ -869,6 +842,33 @@ src/shapes/shape.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/shape.cpp.s
 .PHONY : src/shapes/shape.cpp.s
 
+src/shapes/smooth_triangle.o: src/shapes/smooth_triangle.cpp.o
+.PHONY : src/shapes/smooth_triangle.o
+
+# target to build an object file
+src/shapes/smooth_triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/smooth_triangle.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/smooth_triangle.cpp.o
+.PHONY : src/shapes/smooth_triangle.cpp.o
+
+src/shapes/smooth_triangle.i: src/shapes/smooth_triangle.cpp.i
+.PHONY : src/shapes/smooth_triangle.i
+
+# target to preprocess a source file
+src/shapes/smooth_triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/smooth_triangle.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/smooth_triangle.cpp.i
+.PHONY : src/shapes/smooth_triangle.cpp.i
+
+src/shapes/smooth_triangle.s: src/shapes/smooth_triangle.cpp.s
+.PHONY : src/shapes/smooth_triangle.s
+
+# target to generate assembly for a file
+src/shapes/smooth_triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/shapes/smooth_triangle.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/shapes/smooth_triangle.cpp.s
+.PHONY : src/shapes/smooth_triangle.cpp.s
+
 src/shapes/sphere.o: src/shapes/sphere.cpp.o
 .PHONY : src/shapes/sphere.o
 
@@ -1364,6 +1364,30 @@ tests/shape.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/shape.cpp.s
 .PHONY : tests/shape.cpp.s
 
+tests/smooth_triangle.o: tests/smooth_triangle.cpp.o
+.PHONY : tests/smooth_triangle.o
+
+# target to build an object file
+tests/smooth_triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/smooth_triangle.cpp.o
+.PHONY : tests/smooth_triangle.cpp.o
+
+tests/smooth_triangle.i: tests/smooth_triangle.cpp.i
+.PHONY : tests/smooth_triangle.i
+
+# target to preprocess a source file
+tests/smooth_triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/smooth_triangle.cpp.i
+.PHONY : tests/smooth_triangle.cpp.i
+
+tests/smooth_triangle.s: tests/smooth_triangle.cpp.s
+.PHONY : tests/smooth_triangle.s
+
+# target to generate assembly for a file
+tests/smooth_triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/smooth_triangle.cpp.s
+.PHONY : tests/smooth_triangle.cpp.s
+
 tests/transformations.o: tests/transformations.cpp.o
 .PHONY : tests/transformations.o
 
@@ -1467,9 +1491,6 @@ help:
 	@echo "... src/lights/point_light.o"
 	@echo "... src/lights/point_light.i"
 	@echo "... src/lights/point_light.s"
-	@echo "... src/obj/face.o"
-	@echo "... src/obj/face.i"
-	@echo "... src/obj/face.s"
 	@echo "... src/obj/obj_parser.o"
 	@echo "... src/obj/obj_parser.i"
 	@echo "... src/obj/obj_parser.s"
@@ -1527,6 +1548,9 @@ help:
 	@echo "... src/shapes/shape.o"
 	@echo "... src/shapes/shape.i"
 	@echo "... src/shapes/shape.s"
+	@echo "... src/shapes/smooth_triangle.o"
+	@echo "... src/shapes/smooth_triangle.i"
+	@echo "... src/shapes/smooth_triangle.s"
 	@echo "... src/shapes/sphere.o"
 	@echo "... src/shapes/sphere.i"
 	@echo "... src/shapes/sphere.s"
@@ -1587,6 +1611,9 @@ help:
 	@echo "... tests/shape.o"
 	@echo "... tests/shape.i"
 	@echo "... tests/shape.s"
+	@echo "... tests/smooth_triangle.o"
+	@echo "... tests/smooth_triangle.i"
+	@echo "... tests/smooth_triangle.s"
 	@echo "... tests/transformations.o"
 	@echo "... tests/transformations.i"
 	@echo "... tests/transformations.s"

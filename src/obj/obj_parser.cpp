@@ -1,5 +1,4 @@
 #include "obj_parser.hpp"
-#include "face.hpp"
 #include <cassert>
 #include <fstream>
 #include <iostream>
