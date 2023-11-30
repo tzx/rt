@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 #include "../primitives/matrix.hpp"
 #include "../util/randgen.hpp"
-#include "../intersection.hpp"
+#include "../intersections/intersection.hpp"
 #include "bounds.hpp"
 #include "shape.hpp"
 #include <cmath>

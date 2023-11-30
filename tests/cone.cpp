@@ -2,7 +2,7 @@
 #include <iostream>
 #include <memory>
 #include "../src/primitives/tuple.hpp"
-#include "../src/ray.hpp"
+#include "../src/intersections/ray.hpp"
 #include "../src/shapes/cone.hpp"
 
 TEST_CASE("Intersecting a cone with a ray", "[cone]") {

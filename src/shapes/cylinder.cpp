@@ -1,6 +1,6 @@
 #include "cylinder.hpp"
 #include "../util/approx.hpp"
-#include "../intersection.hpp"
+#include "../intersections/intersection.hpp"
 #include <cmath>
 #include <iostream>
 #include <vector>

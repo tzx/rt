@@ -1,6 +1,6 @@
 #pragma once
 
-#include "primitives/tuple.hpp"
+#include "../primitives/tuple.hpp"
 #include "ray.hpp"
 #include <memory>
 #include <utility>

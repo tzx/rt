@@ -1,5 +1,4 @@
 #include "ray.hpp"
-#include "primitives/tuple.hpp"
 
 Ray::Ray(Tuple origin_, Tuple direction_) {
   this->orig_ = origin_;

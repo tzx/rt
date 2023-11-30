@@ -3,8 +3,8 @@
 #include "../lights/material.hpp"
 #include "../primitives/matrix.hpp"
 #include "../primitives/tuple.hpp"
-#include "../ray.hpp"
-#include "../intersection.hpp"
+#include "../intersections/ray.hpp"
+#include "../intersections/intersection.hpp"
 #include "shape.hpp"
 
 class Sphere : public Shape {

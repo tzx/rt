@@ -1,7 +1,6 @@
 #include "intersection.hpp"
-#include "canvas/world.hpp"
-#include "primitives/tuple.hpp"
-#include "shapes/shape.hpp"
+#include "../canvas/world.hpp"
+#include "../shapes/shape.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iostream>

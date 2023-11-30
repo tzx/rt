@@ -2,7 +2,7 @@
 
 #include "../lights/point_light.hpp"
 #include "../shapes/shape.hpp"
-#include "../intersection.hpp"
+#include "../intersections/intersection.hpp"
 #include <memory>
 #include <optional>
 #include <vector>

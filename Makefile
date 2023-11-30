@@ -251,32 +251,59 @@ src/canvas/world.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/canvas/world.cpp.s
 .PHONY : src/canvas/world.cpp.s
 
-src/intersection.o: src/intersection.cpp.o
-.PHONY : src/intersection.o
+src/intersections/intersection.o: src/intersections/intersection.cpp.o
+.PHONY : src/intersections/intersection.o
 
 # target to build an object file
-src/intersection.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.o
-.PHONY : src/intersection.cpp.o
+src/intersections/intersection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/intersection.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/intersection.cpp.o
+.PHONY : src/intersections/intersection.cpp.o
 
-src/intersection.i: src/intersection.cpp.i
-.PHONY : src/intersection.i
+src/intersections/intersection.i: src/intersections/intersection.cpp.i
+.PHONY : src/intersections/intersection.i
 
 # target to preprocess a source file
-src/intersection.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.i
-.PHONY : src/intersection.cpp.i
+src/intersections/intersection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/intersection.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/intersection.cpp.i
+.PHONY : src/intersections/intersection.cpp.i
 
-src/intersection.s: src/intersection.cpp.s
-.PHONY : src/intersection.s
+src/intersections/intersection.s: src/intersections/intersection.cpp.s
+.PHONY : src/intersections/intersection.s
 
 # target to generate assembly for a file
-src/intersection.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersection.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersection.cpp.s
-.PHONY : src/intersection.cpp.s
+src/intersections/intersection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/intersection.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/intersection.cpp.s
+.PHONY : src/intersections/intersection.cpp.s
+
+src/intersections/ray.o: src/intersections/ray.cpp.o
+.PHONY : src/intersections/ray.o
+
+# target to build an object file
+src/intersections/ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/ray.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/ray.cpp.o
+.PHONY : src/intersections/ray.cpp.o
+
+src/intersections/ray.i: src/intersections/ray.cpp.i
+.PHONY : src/intersections/ray.i
+
+# target to preprocess a source file
+src/intersections/ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/ray.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/ray.cpp.i
+.PHONY : src/intersections/ray.cpp.i
+
+src/intersections/ray.s: src/intersections/ray.cpp.s
+.PHONY : src/intersections/ray.s
+
+# target to generate assembly for a file
+src/intersections/ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/intersections/ray.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/intersections/ray.cpp.s
+.PHONY : src/intersections/ray.cpp.s
 
 src/lights/material.o: src/lights/material.cpp.o
 .PHONY : src/lights/material.o
@@ -601,33 +628,6 @@ src/primitives/tuple.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/primitives/tuple.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/primitives/tuple.cpp.s
 .PHONY : src/primitives/tuple.cpp.s
-
-src/ray.o: src/ray.cpp.o
-.PHONY : src/ray.o
-
-# target to build an object file
-src/ray.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.o
-.PHONY : src/ray.cpp.o
-
-src/ray.i: src/ray.cpp.i
-.PHONY : src/ray.i
-
-# target to preprocess a source file
-src/ray.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.i
-.PHONY : src/ray.cpp.i
-
-src/ray.s: src/ray.cpp.s
-.PHONY : src/ray.s
-
-# target to generate assembly for a file
-src/ray.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/ray.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/ray.cpp.s
-.PHONY : src/ray.cpp.s
 
 src/rt.o: src/rt.cpp.o
 .PHONY : src/rt.o
@@ -1482,9 +1482,12 @@ help:
 	@echo "... src/canvas/world.o"
 	@echo "... src/canvas/world.i"
 	@echo "... src/canvas/world.s"
-	@echo "... src/intersection.o"
-	@echo "... src/intersection.i"
-	@echo "... src/intersection.s"
+	@echo "... src/intersections/intersection.o"
+	@echo "... src/intersections/intersection.i"
+	@echo "... src/intersections/intersection.s"
+	@echo "... src/intersections/ray.o"
+	@echo "... src/intersections/ray.i"
+	@echo "... src/intersections/ray.s"
 	@echo "... src/lights/material.o"
 	@echo "... src/lights/material.i"
 	@echo "... src/lights/material.s"
@@ -1521,9 +1524,6 @@ help:
 	@echo "... src/primitives/tuple.o"
 	@echo "... src/primitives/tuple.i"
 	@echo "... src/primitives/tuple.s"
-	@echo "... src/ray.o"
-	@echo "... src/ray.i"
-	@echo "... src/ray.s"
 	@echo "... src/rt.o"
 	@echo "... src/rt.i"
 	@echo "... src/rt.s"

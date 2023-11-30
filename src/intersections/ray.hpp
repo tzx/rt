@@ -1,7 +1,7 @@
 #pragma once
 
-#include "primitives/matrix.hpp"
-#include "primitives/tuple.hpp"
+#include "../primitives/matrix.hpp"
+#include "../primitives/tuple.hpp"
 
 class Ray {
   public:

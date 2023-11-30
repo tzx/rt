@@ -2,7 +2,7 @@
 
 #include "../src/primitives/tuple.hpp"
 #include "../src/shapes/cube.hpp"
-#include "../src/ray.hpp"
+#include "../src/intersections/ray.hpp"
 
 TEST_CASE("A ray intersects a cube", "[cube]") {
   auto c = std::make_shared<Cube>();

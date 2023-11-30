@@ -2,10 +2,10 @@
 #include <iostream>
 #include <memory>
 
-#include "../src/ray.hpp"
+#include "../src/intersections/ray.hpp"
 #include "../src/primitives/matrix.hpp"
 #include "../src/shapes/sphere.hpp"
-#include "../src/intersection.hpp"
+#include "../src/intersections/intersection.hpp"
 
 TEST_CASE ("Creating and querying a ray", "[ray]") {
   Tuple origin = Tuple::create_point(1, 2, 3);

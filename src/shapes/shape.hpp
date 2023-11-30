@@ -2,8 +2,8 @@
 
 #include "../lights/material.hpp"
 #include "../primitives/matrix.hpp"
-#include "../intersection.hpp"
-#include "../ray.hpp"
+#include "../intersections/intersection.hpp"
+#include "../intersections/ray.hpp"
 #include "bounds.hpp"
 #include <memory>
 

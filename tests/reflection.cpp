@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "../src/canvas/world.hpp"
-#include "../src/intersection.hpp"
+#include "../src/intersections/intersection.hpp"
 #include "../src/lights/material.hpp"
 #include "../src/patterns/test_pattern.hpp"
 #include "../src/shapes/plane.hpp"

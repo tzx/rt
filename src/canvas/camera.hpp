@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../primitives/matrix.hpp"
-#include "../ray.hpp"
+#include "../intersections/ray.hpp"
 #include "../canvas/canvas.hpp"
 #include "world.hpp"
 

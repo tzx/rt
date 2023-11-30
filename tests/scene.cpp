@@ -10,7 +10,7 @@
 #include "../src/primitives/tuple.hpp"
 #include "../src/util/approx.hpp"
 #include "../src/shapes/sphere.hpp"
-#include "../src/intersection.hpp"
+#include "../src/intersections/intersection.hpp"
 
 TEST_CASE ("Creating a world", "[world]") {
   World w = World();

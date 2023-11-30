@@ -5,7 +5,7 @@
 
 #include "../src/shapes/cylinder.hpp"
 #include "../src/primitives/tuple.hpp"
-#include "../src/ray.hpp"
+#include "../src/intersections/ray.hpp"
 
 TEST_CASE("A ray misses a cylinder", "[cylinder]") {
   auto cyl = Cylinder();
