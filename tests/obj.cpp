@@ -27,16 +27,16 @@ TEST_CASE("Parsing triangle faces", "[obj]") {
   auto parser = ObjParser(gibberish);
 
   auto g = parser.default_group();
-  Face t1 = g.at(0);
-  Face t2 = g.at(1);
+  Triangle t1 = g.at(0);
+  Triangle t2 = g.at(1);
 
-  REQUIRE (t1.p1() == parser.vertices().at(1));
-  REQUIRE (t1.p2() == parser.vertices().at(2));
-  REQUIRE (t1.p3() == parser.vertices().at(3));
+  REQUIRE (t1.p1() == *parser.vertices().at(1));
+  REQUIRE (t1.p2() == *parser.vertices().at(2));
+  REQUIRE (t1.p3() == *parser.vertices().at(3));
 
-  REQUIRE (t2.p1() == parser.vertices().at(1));
-  REQUIRE (t2.p2() == parser.vertices().at(3));
-  REQUIRE (t2.p3() == parser.vertices().at(4));
+  REQUIRE (t2.p1() == *parser.vertices().at(1));
+  REQUIRE (t2.p2() == *parser.vertices().at(3));
+  REQUIRE (t2.p3() == *parser.vertices().at(4));
 }
 
 TEST_CASE("Triangulating polygons", "[obj]") {
@@ -45,21 +45,21 @@ TEST_CASE("Triangulating polygons", "[obj]") {
 
   auto g = parser.default_group();
 
-  Face t1 = g.at(0);
-  Face t2 = g.at(1);
-  Face t3 = g.at(2);
+  Triangle t1 = g.at(0);
+  Triangle t2 = g.at(1);
+  Triangle t3 = g.at(2);
 
-  REQUIRE (t1.p1() == parser.vertices().at(1));
-  REQUIRE (t1.p2() == parser.vertices().at(2));
-  REQUIRE (t1.p3() == parser.vertices().at(3));
+  REQUIRE (t1.p1() == *parser.vertices().at(1));
+  REQUIRE (t1.p2() == *parser.vertices().at(2));
+  REQUIRE (t1.p3() == *parser.vertices().at(3));
 
-  REQUIRE (t2.p1() == parser.vertices().at(1));
-  REQUIRE (t2.p2() == parser.vertices().at(3));
-  REQUIRE (t2.p3() == parser.vertices().at(4));
+  REQUIRE (t2.p1() == *parser.vertices().at(1));
+  REQUIRE (t2.p2() == *parser.vertices().at(3));
+  REQUIRE (t2.p3() == *parser.vertices().at(4));
 
-  REQUIRE (t3.p1() == parser.vertices().at(1));
-  REQUIRE (t3.p2() == parser.vertices().at(4));
-  REQUIRE (t3.p3() == parser.vertices().at(5));
+  REQUIRE (t3.p1() == *parser.vertices().at(1));
+  REQUIRE (t3.p2() == *parser.vertices().at(4));
+  REQUIRE (t3.p3() == *parser.vertices().at(5));
 }
 
 TEST_CASE("Triangles in groups", "[obj]") {
@@ -72,11 +72,18 @@ TEST_CASE("Triangles in groups", "[obj]") {
   auto t1 = g1.at(0);
   auto t2 = g2.at(0);
 
-  REQUIRE (t1.p1() == parser.vertices().at(1));
-  REQUIRE (t1.p2() == parser.vertices().at(2));
-  REQUIRE (t1.p3() == parser.vertices().at(3));
+  REQUIRE (t1.p1() == *parser.vertices().at(1));
+  REQUIRE (t1.p2() == *parser.vertices().at(2));
+  REQUIRE (t1.p3() == *parser.vertices().at(3));
 
-  REQUIRE (t2.p1() == parser.vertices().at(1));
-  REQUIRE (t2.p2() == parser.vertices().at(3));
-  REQUIRE (t2.p3() == parser.vertices().at(4));
+  REQUIRE (t2.p1() == *parser.vertices().at(1));
+  REQUIRE (t2.p2() == *parser.vertices().at(3));
+  REQUIRE (t2.p3() == *parser.vertices().at(4));
 }
+
+// TEST_CASE("Converting an OBJ file to a group", "[obj]") {
+//   auto file = "./tests/obj/triangles.obj";
+//   auto parser = ObjParser(file);
+// 
+//   auto = parser.obj_to_group();
+// }

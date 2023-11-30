@@ -47,14 +47,14 @@ const std::vector<std::shared_ptr<const Tuple>> &ObjParser::vertices() const {
   return this->vertices_;
 }
 
-const std::vector<Face> &ObjParser::default_group() const {
+const std::vector<Triangle> &ObjParser::default_group() const {
   return this->default_group_;
 }
 
-const std::vector<Face>& ObjParser::group(std::string group_name) const {
+const std::vector<Triangle>& ObjParser::group(std::string group_name) const {
   auto it = this->groups_.find(group_name);
   if (it == this->groups_.end()) {
-    static std::vector<Face> nullresult;
+    static std::vector<Triangle> nullresult;
     return nullresult;
   }
   return it->second;
@@ -79,7 +79,7 @@ Tuple parse_vertex(std::string &line) {
   return pt;
 }
 
-std::vector<Face> parse_face(std::string &line,
+std::vector<Triangle> parse_face(std::string &line,
                 const std::vector<std::shared_ptr<const Tuple>> &vertices) {
   size_t pos = 0;
   std::string token;
@@ -93,12 +93,12 @@ std::vector<Face> parse_face(std::string &line,
   size_t index = std::stoull(line);
   indices.push_back(index);
 
-  std::vector<Face> triangles;
+  std::vector<Triangle> triangles;
   for (auto i = 1; i < indices.size() - 1; ++i) {
-    Face tri = Face(
-      vertices.at(indices.at(0)),
-      vertices.at(indices.at(i)),
-      vertices.at(indices.at(i + 1))
+    Triangle tri = Triangle(
+      *vertices.at(indices.at(0)),
+      *vertices.at(indices.at(i)),
+      *vertices.at(indices.at(i + 1))
     );
     triangles.push_back(tri);
   }
