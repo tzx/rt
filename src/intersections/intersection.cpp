@@ -10,8 +10,18 @@
 
 Intersection::Intersection(float t, const std::shared_ptr<Shape> &s) : time{t}, shape_{s} {};
 
+Intersection::Intersection(float t, const std::shared_ptr<class Shape> &s, float u, float v) : time{t}, shape_{s}, u_{u}, v_{v} {};
+
 float Intersection::t() const {
   return this->time;
+}
+
+float Intersection::u() const {
+  return this->u_;
+}
+
+float Intersection::v() const {
+  return this->v_;
 }
 
 const std::shared_ptr<Shape> Intersection::object() const {

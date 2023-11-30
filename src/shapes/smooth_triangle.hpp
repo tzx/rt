@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../primitives/tuple.hpp"
-#include "./triangle.hpp"
+#include "triangle.hpp"
 
 class SmoothTriangle : public Triangle {
 public:
@@ -15,6 +15,8 @@ public:
   Tuple n1() const;
   Tuple n2() const;
   Tuple n3() const;
+
+  std::vector<Intersection> local_intersect(const Ray &local_r) override;
 
 private:
   Tuple n1_;
