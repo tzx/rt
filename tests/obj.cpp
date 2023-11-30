@@ -3,6 +3,7 @@
 
 #include "../src/primitives/tuple.hpp"
 #include "../src/obj/obj_parser.hpp"
+#include "../src/shapes/group.hpp"
 
 TEST_CASE("Ignoring unrecognized lines", "[obj]") {
   auto gibberish = "./tests/obj/gibberish.obj";
@@ -81,9 +82,9 @@ TEST_CASE("Triangles in groups", "[obj]") {
   REQUIRE (t2.p3() == *parser.vertices().at(4));
 }
 
-// TEST_CASE("Converting an OBJ file to a group", "[obj]") {
-//   auto file = "./tests/obj/triangles.obj";
-//   auto parser = ObjParser(file);
-// 
-//   auto = parser.obj_to_group();
-// }
+TEST_CASE("Converting an OBJ file to a group", "[obj]") {
+  auto file = "./tests/obj/triangles.obj";
+  auto parser = ObjParser(file);
+  auto g = parser.obj_to_group();
+  REQUIRE(g->shapes().size() == 2);
+}

@@ -3,7 +3,12 @@
 #include <cassert>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
+
+#include "../shapes/group.hpp"
+
+// TODO: maybe refactor? the old face to triangle
 
 ObjParser::ObjParser(std::string filename) {
   // make it 1-index
@@ -58,6 +63,21 @@ const std::vector<Triangle>& ObjParser::group(std::string group_name) const {
     return nullresult;
   }
   return it->second;
+}
+
+std::shared_ptr<Group> ObjParser::obj_to_group() const {
+  auto super_group = std::make_shared<Group>();
+  for (auto &[g_name, triangles]: this->groups_) {
+    auto ggroup = std::make_shared<Group>();
+    for (auto &tri: triangles) {
+      ggroup->add_child(std::make_shared<Triangle>(tri));
+    }
+    if (triangles.size() == 0) {
+      continue;
+    }
+    super_group->add_child(ggroup);
+  }
+  return super_group;
 }
 
 // All parse helpers assume that the line already removed the first token

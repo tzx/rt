@@ -16,6 +16,8 @@ class ObjParser {
     const std::vector<Triangle>& group(std::string group_name) const;
     size_t lines_ignored() const;
 
+    std::shared_ptr<Group> obj_to_group() const;
+
   private:
     std::vector<Triangle> default_group_;
     std::unordered_map<std::string, std::vector<Triangle>> groups_;
