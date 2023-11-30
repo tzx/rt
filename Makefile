@@ -332,6 +332,60 @@ src/lights/point_light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
 .PHONY : src/lights/point_light.cpp.s
 
+src/obj/face.o: src/obj/face.cpp.o
+.PHONY : src/obj/face.o
+
+# target to build an object file
+src/obj/face.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.o
+.PHONY : src/obj/face.cpp.o
+
+src/obj/face.i: src/obj/face.cpp.i
+.PHONY : src/obj/face.i
+
+# target to preprocess a source file
+src/obj/face.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.i
+.PHONY : src/obj/face.cpp.i
+
+src/obj/face.s: src/obj/face.cpp.s
+.PHONY : src/obj/face.s
+
+# target to generate assembly for a file
+src/obj/face.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face.cpp.s
+.PHONY : src/obj/face.cpp.s
+
+src/obj/obj_parser.o: src/obj/obj_parser.cpp.o
+.PHONY : src/obj/obj_parser.o
+
+# target to build an object file
+src/obj/obj_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/obj_parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/obj_parser.cpp.o
+.PHONY : src/obj/obj_parser.cpp.o
+
+src/obj/obj_parser.i: src/obj/obj_parser.cpp.i
+.PHONY : src/obj/obj_parser.i
+
+# target to preprocess a source file
+src/obj/obj_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/obj_parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/obj_parser.cpp.i
+.PHONY : src/obj/obj_parser.cpp.i
+
+src/obj/obj_parser.s: src/obj/obj_parser.cpp.s
+.PHONY : src/obj/obj_parser.s
+
+# target to generate assembly for a file
+src/obj/obj_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/obj_parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/obj_parser.cpp.s
+.PHONY : src/obj/obj_parser.cpp.s
+
 src/patterns/checker.o: src/patterns/checker.cpp.o
 .PHONY : src/patterns/checker.o
 
@@ -1166,6 +1220,30 @@ tests/matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/matrix.cpp.s
 .PHONY : tests/matrix.cpp.s
 
+tests/obj.o: tests/obj.cpp.o
+.PHONY : tests/obj.o
+
+# target to build an object file
+tests/obj.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/obj.cpp.o
+.PHONY : tests/obj.cpp.o
+
+tests/obj.i: tests/obj.cpp.i
+.PHONY : tests/obj.i
+
+# target to preprocess a source file
+tests/obj.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/obj.cpp.i
+.PHONY : tests/obj.cpp.i
+
+tests/obj.s: tests/obj.cpp.s
+.PHONY : tests/obj.s
+
+# target to generate assembly for a file
+tests/obj.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/tests/obj.cpp.s
+.PHONY : tests/obj.cpp.s
+
 tests/patterns.o: tests/patterns.cpp.o
 .PHONY : tests/patterns.o
 
@@ -1389,6 +1467,12 @@ help:
 	@echo "... src/lights/point_light.o"
 	@echo "... src/lights/point_light.i"
 	@echo "... src/lights/point_light.s"
+	@echo "... src/obj/face.o"
+	@echo "... src/obj/face.i"
+	@echo "... src/obj/face.s"
+	@echo "... src/obj/obj_parser.o"
+	@echo "... src/obj/obj_parser.i"
+	@echo "... src/obj/obj_parser.s"
 	@echo "... src/patterns/checker.o"
 	@echo "... src/patterns/checker.i"
 	@echo "... src/patterns/checker.s"
@@ -1485,6 +1569,9 @@ help:
 	@echo "... tests/matrix.o"
 	@echo "... tests/matrix.i"
 	@echo "... tests/matrix.s"
+	@echo "... tests/obj.o"
+	@echo "... tests/obj.i"
+	@echo "... tests/obj.s"
 	@echo "... tests/patterns.o"
 	@echo "... tests/patterns.i"
 	@echo "... tests/patterns.s"
