@@ -17,6 +17,8 @@ public:
   Tuple n3() const;
 
   std::vector<Intersection> local_intersect(const Ray &local_r) override;
+  Tuple local_normal_at(const Tuple &point, const Intersection &hit) const;
+  Tuple normal_at(const Tuple &p, const Intersection &hit) const;
 
 private:
   Tuple n1_;

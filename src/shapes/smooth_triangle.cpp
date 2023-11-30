@@ -14,6 +14,18 @@ Tuple SmoothTriangle::n3() const {
   return n3_;
 }
 
+Tuple SmoothTriangle::local_normal_at(const Tuple &point, const Intersection &hit)  const {
+  return n2() * hit.u() +
+         n3() * hit.v() +
+         n1() * (1 - hit.u() - hit.v());
+}
+
+Tuple SmoothTriangle::normal_at(const Tuple &p, const Intersection &hit) const {
+  auto local_point = world_to_object(p);
+  auto local_normal = local_normal_at(local_point, hit);
+  return normal_to_world(local_normal);
+}
+
 std::vector<Intersection> SmoothTriangle::local_intersect(const Ray &local_r) {
   auto dir_cross_e2 = crossProduct(local_r.direction(), this->e2());
   auto det = dotProduct(this->e1(), dir_cross_e2);
