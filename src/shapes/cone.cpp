@@ -3,6 +3,7 @@
 #include "cylinder.hpp"
 #include <cmath>
 #include <iostream>
+#include "../intersections/intersection.hpp"
 
 std::vector<Intersection> Cone::local_intersect(const Ray &r) {
   float a = r.direction().getX() * r.direction().getX() -
@@ -112,7 +113,7 @@ void Cone::intersect_caps(const Ray &ray, std::vector<Intersection> &xs) {
   }
 }
 
-Tuple Cone::local_normal_at(const Tuple &local_p) const {
+Tuple Cone::local_normal_at(const Tuple &local_p, const Intersection &_) const {
   auto dist = local_p.getX() * local_p.getX() + local_p.getZ()* local_p.getZ();
 
   if (dist < 1 && local_p.getY() >= maximum() - EPS) {

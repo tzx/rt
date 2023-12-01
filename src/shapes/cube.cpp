@@ -22,7 +22,7 @@ std::vector<Intersection> Cube::local_intersect(const Ray &ray) {
   return { Intersection(tmin, self), Intersection(tmax, self) };
 }
 
-Tuple Cube::local_normal_at(const Tuple &local_p) const {
+Tuple Cube::local_normal_at(const Tuple &local_p, const Intersection &_) const {
   auto maxc = std::max(std::max(fabs(local_p.getX()), fabs(local_p.getY())), fabs(local_p.getZ()));
 
   if (approx_eq(maxc, fabs(local_p.getX()))) {

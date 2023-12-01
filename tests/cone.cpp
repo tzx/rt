@@ -96,7 +96,7 @@ TEST_CASE ("Computing the normal vector on a cone", "[cone]") {
                                };
   auto size = 3;
   for (auto i = 0; i < size; ++i) {
-    auto n = shape->local_normal_at(points.at(i));
+    auto n = shape->local_normal_at(points.at(i), fake_hit);
     REQUIRE ( n == normals.at(i) );
   }
 }

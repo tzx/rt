@@ -115,7 +115,7 @@ TEST_CASE("The normal on the surface of a cube", "[cube]") {
   auto size = 8;
   for (auto i = 0; i < size; ++i) {
     auto p = points.at(i);
-    auto normal = c->local_normal_at(p);
+    auto normal = c->local_normal_at(p, fake_hit);
     REQUIRE (normal == normals.at(i));
   }
 }

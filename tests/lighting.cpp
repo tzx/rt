@@ -7,40 +7,40 @@
 
 TEST_CASE ("The normal on a sphere at a point on the x axis", "[normal]") {
   Sphere s = Sphere();
-  Tuple n = s.normal_at(Tuple::create_point(1, 0, 0));
+  Tuple n = s.normal_at(Tuple::create_point(1, 0, 0), fake_hit);
   REQUIRE (n == Tuple::create_vector(1, 0, 0));
 }
 
 TEST_CASE ("The normal on a sphere at a point on the y axis", "[normal]") {
   Sphere s = Sphere();
-  Tuple n = s.normal_at(Tuple::create_point(0, 1, 0));
+  Tuple n = s.normal_at(Tuple::create_point(0, 1, 0), fake_hit);
   REQUIRE (n == Tuple::create_vector(0, 1, 0));
 }
 
 TEST_CASE ("The normal on a sphere at a point on the z axis", "[normal]") {
   Sphere s = Sphere();
-  Tuple n = s.normal_at(Tuple::create_point(0, 0, 1));
+  Tuple n = s.normal_at(Tuple::create_point(0, 0, 1), fake_hit);
   REQUIRE (n == Tuple::create_vector(0, 0, 1));
 }
 
 TEST_CASE ("The normal on a sphere at a nonaxial point", "[normal]") {
   Sphere s = Sphere();
   float root3over3 = std::sqrt(3)/3.0f;
-  Tuple n = s.normal_at(Tuple::create_point(root3over3, root3over3, root3over3));
+  Tuple n = s.normal_at(Tuple::create_point(root3over3, root3over3, root3over3), fake_hit);
   REQUIRE (n == Tuple::create_vector(root3over3, root3over3, root3over3));
 }
 
 TEST_CASE ("The normal is a normalized vector", "[normal]") {
   Sphere s = Sphere();
   float root3over3 = std::sqrt(3)/3.0f;
-  Tuple n = s.normal_at(Tuple::create_point(root3over3, root3over3, root3over3));
+  Tuple n = s.normal_at(Tuple::create_point(root3over3, root3over3, root3over3), fake_hit);
   REQUIRE (n == n.getNormalized());
 }
 
 TEST_CASE ("Computing the normal on a translated sphere", "[normal]") {
   Sphere s = Sphere();
   s.setTransform(Matrix::translation(0, 1, 0));
-  Tuple n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711));
+  Tuple n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711), fake_hit);
   REQUIRE (n == n.create_vector(0, 0.70711, -0.70711));
 }
 
@@ -50,7 +50,7 @@ TEST_CASE ("Computing the normal on a transformed sphere", "[normal]") {
   s.setTransform(m);
 
   float sqpi2 = std::sqrt(2)/2.0f;
-  Tuple n = s.normal_at(Tuple::create_point(0, sqpi2, -sqpi2));
+  Tuple n = s.normal_at(Tuple::create_point(0, sqpi2, -sqpi2), fake_hit);
   REQUIRE (n == Tuple::create_vector(0, 0.97014, -0.24254));
 }
 

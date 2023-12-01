@@ -7,7 +7,7 @@
 #include <cmath>
 #include <memory>
 
-Tuple Sphere::local_normal_at(const Tuple &local_p) const {
+Tuple Sphere::local_normal_at(const Tuple &local_p, const Intersection &_) const {
   return local_p - Tuple::create_point(0, 0, 0);
 }
 

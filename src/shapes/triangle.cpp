@@ -48,7 +48,7 @@ std::vector<Intersection> Triangle::local_intersect(const Ray &local_r) {
   return { Intersection(t, self) };
 }
 
-Tuple Triangle::local_normal_at(const Tuple &local_p) const {
+Tuple Triangle::local_normal_at(const Tuple &local_p, const Intersection &_) const {
   return normal();
 }
 

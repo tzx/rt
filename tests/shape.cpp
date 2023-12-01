@@ -56,7 +56,7 @@ TEST_CASE("Intersecting a translated shape with a ray", "[shape]") {
 TEST_CASE("Computing the normal on a translated test shape", "[shape]") {
   auto s = TestShape();
   s.setTransform(Matrix::translation(0, 1, 0));
-  auto n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711));
+  auto n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711), fake_hit);
 
   REQUIRE(n == Tuple::create_vector(0, 0.70711, -0.70711));
 }
@@ -65,16 +65,16 @@ TEST_CASE("Computing the normal on a transformed test shape", "[shape]") {
   auto s = TestShape();
   s.setTransform(Matrix::scaling(1, 0.5, 1) * Matrix::rotation_z(M_PIf / 5));
   float sq2_2 = std::sqrt(2.0f) / 2;
-  auto n = s.normal_at(Tuple::create_point(0, sq2_2, -sq2_2));
+  auto n = s.normal_at(Tuple::create_point(0, sq2_2, -sq2_2), fake_hit);
 
   REQUIRE(n == Tuple::create_vector(0, 0.97014, -0.24254));
 }
 
 TEST_CASE("The normal of a plane is constant everywhere", "[shape]") {
   auto p = Plane();
-  Tuple n1 = p.local_normal_at(Tuple::create_point(0, 0, 0));
-  Tuple n2 = p.local_normal_at(Tuple::create_point(10, 0, -10));
-  Tuple n3 = p.local_normal_at(Tuple::create_point(-5, 0, 150));
+  Tuple n1 = p.local_normal_at(Tuple::create_point(0, 0, 0), fake_hit);
+  Tuple n2 = p.local_normal_at(Tuple::create_point(10, 0, -10), fake_hit);
+  Tuple n3 = p.local_normal_at(Tuple::create_point(-5, 0, 150), fake_hit);
 
   REQUIRE(n1 == Tuple::create_vector(0, 1, 0));
   REQUIRE(n2 == Tuple::create_vector(0, 1, 0));

@@ -9,7 +9,7 @@
 
 class Intersection {
   public:
-    // Intersection();
+    Intersection() {}
     Intersection(float t, const std::shared_ptr<class Shape> &s);
     // XXX: It would be cool if i could separate the types of UV and non UV with dyn dispatch but idk how
     Intersection(float t, const std::shared_ptr<class Shape> &s, float u, float v);

@@ -26,9 +26,9 @@ TEST_CASE("Finding the normal on a triangle", "[triangle]") {
                     Tuple::create_point(-1, 0, 0), 
                     Tuple::create_point(1, 0, 0));
 
-  auto n1 = t.local_normal_at(Tuple::create_point(0, 0.5, 0));
-  auto n2 = t.local_normal_at(Tuple::create_point(-0.5, 0.75, 0));
-  auto n3 = t.local_normal_at(Tuple::create_point(0.5, 0.25, 0));
+  auto n1 = t.local_normal_at(Tuple::create_point(0, 0.5, 0), fake_hit);
+  auto n2 = t.local_normal_at(Tuple::create_point(-0.5, 0.75, 0), fake_hit);
+  auto n3 = t.local_normal_at(Tuple::create_point(0.5, 0.25, 0), fake_hit);
 
   REQUIRE (n1 == t.normal());
   REQUIRE (n2 == t.normal());

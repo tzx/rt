@@ -79,6 +79,5 @@ TEST_CASE("Preparing the normal on a smooth triangle", "[smooth triangle]") {
   auto r = Ray(Tuple::create_point(-0.2, 0.3, -2), Tuple::create_vector(0, 0, 1));
   std::vector<Intersection> xs = { i };
   auto comps = Computations(i, r, xs);
-  comps.normalv().repr();
   REQUIRE (comps.normalv() == Tuple::create_vector(-0.5547, 0.83205, 0));
 }

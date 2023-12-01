@@ -92,7 +92,7 @@ Computations::Computations(const Intersection &hit, const Ray &r, const std::vec
 
   this->point_ = r.position(this->t());
   this->eyev_ = -r.direction();
-  this->normalv_ = this->object()->normal_at(this->point());
+  this->normalv_ = this->object()->normal_at(this->point(), hit);
 
 
   this->reflectv_ = reflect(r.direction(), this->normalv_);

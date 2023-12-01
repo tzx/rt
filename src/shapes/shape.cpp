@@ -39,9 +39,9 @@ std::shared_ptr<const Material> Shape::const_material() const {
   return this->material_;
 }
 
-Tuple Shape::normal_at(const Tuple &p) const {
+Tuple Shape::normal_at(const Tuple &p, const Intersection &hit) const {
   auto local_point = world_to_object(p);
-  auto local_normal = local_normal_at(local_point);
+  auto local_normal = local_normal_at(local_point, hit);
   return normal_to_world(local_normal);
   //Tuple local_point = this->transform().inverse() * p;
   //Tuple local_normal = this->local_normal_at(local_point);

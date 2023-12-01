@@ -123,6 +123,6 @@ TEST_CASE ("Finding the normal on a child object", "[group]") {
   s->setTransform(Matrix::translation(5, 0, 0));
   g2->add_child(s);
 
-  auto n = s->normal_at(Tuple::create_point(1.7321, 1.1547, -5.5774));
+  auto n = s->normal_at(Tuple::create_point(1.7321, 1.1547, -5.5774), fake_hit);
   REQUIRE (n == Tuple::create_vector(0.285704, 0.428543, -0.857161));
 }

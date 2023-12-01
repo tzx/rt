@@ -7,7 +7,7 @@ class Plane: public Shape {
   public:
     Plane() {};
 
-    Tuple local_normal_at(const Tuple &local_p) const override;
+    Tuple local_normal_at(const Tuple &local_p, const Intersection &hit) const override;
     std::vector<Intersection> local_intersect(const Ray &local_r) override;
 
     Bounds bounds() const override;

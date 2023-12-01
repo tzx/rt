@@ -74,7 +74,7 @@ TEST_CASE("Normal vector on a cylinder", "[cylinder]") {
     auto point = points.at(i);
     auto normal = normals.at(i);
 
-    auto n = cyl->local_normal_at(point);
+    auto n = cyl->local_normal_at(point, fake_hit);
 
     REQUIRE (n == normal);
   }
@@ -176,7 +176,7 @@ TEST_CASE ("The normal vector on a cylinder's end caps", "[cylinder]") {
   
   auto size = 6;
   for (auto i = 0; i < size; ++i) {
-    auto n = cyl->local_normal_at(points.at(i));
+    auto n = cyl->local_normal_at(points.at(i), fake_hit);
     REQUIRE (n == normals.at(i));
   }
 }

@@ -55,7 +55,7 @@ std::vector<Intersection> Cylinder::local_intersect(const Ray &local_r) {
   return xs;
 }
 
-Tuple Cylinder::local_normal_at(const Tuple &local_p) const {
+Tuple Cylinder::local_normal_at(const Tuple &local_p, const Intersection &_) const {
   auto dist = local_p.getX() * local_p.getX() + local_p.getZ()* local_p.getZ();
 
   if (dist < 1 && local_p.getY() >= maximum() - EPS) {
