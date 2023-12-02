@@ -206,7 +206,37 @@ void teapot() {
   std::cout << canvas.ppm();
 }
 
+void nefertiti() {
+  std::string file = "./obj/nefertiti.obj";
+  auto parser = ObjParser(file);
+
+  Camera camera(500, 300, 0.75);
+  camera.setTransform(view_transform(Tuple::create_point(0, 1.75, -4.5), 
+                                     Tuple::create_point(0, 1, 0),
+                                     Tuple::create_point(0, 1, 0)));
+  PointLight light(Tuple::create_point(2, 6, -6), Color(1, 1, 1));
+
+  auto nerf_group = parser.obj_to_group();
+  nerf_group->setTransform(Matrix::rotation_x(-1.507) * Matrix::rotation_y(3.14) * Matrix::translation(0, 1.15, 0) * Matrix::rotation_y(-0.4));
+  auto nerf_material = std::make_shared<Material>();
+  nerf_group->set_material(nerf_material);
+  nerf_material->setSpecular(0);
+  nerf_material->setDiffuse(0.9);
+
+  auto perturb = std::make_shared<Gradient>(Color(0.44, 0.33, 0.23), Color(0.53, 0.43, 0.33));
+  perturb->set_transform(Matrix::scaling(0.1, 0.1, 0.1));
+  nerf_material->setPattern(perturb);
+
+  World w = World();
+  w.setLight(light);
+  w.addObject(nerf_group);
+
+  Canvas canvas = camera.render(w);
+  std::cout << canvas.ppm();
+}
+
 int main () {
+  // nefertiti();
   teapot();
   // render_balls();
 }
