@@ -7,17 +7,19 @@
 #include "canvas/canvas.hpp"
 #include "canvas/color.hpp"
 #include "canvas/world.hpp"
-#include "intersection.hpp"
 #include "lights/point_light.hpp"
+#include "obj/obj_parser.hpp"
 #include "patterns/checker.hpp"
 #include "patterns/gradient.hpp"
 #include "patterns/ring.hpp"
 #include "patterns/stripe_pattern.hpp"
 #include "primitives/matrix.hpp"
 #include "primitives/tuple.hpp"
-#include "ray.hpp"
+#include "intersections/ray.hpp"
 #include "shapes/plane.hpp"
 #include "shapes/sphere.hpp"
+#include "shapes/shape.hpp"
+#include "shapes/group.hpp"
 
 
 constexpr int CANVAS_DIMENSIONS = 500;
@@ -26,7 +28,7 @@ constexpr int wall_size = 7;
 constexpr float pixel_size = (float)7/CANVAS_DIMENSIONS;
 constexpr float half = 7/2.0f;
 
-int main () {
+void render_balls() {
   Camera camera(1000, 500, M_PIf/3.0f);
   camera.setTransform(view_transform(Tuple::create_point(-2.6, 1.5, -3.9), 
                                      Tuple::create_point(-0.6, 1, -0.8),
@@ -165,6 +167,46 @@ int main () {
   Canvas canvas = camera.render(w);
 
   std::cout << canvas.ppm();
+}
 
-  return 0;
+void teapot() {
+  std::string file = "./obj/teapot.obj";
+  auto parser = ObjParser(file);
+
+  Camera camera(1000, 500, M_PIf/3.0f);
+  camera.setTransform(view_transform(Tuple::create_point(-2.6, 1.5, -3.9), 
+                                     Tuple::create_point(-0.6, 1, -0.8),
+                                     Tuple::create_point(0, 1, 0)));
+  PointLight light(Tuple::create_point(-4.9, 4.9, -1), Color(1, 1, 1));
+
+  auto group = parser.obj_to_group();
+  group->setTransform(Matrix::translation(3, 1, 0) * Matrix::scaling(0.4, 0.4, 0.4));
+  auto pot_material = std::make_shared<Material>();
+  pot_material->setColor(Color(1, 0.3, 0.2));
+  pot_material->setSpecular(0.4);
+  pot_material->setShininess(5);
+  group->set_material(pot_material);
+
+  auto floor_pattern = std::make_shared<Checker>(Color(0.35, 0.35, 0.35), Color(0.65, 0.65, 0.65));
+  auto floor_material = std::make_shared<Material>();
+  floor_material->setPattern(floor_pattern);
+  floor_material->setSpecular(0);
+  floor_material->setReflective(0.4);
+  auto floor = std::make_shared<Plane>();
+  floor->set_material(floor_material);
+  floor->setTransform(Matrix::rotation_y(M_PIf / 10.f));
+
+  World w = World();
+  w.setLight(light);
+  w.addObject(group);
+  w.addObject(floor);
+
+  Canvas canvas = camera.render(w);
+
+  std::cout << canvas.ppm();
+}
+
+int main () {
+  // teapot();
+  render_balls();
 }

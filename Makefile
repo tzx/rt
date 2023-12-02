@@ -359,6 +359,33 @@ src/lights/point_light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/lights/point_light.cpp.s
 .PHONY : src/lights/point_light.cpp.s
 
+src/obj/face_vertex.o: src/obj/face_vertex.cpp.o
+.PHONY : src/obj/face_vertex.o
+
+# target to build an object file
+src/obj/face_vertex.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face_vertex.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face_vertex.cpp.o
+.PHONY : src/obj/face_vertex.cpp.o
+
+src/obj/face_vertex.i: src/obj/face_vertex.cpp.i
+.PHONY : src/obj/face_vertex.i
+
+# target to preprocess a source file
+src/obj/face_vertex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face_vertex.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face_vertex.cpp.i
+.PHONY : src/obj/face_vertex.cpp.i
+
+src/obj/face_vertex.s: src/obj/face_vertex.cpp.s
+.PHONY : src/obj/face_vertex.s
+
+# target to generate assembly for a file
+src/obj/face_vertex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rt.dir/build.make CMakeFiles/Rt.dir/src/obj/face_vertex.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/obj/face_vertex.cpp.s
+.PHONY : src/obj/face_vertex.cpp.s
+
 src/obj/obj_parser.o: src/obj/obj_parser.cpp.o
 .PHONY : src/obj/obj_parser.o
 
@@ -1494,6 +1521,9 @@ help:
 	@echo "... src/lights/point_light.o"
 	@echo "... src/lights/point_light.i"
 	@echo "... src/lights/point_light.s"
+	@echo "... src/obj/face_vertex.o"
+	@echo "... src/obj/face_vertex.i"
+	@echo "... src/obj/face_vertex.s"
 	@echo "... src/obj/obj_parser.o"
 	@echo "... src/obj/obj_parser.i"
 	@echo "... src/obj/obj_parser.s"

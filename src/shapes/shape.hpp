@@ -19,7 +19,7 @@ class Shape : public std::enable_shared_from_this<Shape> {
     Matrix transform() const;
     void setTransform(Matrix m);
     std::shared_ptr<Material> material();
-    void set_material(std::shared_ptr<Material> m);
+    virtual void set_material(std::shared_ptr<Material> m);
     std::shared_ptr<const Material> const_material() const;
 
     std::optional<std::shared_ptr<class Group>> parent() const;

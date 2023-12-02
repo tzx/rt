@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <catch2/catch.hpp>
+#include <iostream>
 #include <optional>
 
 #include "../src/shapes/group.hpp"

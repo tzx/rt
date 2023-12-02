@@ -16,6 +16,8 @@ public:
   Tuple n2() const;
   Tuple n3() const;
 
+  bool operator==(const SmoothTriangle &oth) const;
+
   std::vector<Intersection> local_intersect(const Ray &local_r) override;
   Tuple local_normal_at(const Tuple &point, const Intersection &hit) const override;
 

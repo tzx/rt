@@ -1,21 +1,23 @@
 #include "triangle.hpp"
 #include "bounds.hpp"
 #include <algorithm>
+#include <iostream>
 #include <math.h>
 
 #include "../util/approx.hpp"
 
-Triangle::Triangle(Tuple p1, Tuple p2, Tuple p3) : bounds_(Tuple::create_point(0, 0, 0), Tuple::create_point(0, 0, 0)) {
+Triangle::Triangle(Tuple p1, Tuple p2, Tuple p3) : 
+  bounds_(Tuple::create_point(std::min({p1.getX(), p2.getX(), p3.getX()}),
+                              std::min({p1.getY(), p2.getY(), p3.getY()}),
+                              std::min({p1.getZ(), p2.getZ(), p3.getZ()})),
+          Tuple::create_point(std::max({p1.getX(), p2.getX(), p3.getX()}),
+                              std::max({p1.getY(), p2.getY(), p3.getY()}),
+                              std::max({p1.getZ(), p2.getZ(), p3.getZ()})))
+{
   p1_ = p1;
   p2_ = p2;
   p3_ = p3;
 
-  bounds_ = Bounds(Tuple::create_point(std::min({p1_.getX(), p2_.getX(), p3_.getX()}),
-                                       std::min({p1_.getY(), p2_.getY(), p3_.getY()}),
-                                       std::min({p1_.getZ(), p2_.getZ(), p3_.getZ()})),
-                   Tuple::create_point(std::max({p1_.getX(), p2_.getX(), p3_.getX()}),
-                                       std::max({p1_.getY(), p2_.getY(), p3_.getY()}),
-                                       std::max({p1_.getZ(), p2_.getZ(), p3_.getZ()})));
 }
 
 Bounds Triangle::bounds() const {

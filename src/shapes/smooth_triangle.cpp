@@ -45,3 +45,8 @@ std::vector<Intersection> SmoothTriangle::local_intersect(const Ray &local_r) {
   auto self = this->shared_from_this();
   return { Intersection(t, self, u, v) };
 }
+
+bool SmoothTriangle::operator==(const SmoothTriangle &oth) const {
+  return n1() == oth.n1() && n2() == oth.n2() && n3() == oth.n3() &&
+         p1() == oth.p1() && p2() == oth.p2() && p3() == oth.p3();
+}

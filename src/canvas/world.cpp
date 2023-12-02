@@ -1,6 +1,7 @@
 #include "world.hpp"
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -58,7 +59,7 @@ bool World::contains(Shape &to_check) const {
 
 std::vector<Intersection> World::intersect_world(const Ray &r) const {
   std::vector<Intersection> res;
-  for (auto sph: this->objects()) {
+  for (auto &sph: this->objects()) {
     std::vector<Intersection> xs = intersect(sph, r);
     res.insert(res.end(), xs.begin(), xs.end());
   }
@@ -91,12 +92,27 @@ Color World::shade_hit(const Computations &comps, size_t remaining) const {
 
 Color World::color_at(const Ray r, size_t remaining) const {
   auto xs = this->intersect_world(r);
+
+  for (auto x: xs) {
+  }
+
+  if (!xs.empty()) {
+  }
+
+
   std::optional<Intersection> h = hit(xs);
+
+  if (!xs.empty()) {
+  }
+
   if (h == std::nullopt) {
     return Color(0, 0, 0);
   }
 
   auto comps = Computations(h.value(), r, xs);
+
+  if (!xs.empty()) {
+  }
 
   return this->shade_hit(comps, remaining);
 }

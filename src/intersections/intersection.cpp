@@ -1,6 +1,7 @@
 #include "intersection.hpp"
 #include "../canvas/world.hpp"
 #include "../shapes/shape.hpp"
+#include "../util/approx.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -29,7 +30,7 @@ const std::shared_ptr<Shape> Intersection::object() const {
 }
 
 bool Intersection::operator==(const Intersection &oth) const {
-  return this->t() == oth.t() && this->object() == oth.object();
+  return approx_eq(this->t(), oth.t()) && this->object() == oth.object();
 }
 
 std::vector<Intersection> intersect (std::shared_ptr<Shape> s, const Ray &ray) {
@@ -88,7 +89,7 @@ float Computations::n2() const {
 
 Computations::Computations(const Intersection &hit, const Ray &r, const std::vector<Intersection> &xs_) {
   this->t_ = hit.t();
-  this->shape_ =hit.object();
+  this->shape_ = hit.object();
 
   this->point_ = r.position(this->t());
   this->eyev_ = -r.direction();

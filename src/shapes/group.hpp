@@ -13,6 +13,7 @@ class Group: public Shape {
 
     std::vector<std::shared_ptr<Shape>>& shapes();
     void add_child(std::shared_ptr<Shape> s);
+    void set_material(std::shared_ptr<Material> m) override;
 
     Bounds bounds() const override;
 
@@ -23,4 +24,6 @@ class Group: public Shape {
     // TODO: you can refactor check_axis
     std::pair<float, float> check_axis(float origin, float direction, float min_, float max_);
     bool intersect_bounding_box(const Ray &ray);
+
+    std::shared_ptr<Material> material_;
 };
