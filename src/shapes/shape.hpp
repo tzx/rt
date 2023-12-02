@@ -17,6 +17,7 @@ class Shape : public std::enable_shared_from_this<Shape> {
 
     int uuid() const;
     Matrix transform() const;
+    Matrix transform_inverse() const;
     void setTransform(Matrix m);
     std::shared_ptr<Material> material();
     virtual void set_material(std::shared_ptr<Material> m);
@@ -40,6 +41,7 @@ class Shape : public std::enable_shared_from_this<Shape> {
   private:
     int uuid_;
     Matrix transform_;
+    Matrix transform_inverse_;
     std::shared_ptr<Material> material_;
     std::optional<std::shared_ptr<class Group>> parent_;
 };

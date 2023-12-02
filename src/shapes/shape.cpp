@@ -4,7 +4,7 @@
 #include <optional>
 #include "group.hpp"
 
-Shape::Shape() : transform_(Matrix::identity_matrix(4)) {
+Shape::Shape() : transform_(Matrix::identity_matrix(4)), transform_inverse_(Matrix::identity_matrix(4)) {
   this->uuid_ = random_id();
   this->material_ = std::make_shared<Material>();
 }
@@ -23,8 +23,13 @@ Matrix Shape::transform() const {
   return this->transform_;
 }
 
+Matrix Shape::transform_inverse() const {
+  return this->transform_inverse_;
+}
+
 void Shape::setTransform(Matrix m) {
   this->transform_ = m;
+  this->transform_inverse_ = m.inverse();
 }
 
 std::shared_ptr<Material> Shape::material() {
@@ -43,15 +48,10 @@ Tuple Shape::normal_at(const Tuple &p, const Intersection &hit) const {
   auto local_point = world_to_object(p);
   auto local_normal = local_normal_at(local_point, hit);
   return normal_to_world(local_normal);
-  //Tuple local_point = this->transform().inverse() * p;
-  //Tuple local_normal = this->local_normal_at(local_point);
-  //Tuple world_normal = this->transform().inverse().transpose() * local_normal;
-  //world_normal.turnIntoVector();
-  //return world_normal.getNormalized();
 }
 
 Tuple Shape::normal_to_world(const Tuple &normal_) const {
-  Tuple normal = this->transform().inverse().transpose() * normal_;
+  Tuple normal = this->transform_inverse().transpose() * normal_;
   normal.turnIntoVector();
   normal = normal.getNormalized();
 
@@ -68,7 +68,7 @@ Tuple Shape::world_to_object(const Tuple &p_) const {
     std::shared_ptr<Group> par = this->parent().value();
     p = par->world_to_object(p);
   }
-  return this->transform().inverse() * p;
+  return this->transform_inverse() * p;
 }
 
 std::optional<std::shared_ptr<Group>> Shape::parent() const {

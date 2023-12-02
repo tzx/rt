@@ -5,9 +5,10 @@
 
 class Pattern {
   public:
-    Pattern() : transform_(Matrix::identity_matrix(4)) {}
+    Pattern() : transform_(Matrix::identity_matrix(4)), transform_inverse_(Matrix::identity_matrix(4)) {}
 
     Matrix transform() const;
+    Matrix transform_inverse() const;
     void set_transform(Matrix t);
 
     virtual Color pattern_at(Tuple point) const = 0;
@@ -15,4 +16,5 @@ class Pattern {
 
   private:
     Matrix transform_;
+    Matrix transform_inverse_;
 };

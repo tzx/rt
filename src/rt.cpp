@@ -173,14 +173,14 @@ void teapot() {
   std::string file = "./obj/teapot.obj";
   auto parser = ObjParser(file);
 
-  Camera camera(200, 200, M_PIf/3.0f);
+  Camera camera(1000, 500, M_PIf/3.0f);
   camera.setTransform(view_transform(Tuple::create_point(-2.6, 1.5, -3.9), 
                                      Tuple::create_point(-0.6, 1, -0.8),
                                      Tuple::create_point(0, 1, 0)));
   PointLight light(Tuple::create_point(-4.9, 4.9, -1), Color(1, 1, 1));
 
   auto group = parser.obj_to_group();
-  group->setTransform(Matrix::translation(0, 0, 0) * Matrix::scaling(0.2, 0.2, 0.2));
+  group->setTransform(Matrix::translation(0, 0, 0) * Matrix::scaling(0.5, 0.5, 0.5));
   auto pot_material = std::make_shared<Material>();
   pot_material->setColor(Color(1, 0.3, 0.2));
   pot_material->setSpecular(0.4);

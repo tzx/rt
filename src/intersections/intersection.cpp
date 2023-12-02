@@ -34,7 +34,7 @@ bool Intersection::operator==(const Intersection &oth) const {
 }
 
 std::vector<Intersection> intersect (std::shared_ptr<Shape> s, const Ray &ray) {
-  Ray local_ray = ray.transform(s->transform().inverse());
+  Ray local_ray = ray.transform(s->transform_inverse());
   return s->local_intersect(local_ray);
 }
 
