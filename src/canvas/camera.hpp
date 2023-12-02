@@ -13,6 +13,7 @@ class Camera {
     int vsize() const;
     float fov() const;
     Matrix transform() const;
+    Matrix transform_inverse() const;
     void setTransform(Matrix m);
     float half_width() const;
     float half_height() const;
@@ -26,6 +27,7 @@ class Camera {
     int vsize_;
     float fov_;
     Matrix transform_;
+    Matrix transform_inverse_;
 
     float half_width_;
     float half_height_;

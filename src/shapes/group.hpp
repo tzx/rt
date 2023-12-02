@@ -24,6 +24,4 @@ class Group: public Shape {
     // TODO: you can refactor check_axis
     std::pair<float, float> check_axis(float origin, float direction, float min_, float max_);
     bool intersect_bounding_box(const Ray &ray);
-
-    std::shared_ptr<Material> material_;
 };

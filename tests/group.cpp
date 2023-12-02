@@ -127,3 +127,19 @@ TEST_CASE ("Finding the normal on a child object", "[group]") {
   auto n = s->normal_at(Tuple::create_point(1.7321, 1.1547, -5.5774), fake_hit);
   REQUIRE (n == Tuple::create_vector(0.285704, 0.428543, -0.857161));
 }
+
+TEST_CASE ("Nested group materials must be the same", "[group]") {
+  auto mat = std::make_shared<Material>();
+  auto parent = std::make_shared<Group>();
+
+  auto child = std::make_shared<Group>();
+  parent->set_material(mat);
+
+  auto sph = std::make_shared<Sphere>();
+  child->add_child(sph);
+
+  parent->add_child(child);
+
+  REQUIRE(child->material() == mat);
+  REQUIRE(sph->material() == mat);
+}

@@ -12,14 +12,14 @@ std::vector<std::shared_ptr<Shape>>& Group::shapes() {
 }
 
 void Group::set_material(std::shared_ptr<Material> m) {
-  this->material_ = m;
+  this->Shape::set_material(m);
   for (auto &s: this->shapes_) {
     s->set_material(m);
   }
 }
 
 void Group::add_child(std::shared_ptr<Shape> s) {
-  s->set_material(this->material_);
+  s->set_material(this->material());
   this->shapes_.push_back(s);
 
   auto base = this->shared_from_this();
