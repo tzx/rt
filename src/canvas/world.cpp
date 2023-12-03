@@ -93,26 +93,13 @@ Color World::shade_hit(const Computations &comps, size_t remaining) const {
 Color World::color_at(const Ray r, size_t remaining) const {
   auto xs = this->intersect_world(r);
 
-  for (auto x: xs) {
-  }
-
-  if (!xs.empty()) {
-  }
-
-
   std::optional<Intersection> h = hit(xs);
-
-  if (!xs.empty()) {
-  }
 
   if (h == std::nullopt) {
     return Color(0, 0, 0);
   }
 
   auto comps = Computations(h.value(), r, xs);
-
-  if (!xs.empty()) {
-  }
 
   return this->shade_hit(comps, remaining);
 }
