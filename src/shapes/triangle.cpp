@@ -11,7 +11,7 @@ Bounds Triangle::bounds() const {
 std::vector<Intersection> Triangle::local_intersect(const Ray &local_r) {
   auto dir_cross_e2 = crossProduct(local_r.direction(), this->e2());
   auto det = dotProduct(this->e1(), dir_cross_e2);
-  if (fabs(det) < EPS) {
+  if (std::abs(det) < EPS) {
     return {};
   }
 
