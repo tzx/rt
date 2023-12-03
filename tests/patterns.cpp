@@ -79,7 +79,7 @@ TEST_CASE("Stripes with an object transformation", "[transformation]") {
   Color black = Color(0, 0, 0);
 
   Sphere object = Sphere();
-  object.setTransform(Matrix::scaling(2, 2, 2));
+  object.setTransform(Mat4::scaling(2, 2, 2));
   StripePattern pattern = StripePattern(white, black);
   Color c = pattern.pattern_at_shape(&object, Tuple::create_point(1.5, 0, 0));
 
@@ -104,7 +104,7 @@ TEST_CASE("Stripes with both an object and a pattern transformation", "[transfor
   Color black = Color(0, 0, 0);
   StripePattern pattern = StripePattern(white, black);
   Sphere object = Sphere();
-  object.setTransform(Matrix::scaling(2, 2, 2));
+  object.setTransform(Mat4::scaling(2, 2, 2));
 
   pattern.set_transform(Matrix::translation(0.5, 0, 0));
   Color c = pattern.pattern_at_shape(&object, Tuple::create_point(2.5, 0, 0));
@@ -125,7 +125,7 @@ TEST_CASE ("Assigning a transformation test pattern", "[test_pattern]") {
 
 TEST_CASE ("A pattern with an object transformation", "[test_pattern]") {
   Sphere shape = Sphere();
-  shape.setTransform(Matrix::scaling(2, 2, 2));
+  shape.setTransform(Mat4::scaling(2, 2, 2));
 
   TestPattern pattern = TestPattern();
 
@@ -145,7 +145,7 @@ TEST_CASE ("A pattern with an pattern transformation", "[test_pattern]") {
 
 TEST_CASE ("A pattern with both an object and pattern transformation", "[test_pattern]") {
   Sphere shape = Sphere();
-  shape.setTransform(Matrix::scaling(2, 2, 2));
+  shape.setTransform(Mat4::scaling(2, 2, 2));
 
   TestPattern pattern = TestPattern();
   pattern.set_transform(Matrix::translation(0.5, 1, 1.5));

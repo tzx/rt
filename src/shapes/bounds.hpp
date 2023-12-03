@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../primitives/matrix.hpp"
+#include "../primitives/matrix4.hpp"
 #include "../primitives/tuple.hpp"
 
 class Bounds {
@@ -12,7 +12,7 @@ class Bounds {
 
     void merge(const Bounds &oth);
     void make_fit(const Tuple &p);
-    Bounds transform(Matrix m);
+    Bounds transform(const Mat4 &m);
 
     bool operator==(const Bounds &oth) const;
 

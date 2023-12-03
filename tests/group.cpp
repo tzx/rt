@@ -10,7 +10,7 @@
 TEST_CASE("Creating a new group", "[group]") {
   auto g = Group();
 
-  REQUIRE (g.transform() == Matrix::identity_matrix(4));
+  REQUIRE (g.transform() == Mat4::identity_matrix());
   REQUIRE (g.shapes().empty());
 }
 
@@ -42,9 +42,9 @@ TEST_CASE("Intersecting a ray with a nonempty group", "[group]") {
   auto g = std::make_shared<Group>();
   auto s1 = std::make_shared<Sphere>();
   auto s2 = std::make_shared<Sphere>();
-  s2->setTransform(Matrix::translation(0, 0, -3));
+  s2->setTransform(Mat4::translation(0, 0, -3));
   auto s3 = std::make_shared<Sphere>();
-  s3->setTransform(Matrix::translation(5, 0, 0));
+  s3->setTransform(Mat4::translation(5, 0, 0));
 
   g->add_child(s1);
   g->add_child(s2);
@@ -63,9 +63,9 @@ TEST_CASE("Intersecting a ray with a nonempty group", "[group]") {
 
 TEST_CASE("Intersecting a transformed group", "[group]") {
   auto g = std::make_shared<Group>();
-  g->setTransform(Matrix::scaling(2, 2, 2));
+  g->setTransform(Mat4::scaling(2, 2, 2));
   auto s = std::make_shared<Sphere>();
-  s->setTransform(Matrix::translation(5, 0, 0));
+  s->setTransform(Mat4::translation(5, 0, 0));
 
   g->add_child(s);
   auto r = Ray(Tuple::create_point(10, 0, -10), Tuple::create_vector(0, 0, 1));
@@ -77,14 +77,14 @@ TEST_CASE("Intersecting a transformed group", "[group]") {
 
 TEST_CASE("Converting a point from world to object space", "[group]") {
   auto g1 = std::make_shared<Group>();
-  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+  g1->setTransform(Mat4::rotation_y(M_PI_2f));
   auto g2 = std::make_shared<Group>();
-  g2->setTransform(Matrix::scaling(2, 2, 2));
+  g2->setTransform(Mat4::scaling(2, 2, 2));
 
   g1->add_child(g2);
 
   auto s = std::make_shared<Sphere>();
-  s->setTransform(Matrix::translation(5, 0, 0));
+  s->setTransform(Mat4::translation(5, 0, 0));
 
   g2->add_child(s);
 
@@ -95,16 +95,16 @@ TEST_CASE("Converting a point from world to object space", "[group]") {
 
 TEST_CASE ("Converting a normal from object to world space", "[group]") {
   auto g1 = std::make_shared<Group>();
-  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+  g1->setTransform(Mat4::rotation_y(M_PI_2f));
 
   auto g2 = std::make_shared<Group>();
-  g2->setTransform(Matrix::scaling(1, 2, 3));
+  g2->setTransform(Mat4::scaling(1, 2, 3));
 
   g1->add_child(g2);
 
   auto s = std::make_shared<Sphere>();
 
-  s->setTransform(Matrix::translation(5, 0, 0));
+  s->setTransform(Mat4::translation(5, 0, 0));
   g2->add_child(s);
 
   auto sq3_3 = std::sqrt(3.0f)/3.0f;
@@ -115,13 +115,13 @@ TEST_CASE ("Converting a normal from object to world space", "[group]") {
 
 TEST_CASE ("Finding the normal on a child object", "[group]") {
   auto g1 = std::make_shared<Group>();
-  g1->setTransform(Matrix::rotation_y(M_PI_2f));
+  g1->setTransform(Mat4::rotation_y(M_PI_2f));
   auto g2 = std::make_shared<Group>();
-  g2->setTransform(Matrix::scaling(1, 2, 3));
+  g2->setTransform(Mat4::scaling(1, 2, 3));
   g1->add_child(g2);
 
   auto s = std::make_shared<Sphere>();
-  s->setTransform(Matrix::translation(5, 0, 0));
+  s->setTransform(Mat4::translation(5, 0, 0));
   g2->add_child(s);
 
   auto n = s->normal_at(Tuple::create_point(1.7321, 1.1547, -5.5774), fake_hit);

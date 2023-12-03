@@ -29,7 +29,7 @@ TEST_CASE ("The default world", "[world]") {
   m1->setSpecular(0.2);
 
   Sphere s2 = Sphere();
-  Matrix t2 = Matrix::scaling(0.5, 0.5, 0.5);
+  Mat4 t2 = Mat4::scaling(0.5, 0.5, 0.5);
   s2.setTransform(t2);
 
   World w = World::default_world();
@@ -157,7 +157,7 @@ TEST_CASE ("The transformation matrix for the default orientation", "[transforma
   Tuple to = Tuple::create_point(0, 0, -1);
   Tuple up = Tuple::create_vector(0, 1, 0);
 
-  Matrix t = view_transform(from, to, up);
+  auto t = view_transform(from, to, up);
 
   REQUIRE (t == Matrix::identity_matrix(4));
 }
@@ -167,7 +167,7 @@ TEST_CASE ("A view transformation matrix looking in the positive z direction", "
   Tuple to = Tuple::create_point(0, 0, 1);
   Tuple up = Tuple::create_vector(0, 1, 0);
 
-  Matrix t = view_transform(from, to, up);
+  auto t = view_transform(from, to, up);
 
   REQUIRE (t == Matrix::scaling(-1, 1, -1));
 }
@@ -196,7 +196,7 @@ TEST_CASE ("An arbitary view transformation", "[transformation]") {
 
 
 
-  Matrix m = Matrix(4, 4, values);
+  auto m = Matrix(4, 4, values);
   REQUIRE (t == m);
 }
 
@@ -302,7 +302,7 @@ TEST_CASE ("shade_hit() if given an intersection in shadow", "[shadow]") {
   w.addObject(s1);
 
   auto s2 = std::make_shared<Sphere>();
-  s2->setTransform(Matrix::translation(0, 0, 10));
+  s2->setTransform(Mat4::translation(0, 0, 10));
   w.addObject(s2);
 
   Ray r = Ray(Tuple::create_point(0, 0, 5), Tuple::create_vector(0, 0, 1));
@@ -317,7 +317,7 @@ TEST_CASE ("shade_hit() if given an intersection in shadow", "[shadow]") {
 TEST_CASE ("The hit should offset the point", "[shadow]") {
   Ray r = Ray(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
   auto shape = std::make_shared<Sphere>();
-  shape->setTransform(Matrix::translation(0, 0, 1));
+  shape->setTransform(Mat4::translation(0, 0, 1));
 
   Intersection i = Intersection(5, shape);
   Computations comps = Computations(i, r);

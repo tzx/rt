@@ -4,7 +4,7 @@
 #include <optional>
 #include "group.hpp"
 
-Shape::Shape() : transform_(Matrix::identity_matrix(4)), transform_inverse_(Matrix::identity_matrix(4)) {
+Shape::Shape() : transform_(Mat4::identity_matrix()), transform_inverse_(Mat4::identity_matrix()) {
   this->uuid_ = random_id();
   this->material_ = std::make_shared<Material>();
 }
@@ -19,15 +19,15 @@ int Shape::uuid() const {
   return this->uuid_;
 }
 
-Matrix Shape::transform() const {
+const Mat4& Shape::transform() const {
   return this->transform_;
 }
 
-Matrix Shape::transform_inverse() const {
+const Mat4& Shape::transform_inverse() const {
   return this->transform_inverse_;
 }
 
-void Shape::setTransform(Matrix m) {
+void Shape::setTransform(Mat4 m) {
   this->transform_ = m;
   this->transform_inverse_ = m.inverse();
 }

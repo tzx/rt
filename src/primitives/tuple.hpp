@@ -13,7 +13,7 @@ class Tuple {
   public:
     void repr() const;
 
-    constexpr Tuple() : x(0), y(0), z(0), w(9) {}
+    constexpr Tuple() : x(0), y(0), z(0), w(0) {}
     constexpr Tuple(float x_, float y_, float z_, float w_) : x(x_), y(y_), z(z_), w(w_) {}
     constexpr static Tuple create_point(float x, float y, float z) { return Tuple(x, y, z, 1.0); }
     constexpr static Tuple create_vector(float x, float y, float z) { return Tuple(x, y, z, 0.0); }

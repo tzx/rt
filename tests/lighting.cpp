@@ -39,14 +39,14 @@ TEST_CASE ("The normal is a normalized vector", "[normal]") {
 
 TEST_CASE ("Computing the normal on a translated sphere", "[normal]") {
   Sphere s = Sphere();
-  s.setTransform(Matrix::translation(0, 1, 0));
+  s.setTransform(Mat4::translation(0, 1, 0));
   Tuple n = s.normal_at(Tuple::create_point(0, 1.70711, -0.70711), fake_hit);
   REQUIRE (n == n.create_vector(0, 0.70711, -0.70711));
 }
 
 TEST_CASE ("Computing the normal on a transformed sphere", "[normal]") {
   Sphere s = Sphere();
-  Matrix m = Matrix::scaling(1, 0.5, 1) * Matrix::rotation_z(M_PIf/5.0f);
+  auto m = Mat4::scaling(1, 0.5, 1) * Mat4::rotation_z(M_PIf/5.0f);
   s.setTransform(m);
 
   float sqpi2 = std::sqrt(2)/2.0f;

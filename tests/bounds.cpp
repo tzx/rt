@@ -14,7 +14,7 @@ TEST_CASE("Merging two bounds combines well", "[bounds]") {
 
 TEST_CASE("Rotation by 45 deg on bounding box", "[bounds]") {
   auto bounds = Bounds(Tuple::create_point(-1, -1, -1), Tuple::create_point(1, 1, 1));
-  bounds.transform(Matrix::rotation_y(M_PI_4f));
+  bounds.transform(Mat4::rotation_y(M_PI_4f));
 
   REQUIRE (bounds == Bounds(Tuple::create_point(-std::sqrt(2), -1, -std::sqrt(2)),
                         Tuple::create_point(std::sqrt(2), 1, std::sqrt(2))));

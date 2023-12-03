@@ -21,7 +21,7 @@ World World::default_world() {
   s1->material()->setSpecular(0.2);
 
   auto s2 = std::make_shared<Sphere>();
-  auto m2 = Matrix::scaling(0.5, 0.5, 0.5);
+  auto m2 = Mat4::scaling(0.5, 0.5, 0.5);
   s2->setTransform(m2);
 
   World w = World();

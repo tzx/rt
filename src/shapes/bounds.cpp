@@ -40,7 +40,7 @@ void Bounds::make_fit(const Tuple &p) {
                                  std::max(p.getZ(), maximum_.getZ()));
 }
 
-Bounds Bounds::transform(Matrix m) {
+Bounds Bounds::transform(const Mat4 &m) {
   // Transform the bounding box by changing all 8 of the corners
   // using make_fit for the new bounding_box
   const auto mi = minimum();

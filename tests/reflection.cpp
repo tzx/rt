@@ -49,7 +49,7 @@ TEST_CASE("The reflected color for a reflective material", "[reflection]") {
   World w = World::default_world();
   auto shape = Plane();
   shape.material()->setReflective(0.5);
-  shape.setTransform(Matrix::translation(0, -1, 0));
+  shape.setTransform(Mat4::translation(0, -1, 0));
 
   auto shapep = std::make_shared<Plane>(shape);
   w.addObject(shapep);
@@ -72,7 +72,7 @@ TEST_CASE("shade_hit() with a reflective material", "[reflection]") {
   World w = World::default_world();
   auto shape = Plane();
   shape.material()->setReflective(0.5);
-  shape.setTransform(Matrix::translation(0, -1, 0));
+  shape.setTransform(Mat4::translation(0, -1, 0));
 
   auto shapep = std::make_shared<Plane>(shape);
   w.addObject(shapep);
@@ -97,11 +97,11 @@ TEST_CASE("color_at() with mutally reflective surfaces", "[reflection]") {
 
   auto lower = std::make_shared<Plane>();
   lower->material()->setReflective(1);
-  lower->setTransform(Matrix::translation(0, -1, 0));
+  lower->setTransform(Mat4::translation(0, -1, 0));
 
   auto upper = std::make_shared<Plane>();
   upper->material()->setReflective(1);
-  upper->setTransform(Matrix::translation(0, 1, 0));
+  upper->setTransform(Mat4::translation(0, 1, 0));
 
   w.addObject(lower);
   w.addObject(upper);
@@ -119,7 +119,7 @@ TEST_CASE("The reflected color at the maximum recursive depth",
   World w = World::default_world();
   auto shape = Plane();
   shape.material()->setReflective(0.5);
-  shape.setTransform(Matrix::translation(0, -1, 0));
+  shape.setTransform(Mat4::translation(0, -1, 0));
 
   auto shapep = std::make_shared<Plane>(shape);
   w.addObject(shapep);
@@ -149,22 +149,22 @@ TEST_CASE("A helper for producing a sphere with a glassy material",
           "[refraction]") {
   Sphere s = Sphere::glass_sphere();
 
-  REQUIRE(s.transform() == Matrix::identity_matrix(4));
+  REQUIRE(s.transform() == Mat4::identity_matrix());
   REQUIRE(s.material()->transparency() == 1.0f);
   REQUIRE(s.material()->refractive_index() == 1.5f);
 }
 
 TEST_CASE("Finding n1 and n2 at various intersections", "[refraction]") {
   auto A = std::make_shared<Sphere>(Sphere::glass_sphere());
-  A->setTransform(Matrix::scaling(2, 2, 2));
+  A->setTransform(Mat4::scaling(2, 2, 2));
   A->material()->setRefractiveIndex(1.5);
 
   auto B = std::make_shared<Sphere>(Sphere::glass_sphere());
-  B->setTransform(Matrix::translation(0, 0, -0.25));
+  B->setTransform(Mat4::translation(0, 0, -0.25));
   B->material()->setRefractiveIndex(2.0);
 
   auto C = std::make_shared<Sphere>(Sphere::glass_sphere());
-  C->setTransform(Matrix::translation(0, 0, 0.25));
+  C->setTransform(Mat4::translation(0, 0, 0.25));
   C->material()->setRefractiveIndex(2.5);
 
   Ray r(Tuple::create_point(0, 0, -4), Tuple::create_vector(0, 0, 1));
@@ -199,7 +199,7 @@ TEST_CASE("Finding n1 and n2 at various intersections", "[refraction]") {
 TEST_CASE("The under point is offset below the surface", "[refraction]") {
   Ray r(Tuple::create_point(0, 0, -5), Tuple::create_vector(0, 0, 1));
   auto shape = std::make_shared<Sphere>(Sphere::glass_sphere());
-  shape->setTransform(Matrix::translation(0, 0, 1));
+  shape->setTransform(Mat4::translation(0, 0, 1));
 
   auto i = Intersection(5, shape);
   auto xs = intersect(shape, r);
@@ -281,7 +281,7 @@ TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
   auto w = World::default_world();
 
   auto floor = std::make_shared<Plane>();
-  floor->setTransform(Matrix::translation(0, -1, 0));
+  floor->setTransform(Mat4::translation(0, -1, 0));
   floor->material()->setTransparency(0.5);
   floor->material()->setRefractiveIndex(1.5);
   w.addObject(floor);
@@ -289,7 +289,7 @@ TEST_CASE("shade_hit() with a transparent material", "[refraction]") {
   auto ball = std::make_shared<Sphere>();
   ball->material()->setColor(Color(1, 0, 0));
   ball->material()->setAmbient(0.5);
-  ball->setTransform(Matrix::translation(0, -3.5, -0.5));
+  ball->setTransform(Mat4::translation(0, -3.5, -0.5));
   w.addObject(ball);
 
   float sq2 = std::sqrt(2);
@@ -354,7 +354,7 @@ TEST_CASE ("shade_hit() with a reflective, transparent material", "[fresnel]") {
   Ray r(Tuple::create_point(0, 0, -3), Tuple::create_vector(0, -sq2_2, sq2_2));
 
   auto floor = std::make_shared<Plane>();
-  floor->setTransform(Matrix::translation(0, -1, 0));
+  floor->setTransform(Mat4::translation(0, -1, 0));
   floor->material()->setReflective(0.5);
   floor->material()->setTransparency(0.5);
   floor->material()->setRefractiveIndex(1.5);
@@ -363,7 +363,7 @@ TEST_CASE ("shade_hit() with a reflective, transparent material", "[fresnel]") {
   auto ball = std::make_shared<Sphere>();
   ball->material()->setColor(Color(1, 0, 0));
   ball->material()->setAmbient(0.5);
-  ball->setTransform(Matrix::translation(0, -3.5, -0.5));
+  ball->setTransform(Mat4::translation(0, -3.5, -0.5));
   w.addObject(ball);
 
   std::vector<Intersection> xs = {{(float)std::sqrt(2), floor}};

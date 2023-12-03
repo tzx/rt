@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../lights/material.hpp"
-#include "../primitives/matrix.hpp"
+#include "../primitives/matrix4.hpp"
 #include "../intersections/intersection.hpp"
 #include "../intersections/ray.hpp"
 #include "bounds.hpp"
@@ -16,9 +16,9 @@ class Shape : public std::enable_shared_from_this<Shape> {
     Shape();
 
     int uuid() const;
-    Matrix transform() const;
-    Matrix transform_inverse() const;
-    void setTransform(Matrix m);
+    const Mat4& transform() const;
+    const Mat4& transform_inverse() const;
+    void setTransform(Mat4 m);
     std::shared_ptr<Material> material();
     virtual void set_material(std::shared_ptr<Material> m);
     std::shared_ptr<const Material> const_material() const;
@@ -40,8 +40,8 @@ class Shape : public std::enable_shared_from_this<Shape> {
 
   private:
     int uuid_;
-    Matrix transform_;
-    Matrix transform_inverse_;
+    Mat4 transform_;
+    Mat4 transform_inverse_;
     std::shared_ptr<Material> material_;
     std::optional<std::shared_ptr<class Group>> parent_;
 };
