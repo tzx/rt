@@ -1,22 +1,5 @@
 #include "bounds.hpp"
 
-Bounds::Bounds(Tuple min_, Tuple max_) {
-  this->minimum_ = min_;
-  this->maximum_ = max_;
-}
-
-Tuple Bounds::minimum() const {
-  return minimum_;
-}
-
-Tuple Bounds::maximum() const {
-  return maximum_;
-}
-
-bool Bounds::operator==(const Bounds &oth) const {
-  return minimum() == oth.minimum() && maximum() == oth.maximum();
-}
-
 void Bounds::merge(const Bounds &oth) {
   const auto oth_min = oth.minimum();
   const auto oth_max = oth.maximum();

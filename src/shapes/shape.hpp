@@ -4,6 +4,7 @@
 #include "../primitives/matrix4.hpp"
 #include "../intersections/intersection.hpp"
 #include "../intersections/ray.hpp"
+#include "../util/randgen.hpp"
 #include "bounds.hpp"
 #include <memory>
 
@@ -13,7 +14,10 @@ static auto fake_hit = Intersection();
 // TODO: Right now intersections own a reference to shape but we create it in local_intersect so :sob:
 class Shape : public std::enable_shared_from_this<Shape> {
   public:
-    Shape();
+    Shape() :
+      transform_(Mat4::identity_matrix()),
+      transform_inverse_(Mat4::identity_matrix()),
+      material_(std::make_shared<Material>()) {}
 
     int uuid() const;
     const Mat4& transform() const;
@@ -39,7 +43,6 @@ class Shape : public std::enable_shared_from_this<Shape> {
     virtual Tuple local_normal_at(const Tuple &local_p, const Intersection &hit) const = 0;
 
   private:
-    int uuid_;
     Mat4 transform_;
     Mat4 transform_inverse_;
     std::shared_ptr<Material> material_;

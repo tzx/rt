@@ -26,7 +26,7 @@ class Tuple {
     constexpr float getW() const { return this->w; }
     constexpr void turnIntoVector() { this->w = 0; }
     constexpr float getMagnitude() const { return std::sqrt(x * x + y * y + z * z + w * w); }
-    constexpr Tuple getNormalized() const { 
+    constexpr const Tuple getNormalized() const { 
       auto mag = getMagnitude();
       return Tuple(x / mag, y / mag, z / mag, w / mag);
     }

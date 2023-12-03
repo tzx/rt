@@ -5,16 +5,20 @@
 
 class Bounds {
   public:
-    Bounds(Tuple min_, Tuple max_);
+    constexpr Bounds(Tuple min_, Tuple max_) :
+      minimum_(min_),
+      maximum_(max_) {}
 
-    Tuple maximum() const;
-    Tuple minimum() const;
+    constexpr const Tuple& maximum() const { return this->maximum_; }
+    constexpr const Tuple& minimum() const { return this->minimum_; }
 
     void merge(const Bounds &oth);
     void make_fit(const Tuple &p);
     Bounds transform(const Mat4 &m);
 
-    bool operator==(const Bounds &oth) const;
+    constexpr bool operator==(const Bounds &oth) const {
+      return minimum() == oth.minimum() && maximum() == oth.maximum();
+    }
 
   private:
     Tuple maximum_;

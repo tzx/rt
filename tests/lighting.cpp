@@ -89,7 +89,7 @@ TEST_CASE ("The default material", "[phong]") {
   REQUIRE (m.shininess() == 200.0f);
 }
 
-TEST_CASE ("A sphere has a default material", "[phong]") {
+TEST_CASE ("A sphere has no material", "[phong]") {
   Sphere s = Sphere();
   Material m = *s.material();
 

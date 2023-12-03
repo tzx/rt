@@ -4,19 +4,10 @@
 #include <optional>
 #include "group.hpp"
 
-Shape::Shape() : transform_(Mat4::identity_matrix()), transform_inverse_(Mat4::identity_matrix()) {
-  this->uuid_ = random_id();
-  this->material_ = std::make_shared<Material>();
-}
-
 bool Shape::operator==(const Shape &other) const {
-  return this->uuid() == other.uuid() &&
+  return 
          this->transform() == other.transform() &&
          *(this->const_material()) == *other.const_material();
-}
-
-int Shape::uuid() const {
-  return this->uuid_;
 }
 
 const Mat4& Shape::transform() const {
