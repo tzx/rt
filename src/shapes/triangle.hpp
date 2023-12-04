@@ -5,15 +5,15 @@
 class Triangle: public Shape {
   public:
     Triangle(Tuple p1, Tuple p2, Tuple p3) :
+      p1_(p1),
+      p2_(p2),
+      p3_(p3),
       bounds_(Tuple::create_point(std::min({p1.getX(), p2.getX(), p3.getX()}),
                                   std::min({p1.getY(), p2.getY(), p3.getY()}),
                                   std::min({p1.getZ(), p2.getZ(), p3.getZ()})),
               Tuple::create_point(std::max({p1.getX(), p2.getX(), p3.getX()}),
                                   std::max({p1.getY(), p2.getY(), p3.getY()}),
-                                  std::max({p1.getZ(), p2.getZ(), p3.getZ()}))),
-      p1_(p1),
-      p2_(p2),
-      p3_(p3) {}
+                                  std::max({p1.getZ(), p2.getZ(), p3.getZ()}))) {}
 
     constexpr const Tuple& p1() const { return p1_; }
     constexpr const Tuple& p2() const { return p2_; }

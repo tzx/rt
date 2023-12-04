@@ -1,5 +1,6 @@
 #include "obj_parser.hpp"
 #include <cassert>
+#include <cstddef>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -146,7 +147,7 @@ std::vector<std::shared_ptr<Triangle>> parse_face(std::string &line,
 
   std::vector<std::shared_ptr<Triangle>> triangles;
 
-  for (auto i = 1; i < fvs.size() - 1; ++i) {
+  for (size_t i = 1; i < fvs.size() - 1; ++i) {
     auto vn0 = fvs.at(0).vertex_normal_index();
     auto vni = fvs.at(i).vertex_normal_index();
     auto vni1 = fvs.at(i + 1).vertex_normal_index();

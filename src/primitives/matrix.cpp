@@ -10,7 +10,7 @@ Matrix::Matrix(int height, int width, std::vector<float> values) {
   h_ = height;
   values_ = std::vector<float>(w_ * h_);
 
-  for (auto i = 0; i < values.size(); ++i) {
+  for (size_t i = 0; i < values.size(); ++i) {
     values_[i] = values[i];
   }
 }

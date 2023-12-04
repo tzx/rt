@@ -16,7 +16,7 @@ TEST_CASE("A ray misses a cylinder", "[cylinder]") {
   REQUIRE (directions.size() == origins.size());
   auto size = directions.size();
 
-  for (auto i = 0; i < size; ++i) {
+  for (size_t i = 0; i < size; ++i) {
     auto direction = directions.at(i);
     auto origin = origins.at(i);
     auto r = Ray(origin, direction);

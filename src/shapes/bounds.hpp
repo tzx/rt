@@ -6,8 +6,8 @@
 class Bounds {
   public:
     constexpr Bounds(Tuple min_, Tuple max_) :
-      minimum_(min_),
-      maximum_(max_) {}
+      maximum_(max_),
+      minimum_(min_) {}
 
     constexpr const Tuple& maximum() const { return this->maximum_; }
     constexpr const Tuple& minimum() const { return this->minimum_; }

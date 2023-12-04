@@ -108,7 +108,7 @@ TEST_CASE("color_at() with mutally reflective surfaces", "[reflection]") {
 
   Ray r = Ray(Tuple::create_point(0, 0, 0), Tuple::create_vector(0, 1, 0));
 
-  Color c = w.color_at(r);
+  w.color_at(r);
 
   // This reaches here and terminates
   REQUIRE(true);

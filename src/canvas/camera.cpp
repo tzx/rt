@@ -13,9 +13,6 @@ Camera::Camera(int hsize, int vsize, float fov)
   float half_view = std::tan(this->fov() / 2.0f);
   float aspect = (float)this->hsize() / this->vsize();
 
-  float half_width;
-  float half_height;
-
   if (aspect >= 1) {
     this->half_width_ = half_view;
     this->half_height_ = half_view / aspect;
